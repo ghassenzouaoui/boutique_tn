@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Votre_Boutique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+        }
+
+        .admin-sidebar {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .admin-content {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-dark);
+        }
+
+        .product-image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .product-card-admin {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-card-admin:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image-admin {
+            height: 150px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stats-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .action-btn {
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .image-url-input {
+            margin-bottom: 10px;
+        }
+
+        .color-tag {
+            display: inline-block;
+            background-color: #e5e7eb;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+        }
+
+        .color-tag .remove-color {
+            margin-left: 5px;
+            cursor: pointer;
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="h3 mb-0">
+                        <i class="fas fa-cog me-2"></i>Administration
+                    </h1>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="products.html" class="btn btn-light btn-sm">
+                        <i class="fas fa-store me-1"></i> Retour à la boutique
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Content -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 mb-4">
+                <div class="admin-sidebar">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#products" data-bs-toggle="tab">
+                                <i class="fas fa-box me-2"></i> Gestion des produits
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#stats" data-bs-toggle="tab">
+                                <i class="fas fa-chart-bar me-2"></i> Statistiques
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#backup" data-bs-toggle="tab">
+                                <i class="fas fa-download me-2"></i> Sauvegarde
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="tab-content">
+                    <!-- Products Tab -->
+                    <div class="tab-pane fade show active" id="products">
+                        <div class="admin-content">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h2 class="h4 mb-0">Gestion des produits</h2>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                    <i class="fas fa-plus me-1"></i> Ajouter un produit
+                                </button>
+                            </div>
+
+                            <!-- Products List -->
+                            <div class="row" id="products-list">
+                                <!-- Les produits seront chargés ici dynamiquement -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Tab -->
+                    <div class="tab-pane fade" id="stats">
+                        <div class="admin-content">
+                            <h2 class="h4 mb-4">Statistiques</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="stats-card">
+                                        <div class="stats-number" id="total-products">0</div>
+                                        <div class="stats-label">Produits total</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="stats-card">
+                                        <div class="stats-number" id="homme-products">0</div>
+                                        <div class="stats-label">Produits Homme</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="stats-card">
+                                        <div class="stats-number" id="femme-products">0</div>
+                                        <div class="stats-label">Produits Femme</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backup Tab -->
+                    <div class="tab-pane fade" id="backup">
+                        <div class="admin-content">
+                            <h2 class="h4 mb-4">Sauvegarde et restauration</h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Sauvegarder les données</h5>
+                                            <p class="card-text">Téléchargez un fichier de sauvegarde contenant tous vos produits.</p>
+                                            <button class="btn btn-primary" id="export-data">
+                                                <i class="fas fa-download me-1"></i> Exporter les données
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Restaurer les données</h5>
+                                            <p class="card-text">Importez un fichier de sauvegarde pour restaurer vos produits.</p>
+                                            <div class="mb-3">
+                                                <input type="file" class="form-control" id="import-file" accept=".json">
+                                            </div>
+                                            <button class="btn btn-success" id="import-data">
+                                                <i class="fas fa-upload me-1"></i> Importer les données
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="alert alert-warning mt-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Attention :</strong> L'importation de données écrasera toutes les données actuelles.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Ajouter un produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm">
+                        <input type="hidden" id="productId">
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="productName" class="form-label">Nom du produit *</label>
+                                <input type="text" class="form-control" id="productName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="productCategory" class="form-label">Catégorie *</label>
+                                <select class="form-select" id="productCategory" required>
+                                    <option value="">Sélectionner une catégorie</option>
+                                    <option value="homme">Homme</option>
+                                    <option value="femme">Femme</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="productPrice" class="form-label">Prix (DT) *</label>
+                                <input type="number" class="form-control" id="productPrice" min="0" step="0.01" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="productDiscount" class="form-label">Remise (%)</label>
+                                <input type="number" class="form-control" id="productDiscount" min="0" max="100" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="productIsNew">
+                                <label class="form-check-label" for="productIsNew">
+                                    Marquer comme nouveau produit
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Images du produit</label>
+                            <div id="imageUrlsContainer">
+                                <!-- Les champs d'URL d'image seront ajoutés ici dynamiquement -->
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="addImageUrl">
+                                <i class="fas fa-plus me-1"></i> Ajouter une image
+                            </button>
+                            
+                            <div id="imagePreview" class="mt-3">
+                                <!-- Aperçu des images sera affiché ici -->
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Couleurs disponibles</label>
+                            <div id="colorsContainer">
+                                <!-- Les tags de couleur seront ajoutés ici dynamiquement -->
+                            </div>
+                            <div class="input-group mt-2">
+                                <input type="text" class="form-control" id="newColor" placeholder="Ajouter une couleur">
+                                <button type="button" class="btn btn-outline-secondary" id="addColor">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="saveProduct">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmer la suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir supprimer ce produit ? Cette action est irréversible.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Clé pour le localStorage
+        const STORAGE_KEY = 'sportplus_products';
+
+        // Données par défaut des produits
+        const defaultProducts = [
+            {
+                id: 1,
+                name: "Ensemble survêtement homme",
+                category: "homme",
+                price: 45,
+                images: [
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
+                ],
+                colors: ["Gris", "Rouge", "Noir"],
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 2,
+                name: "T‑shirt sport homme",
+                category: "homme",
+                price: 50,
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: false,
+                discount: 30
+            },
+            {
+                id: 3,
+                name: "Pantalon de jogging homme",
+                category: "homme",
+                price: 120,
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: false,
+                discount: 25
+            },
+            {
+                id: 4,
+                name: "Short running homme",
+                category: "homme",
+                price: 100,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
+                isNew: false,
+                discount: 25
+            },
+            {
+                id: 5,
+                name: "Legging Yoga Premium",
+                category: "femme",
+                price: 65,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 6,
+                name: "T-Shirt Fitness Dry",
+                category: "femme",
+                price: 42,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 7,
+                name: "Ensemble Fitness Pro",
+                category: "femme",
+                price: 95,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 8,
+                name: "Short Training Fit",
+                category: "femme",
+                price: 55,
+                image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
+                isNew: false,
+                discount: 50
+            }
+        ];
+
+        class AdminPanel {
+            constructor() {
+                this.products = this.loadProducts();
+                this.currentProductId = null;
+                this.init();
+            }
+
+            init() {
+                this.displayProducts();
+                this.setupEventListeners();
+                this.updateStats();
+            }
+
+            // Charger les produits depuis le localStorage
+            loadProducts() {
+                const storedProducts = localStorage.getItem(STORAGE_KEY);
+                if (storedProducts) {
+                    return JSON.parse(storedProducts);
+                } else {
+                    // Initialiser avec les données par défaut
+                    this.saveProducts(defaultProducts);
+                    return defaultProducts;
+                }
+            }
+
+            // Sauvegarder les produits dans le localStorage
+            saveProducts(products) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+            }
+
+            // Générer un ID unique pour un nouveau produit
+            generateId() {
+                return Date.now();
+            }
+
+            // Afficher tous les produits
+            displayProducts() {
+                const container = document.getElementById('products-list');
+                
+                if (this.products.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                            <h4 class="fw-bold mb-3">Aucun produit</h4>
+                            <p class="text-muted mb-4">
+                                Commencez par ajouter votre premier produit.
+                            </p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = this.products.map(product => {
+                    const hasDiscount = product.discount > 0;
+                    const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                    const mainImage = product.images ? product.images[0] : product.image;
+
+                    return `
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="product-card-admin h-100">
+                                <img src="${mainImage}" class="product-image-admin" alt="${product.name}">
+                                <div class="p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="mb-0">${product.name}</h5>
+                                        <span class="badge ${product.category === 'homme' ? 'bg-primary' : 'bg-danger'}">
+                                            ${product.category}
+                                        </span>
+                                    </div>
+                                    <p class="text-muted small mb-2">${product.colors ? product.colors.join(', ') : 'Aucune couleur spécifiée'}</p>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div>
+                                            ${hasDiscount ? `
+                                                <span class="fw-bold text-primary">${discountPrice} DT</span>
+                                                <span class="text-muted text-decoration-line-through ms-1">${product.price} DT</span>
+                                                <span class="badge bg-danger ms-1">-${product.discount}%</span>
+                                            ` : `
+                                                <span class="fw-bold text-primary">${product.price} DT</span>
+                                            `}
+                                        </div>
+                                        ${product.isNew ? '<span class="badge bg-success">Nouveau</span>' : ''}
+                                    </div>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary action-btn edit-product" data-id="${product.id}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger action-btn delete-product" data-id="${product.id}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Mettre à jour les statistiques
+            updateStats() {
+                const totalProducts = this.products.length;
+                const hommeProducts = this.products.filter(p => p.category === 'homme').length;
+                const femmeProducts = this.products.filter(p => p.category === 'femme').length;
+
+                document.getElementById('total-products').textContent = totalProducts;
+                document.getElementById('homme-products').textContent = hommeProducts;
+                document.getElementById('femme-products').textContent = femmeProducts;
+            }
+
+            // Ouvrir le modal pour ajouter un produit
+            openAddProductModal() {
+                document.getElementById('productModalLabel').textContent = 'Ajouter un produit';
+                document.getElementById('productForm').reset();
+                document.getElementById('productId').value = '';
+                document.getElementById('imageUrlsContainer').innerHTML = '';
+                document.getElementById('colorsContainer').innerHTML = '';
+                document.getElementById('imagePreview').innerHTML = '';
+                
+                // Ajouter un champ d'URL d'image par défaut
+                this.addImageUrlField();
+                
+                const modal = new bootstrap.Modal(document.getElementById('productModal'));
+                modal.show();
+            }
+
+            // Ouvrir le modal pour modifier un produit
+            openEditProductModal(productId) {
+                const product = this.products.find(p => p.id === productId);
+                if (!product) return;
+
+                document.getElementById('productModalLabel').textContent = 'Modifier le produit';
+                document.getElementById('productId').value = product.id;
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productCategory').value = product.category;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productDiscount').value = product.discount || 0;
+                document.getElementById('productIsNew').checked = product.isNew || false;
+
+                // Gérer les images
+                document.getElementById('imageUrlsContainer').innerHTML = '';
+                const images = product.images || [product.image];
+                images.forEach(url => this.addImageUrlField(url));
+                
+                // Gérer les couleurs
+                document.getElementById('colorsContainer').innerHTML = '';
+                if (product.colors) {
+                    product.colors.forEach(color => this.addColorTag(color));
+                }
+                
+                // Afficher l'aperçu des images
+                this.updateImagePreview();
+
+                const modal = new bootstrap.Modal(document.getElementById('productModal'));
+                modal.show();
+            }
+
+            // Ajouter un champ d'URL d'image
+            addImageUrlField(url = '') {
+                const container = document.getElementById('imageUrlsContainer');
+                const index = container.children.length;
+                
+                const div = document.createElement('div');
+                div.className = 'input-group image-url-input';
+                div.innerHTML = `
+                    <input type="url" class="form-control" value="${url}" placeholder="URL de l'image" data-index="${index}">
+                    <button type="button" class="btn btn-outline-danger remove-image-url">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                container.appendChild(div);
+                
+                // Mettre à jour l'aperçu quand l'URL change
+                const input = div.querySelector('input');
+                input.addEventListener('input', () => this.updateImagePreview());
+            }
+
+            // Ajouter un tag de couleur
+            addColorTag(color) {
+                const container = document.getElementById('colorsContainer');
+                
+                const tag = document.createElement('span');
+                tag.className = 'color-tag';
+                tag.innerHTML = `
+                    ${color}
+                    <span class="remove-color">
+                        <i class="fas fa-times"></i>
+                    </span>
+                `;
+                
+                container.appendChild(tag);
+            }
+
+            // Mettre à jour l'aperçu des images
+            updateImagePreview() {
+                const container = document.getElementById('imagePreview');
+                const inputs = document.querySelectorAll('#imageUrlsContainer input');
+                
+                container.innerHTML = '';
+                
+                inputs.forEach(input => {
+                    if (input.value) {
+                        const img = document.createElement('img');
+                        img.src = input.value;
+                        img.className = 'product-image-preview me-2 mb-2';
+                        img.alt = 'Aperçu';
+                        img.onerror = function() {
+                            this.style.display = 'none';
+                        };
+                        container.appendChild(img);
+                    }
+                });
+            }
+
+            // Sauvegarder un produit (ajout ou modification)
+            saveProduct() {
+                // Récupérer les données du formulaire
+                const id = document.getElementById('productId').value;
+                const name = document.getElementById('productName').value;
+                const category = document.getElementById('productCategory').value;
+                const price = parseFloat(document.getElementById('productPrice').value);
+                const discount = parseInt(document.getElementById('productDiscount').value) || 0;
+                const isNew = document.getElementById('productIsNew').checked;
+                
+                // Récupérer les URLs des images
+                const imageInputs = document.querySelectorAll('#imageUrlsContainer input');
+                const images = Array.from(imageInputs)
+                    .map(input => input.value.trim())
+                    .filter(url => url !== '');
+                
+                // Récupérer les couleurs
+                const colorTags = document.querySelectorAll('#colorsContainer .color-tag');
+                const colors = Array.from(colorTags)
+                    .map(tag => tag.textContent.trim().replace('×', '').trim());
+                
+                // Validation
+                if (!name || !category || isNaN(price) || images.length === 0) {
+                    alert('Veuillez remplir tous les champs obligatoires et ajouter au moins une image.');
+                    return;
+                }
+                
+                // Préparer l'objet produit
+                const productData = {
+                    id: id ? parseInt(id) : this.generateId(),
+                    name,
+                    category,
+                    price,
+                    discount,
+                    isNew,
+                    colors: colors.length > 0 ? colors : undefined
+                };
+                
+                // Gérer les images (compatibilité avec l'ancienne structure)
+                if (images.length === 1) {
+                    productData.image = images[0];
+                } else {
+                    productData.images = images;
+                }
+                
+                // Ajouter ou mettre à jour le produit
+                if (id) {
+                    // Modification
+                    const index = this.products.findIndex(p => p.id === parseInt(id));
+                    if (index !== -1) {
+                        this.products[index] = productData;
+                    }
+                } else {
+                    // Ajout
+                    this.products.push(productData);
+                }
+                
+                // Sauvegarder et rafraîchir l'affichage
+                this.saveProducts(this.products);
+                this.displayProducts();
+                this.updateStats();
+                
+                // Fermer le modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+                modal.hide();
+                
+                alert(id ? 'Produit modifié avec succès!' : 'Produit ajouté avec succès!');
+            }
+
+            // Supprimer un produit
+            deleteProduct(productId) {
+                this.products = this.products.filter(p => p.id !== productId);
+                this.saveProducts(this.products);
+                this.displayProducts();
+                this.updateStats();
+                
+                alert('Produit supprimé avec succès!');
+            }
+
+            // Exporter les données
+            exportData() {
+                const dataStr = JSON.stringify(this.products, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'sportplus_products_backup.json';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                alert('Données exportées avec succès!');
+            }
+
+            // Importer les données
+            importData(file) {
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    try {
+                        const importedProducts = JSON.parse(e.target.result);
+                        
+                        // Validation basique des données
+                        if (!Array.isArray(importedProducts)) {
+                            throw new Error('Format de fichier invalide');
+                        }
+                        
+                        // Demander confirmation avant d'écraser les données
+                        if (confirm('Cette action écrasera toutes vos données actuelles. Êtes-vous sûr ?')) {
+                            this.products = importedProducts;
+                            this.saveProducts(this.products);
+                            this.displayProducts();
+                            this.updateStats();
+                            alert('Données importées avec succès!');
+                        }
+                    } catch (error) {
+                        alert('Erreur lors de l\'importation: ' + error.message);
+                    }
+                };
+                
+                reader.readAsText(file);
+            }
+
+            // Configurer les écouteurs d'événements
+            setupEventListeners() {
+                // Bouton pour ajouter un produit
+                document.querySelector('[data-bs-target="#addProductModal"]').addEventListener('click', () => {
+                    this.openAddProductModal();
+                });
+                
+                // Boutons pour modifier/supprimer des produits (délégués d'événements)
+                document.getElementById('products-list').addEventListener('click', (e) => {
+                    if (e.target.closest('.edit-product')) {
+                        const productId = parseInt(e.target.closest('.edit-product').getAttribute('data-id'));
+                        this.openEditProductModal(productId);
+                    }
+                    
+                    if (e.target.closest('.delete-product')) {
+                        const productId = parseInt(e.target.closest('.delete-product').getAttribute('data-id'));
+                        this.currentProductId = productId;
+                        
+                        const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                        modal.show();
+                    }
+                });
+                
+                // Confirmation de suppression
+                document.getElementById('confirmDelete').addEventListener('click', () => {
+                    this.deleteProduct(this.currentProductId);
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                    modal.hide();
+                });
+                
+                // Sauvegarder un produit
+                document.getElementById('saveProduct').addEventListener('click', () => {
+                    this.saveProduct();
+                });
+                
+                // Ajouter un champ d'URL d'image
+                document.getElementById('addImageUrl').addEventListener('click', () => {
+                    this.addImageUrlField();
+                });
+                
+                // Supprimer un champ d'URL d'image (délégué d'événements)
+                document.getElementById('imageUrlsContainer').addEventListener('click', (e) => {
+                    if (e.target.closest('.remove-image-url')) {
+                        e.target.closest('.image-url-input').remove();
+                        this.updateImagePreview();
+                    }
+                });
+                
+                // Ajouter une couleur
+                document.getElementById('addColor').addEventListener('click', () => {
+                    const newColorInput = document.getElementById('newColor');
+                    const color = newColorInput.value.trim();
+                    
+                    if (color) {
+                        this.addColorTag(color);
+                        newColorInput.value = '';
+                    }
+                });
+                
+                // Supprimer une couleur (délégué d'événements)
+                document.getElementById('colorsContainer').addEventListener('click', (e) => {
+                    if (e.target.closest('.remove-color')) {
+                        e.target.closest('.color-tag').remove();
+                    }
+                });
+                
+                // Entrée pour ajouter une couleur
+                document.getElementById('newColor').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.getElementById('addColor').click();
+                    }
+                });
+                
+                // Exporter les données
+                document.getElementById('export-data').addEventListener('click', () => {
+                    this.exportData();
+                });
+                
+                // Importer les données
+                document.getElementById('import-data').addEventListener('click', () => {
+                    const fileInput = document.getElementById('import-file');
+                    if (fileInput.files.length > 0) {
+                        this.importData(fileInput.files[0]);
+                    } else {
+                        alert('Veuillez sélectionner un fichier à importer.');
+                    }
+                });
+            }
+        }
+
+        // Démarrer l'application
+        document.addEventListener('DOMContentLoaded', () => {
+            new AdminPanel();
+        });
+    </script>
+</body>
+</html>

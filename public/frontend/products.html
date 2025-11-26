@@ -55,6 +55,21 @@ body {
     color: var(--primary-color) !important;
 }
 
+.admin-link {
+    background: linear-gradient(135deg, var(--accent-color), #f59e0b);
+    color: white !important;
+    border-radius: 20px;
+    padding: 0.5rem 1rem !important;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.admin-link:hover {
+    background: linear-gradient(135deg, #e69500, #d97706);
+    color: white !important;
+    transform: translateY(-2px);
+}
+
 /* Product Cards */
 .product-card {
     background: white;
@@ -546,6 +561,10 @@ footer {
                         <i class="fas fa-shopping-bag"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">0</span>
                     </a>
+                    <!-- Dans la navbar, ajouter cette ligne dans la section des icônes -->
+<a class="nav-link admin-link" href="#" title="Administration" data-bs-toggle="modal" data-bs-target="#adminAuthModal">
+    <i class="fas fa-cog me-1"></i>ADMIN
+</a>
                 </div>
             </div>
         </div>
@@ -729,8 +748,8 @@ footer {
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Données des produits
-        const productsData = [
+        // Données par défaut des produits
+        const defaultProducts = [
             {
                 id: 1,
                 name: "Ensemble survêtement homme",
@@ -810,13 +829,45 @@ footer {
             },
         ];
 
+        // Gestionnaire des produits
+        class ProductsManager {
+            constructor() {
+                this.storageKey = 'sportplus_products';
+                this.products = this.loadProducts();
+            }
+
+            // Charger les produits depuis le localStorage
+            loadProducts() {
+                const storedProducts = localStorage.getItem(this.storageKey);
+                if (storedProducts) {
+                    return JSON.parse(storedProducts);
+                } else {
+                    // Initialiser avec les données par défaut
+                    this.saveProducts(defaultProducts);
+                    return defaultProducts;
+                }
+            }
+
+            // Sauvegarder les produits dans le localStorage
+            saveProducts(products) {
+                localStorage.setItem(this.storageKey, JSON.stringify(products));
+            }
+
+            // Obtenir les produits filtrés par catégorie
+            getFilteredProducts(category = null) {
+                if (!category) return this.products;
+                return this.products.filter(product => product.category === category);
+            }
+        }
+
+        // Filtre et affichage des produits
         class ProductsFilter {
             constructor() {
-                this.products = productsData;
+                this.productsManager = new ProductsManager();
                 this.currentCategory = this.getCategoryFromURL();
                 this.currentProduct = null;
                 this.selectedColorIndex = 0;
-                this.productColorSelections = {}; // Stocker les sélections de couleur par produit
+                this.productColorSelections = {};
                 this.init();
             }
 
@@ -832,10 +883,7 @@ footer {
             }
 
             getFilteredProducts() {
-                if (!this.currentCategory) {
-                    return this.products;
-                }
-                return this.products.filter(product => product.category === this.currentCategory);
+                return this.productsManager.getFilteredProducts(this.currentCategory);
             }
 
             async displayProducts() {
@@ -1031,7 +1079,7 @@ footer {
                         const productId = parseInt(btn.getAttribute('data-product-id'));
                         
                         // Trouver le produit dans les données
-                        const product = this.products.find(p => p.id === productId);
+                        const product = this.productsManager.products.find(p => p.id === productId);
                         if (!product) return;
                         
                         // Déterminer l'index de couleur sélectionné
@@ -1205,5 +1253,61 @@ Merci de me contacter pour finaliser ma commande.`;
             new ProductsFilter();
         });
     </script>
+    <!-- Modal d'authentification admin -->
+<div class="modal fade" id="adminAuthModal" tabindex="-1" aria-labelledby="adminAuthModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adminAuthModalLabel">Accès Administration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="adminAuthForm">
+                    <div class="mb-3">
+                        <label for="adminPassword" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="adminPassword" placeholder="Entrez le mot de passe" required>
+                    </div>
+                    <div class="alert alert-danger d-none" id="authError">
+                        Mot de passe incorrect !
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-lock me-2"></i>Se connecter
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>// Ajouter cette fonction dans le script
+function setupAdminAuth() {
+    const adminPassword = "admin123"; // Mot de passe - à changer
+    
+    document.getElementById('adminAuthForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const passwordInput = document.getElementById('adminPassword').value;
+        const errorElement = document.getElementById('authError');
+        
+        if (passwordInput === adminPassword) {
+            // Rediriger vers la page admin
+            window.location.href = 'admin.html';
+        } else {
+            errorElement.classList.remove('d-none');
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminPassword').focus();
+        }
+    });
+    
+    // Réinitialiser l'erreur quand le modal s'ouvre
+    document.getElementById('adminAuthModal').addEventListener('show.bs.modal', function() {
+        document.getElementById('authError').classList.add('d-none');
+        document.getElementById('adminPassword').value = '';
+    });
+}
+
+// Appeler la fonction dans le DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    new ProductsFilter();
+    setupAdminAuth(); // Ajouter cette ligne
+});</script>
 </body>
 </html>
