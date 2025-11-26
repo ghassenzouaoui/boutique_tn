@@ -435,668 +435,699 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Configuration Firebase
-        const firebaseConfig = {
-    apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
-    authDomain: "bt-sp-b3ce3.firebaseapp.com",
-    projectId: "bt-sp-b3ce3",
-    storageBucket: "bt-sp-b3ce3.firebasestorage.app",
-    messagingSenderId: "1072895717676",
-    appId: "1:1072895717676:web:bace267352a7941c1dfc89"
-};
-        // Initialiser Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
+    // Configuration Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
+        authDomain: "bt-sp-b3ce3.firebaseapp.com",
+        projectId: "bt-sp-b3ce3",
+        storageBucket: "bt-sp-b3ce3.firebasestorage.app",
+        messagingSenderId: "1072895717676",
+        appId: "1:1072895717676:web:bace267352a7941c1dfc89"
+    };
+
+    // Initialiser Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    // Données par défaut des produits
+    const defaultProducts = [
+        {
+            name: "Ensemble survêtement homme",
+            category: "homme",
+            price: 45,
+            images: [
+                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
+                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
+                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
+            ],
+            colors: ["Gris", "Rouge", "Noir"],
+            isNew: true,
+            discount: 0
+        },
+        {
+            name: "T‑shirt sport homme",
+            category: "homme",
+            price: 50,
+            image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            isNew: false,
+            discount: 30
+        },
+        {
+            name: "Pantalon de jogging homme",
+            category: "homme",
+            price: 120,
+            image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            isNew: false,
+            discount: 25
+        },
+        {
+            name: "Short running homme",
+            category: "homme",
+            price: 100,
+            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
+            isNew: false,
+            discount: 25
+        },
+        {
+            name: "Legging Yoga Premium",
+            category: "femme",
+            price: 65,
+            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+            isNew: true,
+            discount: 0
+        },
+        {
+            name: "T-Shirt Fitness Dry",
+            category: "femme",
+            price: 42,
+            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+            isNew: true,
+            discount: 0
+        },
+        {
+            name: "Ensemble Fitness Pro",
+            category: "femme",
+            price: 95,
+            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+            isNew: true,
+            discount: 0
+        },
+        {
+            name: "Short Training Fit",
+            category: "femme",
+            price: 55,
+            image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
+            isNew: false,
+            discount: 50
+        }
+    ];
+
+    class AdminPanel {
+        constructor() {
+            this.db = firebase.firestore();
+            this.products = [];
+            this.currentProductId = null;
+            this.unsubscribe = null;
+            this.init();
         }
 
-        // Données par défaut des produits
-        const defaultProducts = [
-            {
-                id: 1,
-                name: "Ensemble survêtement homme",
-                category: "homme",
-                price: 45,
-                images: [
-                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
-                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
-                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
-                ],
-                colors: ["Gris", "Rouge", "Noir"],
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: 2,
-                name: "T‑shirt sport homme",
-                category: "homme",
-                price: 50,
-                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                isNew: false,
-                discount: 30
-            },
-            {
-                id: 3,
-                name: "Pantalon de jogging homme",
-                category: "homme",
-                price: 120,
-                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                isNew: false,
-                discount: 25
-            },
-            {
-                id: 4,
-                name: "Short running homme",
-                category: "homme",
-                price: 100,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
-                isNew: false,
-                discount: 25
-            },
-            {
-                id: 5,
-                name: "Legging Yoga Premium",
-                category: "femme",
-                price: 65,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: 6,
-                name: "T-Shirt Fitness Dry",
-                category: "femme",
-                price: 42,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: 7,
-                name: "Ensemble Fitness Pro",
-                category: "femme",
-                price: 95,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: 8,
-                name: "Short Training Fit",
-                category: "femme",
-                price: 55,
-                image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
-                isNew: false,
-                discount: 50
-            }
-        ];
+        async init() {
+            await this.loadProducts();
+            this.setupEventListeners();
+            this.updateStats();
+            this.listenToChanges();
+            this.updateSyncStatus('✅ Connecté à Firebase', 'sync-success');
+        }
 
-        class AdminPanel {
-            constructor() {
-                this.db = firebase.firestore();
-                this.products = [];
-                this.currentProductId = null;
-                this.unsubscribe = null;
-                this.init();
-            }
-
-            async init() {
-                await this.loadProducts();
-                this.setupEventListeners();
-                this.updateStats();
-                this.listenToChanges();
-                this.updateSyncStatus('✅ Connecté à Firebase', 'sync-success');
-            }
-
-            // Charger les produits depuis Firebase
-            async loadProducts() {
-                try {
-                    const snapshot = await this.db.collection('products').get();
-                    
-                    if (!snapshot.empty) {
-                        this.products = snapshot.docs.map(doc => ({
-                            id: doc.id,
-                            ...doc.data()
-                        }));
-                        this.updateSyncStatus(`✅ ${this.products.length} produits chargés`, 'sync-success');
-                    } else {
-                        this.products = defaultProducts;
-                        await this.saveAllToFirebase();
-                        this.updateSyncStatus('✅ Données initiales créées', 'sync-success');
-                    }
-                } catch (error) {
-                    console.error('Erreur chargement Firebase:', error);
-                    this.updateSyncStatus('❌ Erreur de connexion Firebase', 'sync-error');
-                    this.products = defaultProducts;
-                }
-            }
-
-            // Écouter les changements en temps réel
-            listenToChanges() {
-                this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+        // Charger les produits depuis Firebase
+        async loadProducts() {
+            try {
+                const snapshot = await this.db.collection('products').get();
+                
+                if (!snapshot.empty) {
                     this.products = snapshot.docs.map(doc => ({
-                        id: doc.id,
+                        id: doc.id, // Utiliser l'ID Firebase
                         ...doc.data()
                     }));
                     this.displayProducts();
-                    this.updateStats();
-                    this.updateLastSync();
-                }, error => {
-                    console.error('Erreur écoute Firebase:', error);
-                    this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
-                });
-            }
-
-            // Sauvegarder tous les produits dans Firebase
-            async saveAllToFirebase() {
-                try {
-                    const batch = this.db.batch();
-                    
-                    // Supprimer tous les documents existants
-                    const snapshot = await this.db.collection('products').get();
-                    snapshot.docs.forEach(doc => {
-                        batch.delete(doc.ref);
-                    });
-                    
-                    // Ajouter tous les nouveaux produits
-                    this.products.forEach(product => {
-                        const docRef = this.db.collection('products').doc(product.id.toString());
-                        const { id, ...productData } = product;
-                        batch.set(docRef, productData);
-                    });
-                    
-                    await batch.commit();
-                    return true;
-                } catch (error) {
-                    console.error('Erreur sauvegarde Firebase:', error);
-                    return false;
-                }
-            }
-
-            // Sauvegarder un produit dans Firebase
-            async saveProductToFirebase(product) {
-                try {
-                    const { id, ...productData } = product;
-                    await this.db.collection('products').doc(id.toString()).set(productData);
-                    return true;
-                } catch (error) {
-                    console.error('Erreur sauvegarde produit:', error);
-                    return false;
-                }
-            }
-
-            // Supprimer un produit de Firebase
-            async deleteProductFromFirebase(productId) {
-                try {
-                    await this.db.collection('products').doc(productId.toString()).delete();
-                    return true;
-                } catch (error) {
-                    console.error('Erreur suppression produit:', error);
-                    return false;
-                }
-            }
-
-            // Générer un ID unique pour un nouveau produit
-            generateId() {
-                return Date.now();
-            }
-
-            // Afficher tous les produits
-            displayProducts() {
-                const container = document.getElementById('products-list');
-                
-                if (this.products.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-12 text-center py-5">
-                            <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-                            <h4 class="fw-bold mb-3">Aucun produit</h4>
-                            <p class="text-muted mb-4">
-                                Commencez par ajouter votre premier produit.
-                            </p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                container.innerHTML = this.products.map(product => {
-                    const hasDiscount = product.discount > 0;
-                    const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
-                    const mainImage = product.images ? product.images[0] : product.image;
-
-                    return `
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="product-card-admin h-100">
-                                <img src="${mainImage}" class="product-image-admin" alt="${product.name}">
-                                <div class="p-3">
-                                    <div class="d-flex justify-content-between align-items-start mb-2">
-                                        <h5 class="mb-0">${product.name}</h5>
-                                        <span class="badge ${product.category === 'homme' ? 'bg-primary' : 'bg-danger'}">
-                                            ${product.category}
-                                        </span>
-                                    </div>
-                                    <p class="text-muted small mb-2">${product.colors ? product.colors.join(', ') : 'Aucune couleur spécifiée'}</p>
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div>
-                                            ${hasDiscount ? `
-                                                <span class="fw-bold text-primary">${discountPrice} DT</span>
-                                                <span class="text-muted text-decoration-line-through ms-1">${product.price} DT</span>
-                                                <span class="badge bg-danger ms-1">-${product.discount}%</span>
-                                            ` : `
-                                                <span class="fw-bold text-primary">${product.price} DT</span>
-                                            `}
-                                        </div>
-                                        ${product.isNew ? '<span class="badge bg-success">Nouveau</span>' : ''}
-                                    </div>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary action-btn edit-product" data-id="${product.id}">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger action-btn delete-product" data-id="${product.id}">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            // Mettre à jour les statistiques
-            updateStats() {
-                const totalProducts = this.products.length;
-                const hommeProducts = this.products.filter(p => p.category === 'homme').length;
-                const femmeProducts = this.products.filter(p => p.category === 'femme').length;
-
-                document.getElementById('total-products').textContent = totalProducts;
-                document.getElementById('homme-products').textContent = hommeProducts;
-                document.getElementById('femme-products').textContent = femmeProducts;
-
-                document.getElementById('firebaseStatus').textContent = 
-                    `✅ ${totalProducts} produits synchronisés - Temps réel activé`;
-            }
-
-            // Mettre à jour le statut de synchronisation
-            updateSyncStatus(message, type) {
-                const statusElement = document.getElementById('syncStatus');
-                statusElement.textContent = message;
-                statusElement.className = `sync-status ${type}`;
-                statusElement.classList.remove('d-none');
-                
-                setTimeout(() => {
-                    statusElement.classList.add('d-none');
-                }, 5000);
-            }
-
-            // Mettre à jour la dernière synchronisation
-            updateLastSync() {
-                const now = new Date();
-                document.getElementById('lastSync').textContent = 
-                    `Dernière synchronisation: ${now.toLocaleString()}`;
-            }
-
-            // Ouvrir le modal pour ajouter un produit
-            openAddProductModal() {
-                document.getElementById('productModalLabel').textContent = 'Ajouter un produit';
-                document.getElementById('productForm').reset();
-                document.getElementById('productId').value = '';
-                document.getElementById('imageUrlsContainer').innerHTML = '';
-                document.getElementById('colorsContainer').innerHTML = '';
-                document.getElementById('imagePreview').innerHTML = '';
-                
-                // Ajouter un champ d'URL d'image par défaut
-                this.addImageUrlField();
-                
-                const modal = new bootstrap.Modal(document.getElementById('productModal'));
-                modal.show();
-            }
-
-            // Ouvrir le modal pour modifier un produit
-            openEditProductModal(productId) {
-                const product = this.products.find(p => p.id == productId);
-                if (!product) return;
-
-                document.getElementById('productModalLabel').textContent = 'Modifier le produit';
-                document.getElementById('productId').value = product.id;
-                document.getElementById('productName').value = product.name;
-                document.getElementById('productCategory').value = product.category;
-                document.getElementById('productPrice').value = product.price;
-                document.getElementById('productDiscount').value = product.discount || 0;
-                document.getElementById('productIsNew').checked = product.isNew || false;
-
-                // Gérer les images
-                document.getElementById('imageUrlsContainer').innerHTML = '';
-                const images = product.images || [product.image];
-                images.forEach(url => this.addImageUrlField(url));
-                
-                // Gérer les couleurs
-                document.getElementById('colorsContainer').innerHTML = '';
-                if (product.colors) {
-                    product.colors.forEach(color => this.addColorTag(color));
-                }
-                
-                // Afficher l'aperçu des images
-                this.updateImagePreview();
-
-                const modal = new bootstrap.Modal(document.getElementById('productModal'));
-                modal.show();
-            }
-
-            // Ajouter un champ d'URL d'image
-            addImageUrlField(url = '') {
-                const container = document.getElementById('imageUrlsContainer');
-                const index = container.children.length;
-                
-                const div = document.createElement('div');
-                div.className = 'input-group image-url-input';
-                div.innerHTML = `
-                    <input type="url" class="form-control" value="${url}" placeholder="URL de l'image" data-index="${index}">
-                    <button type="button" class="btn btn-outline-danger remove-image-url">
-                        <i class="fas fa-times"></i>
-                    </button>
-                `;
-                
-                container.appendChild(div);
-                
-                // Mettre à jour l'aperçu quand l'URL change
-                const input = div.querySelector('input');
-                input.addEventListener('input', () => this.updateImagePreview());
-            }
-
-            // Ajouter un tag de couleur
-            addColorTag(color) {
-                const container = document.getElementById('colorsContainer');
-                
-                const tag = document.createElement('span');
-                tag.className = 'color-tag';
-                tag.innerHTML = `
-                    ${color}
-                    <span class="remove-color">
-                        <i class="fas fa-times"></i>
-                    </span>
-                `;
-                
-                container.appendChild(tag);
-            }
-
-            // Mettre à jour l'aperçu des images
-            updateImagePreview() {
-                const container = document.getElementById('imagePreview');
-                const inputs = document.querySelectorAll('#imageUrlsContainer input');
-                
-                container.innerHTML = '';
-                
-                inputs.forEach(input => {
-                    if (input.value) {
-                        const img = document.createElement('img');
-                        img.src = input.value;
-                        img.className = 'product-image-preview me-2 mb-2';
-                        img.alt = 'Aperçu';
-                        img.onerror = function() {
-                            this.style.display = 'none';
-                        };
-                        container.appendChild(img);
-                    }
-                });
-            }
-
-            // Sauvegarder un produit (ajout ou modification)
-            async saveProduct() {
-                // Récupérer les données du formulaire
-                const id = document.getElementById('productId').value;
-                const name = document.getElementById('productName').value;
-                const category = document.getElementById('productCategory').value;
-                const price = parseFloat(document.getElementById('productPrice').value);
-                const discount = parseInt(document.getElementById('productDiscount').value) || 0;
-                const isNew = document.getElementById('productIsNew').checked;
-                
-                // Récupérer les URLs des images
-                const imageInputs = document.querySelectorAll('#imageUrlsContainer input');
-                const images = Array.from(imageInputs)
-                    .map(input => input.value.trim())
-                    .filter(url => url !== '');
-                
-                // Récupérer les couleurs
-                const colorTags = document.querySelectorAll('#colorsContainer .color-tag');
-                const colors = Array.from(colorTags)
-                    .map(tag => tag.textContent.trim().replace('×', '').trim());
-                
-                // Validation
-                if (!name || !category || isNaN(price) || images.length === 0) {
-                    alert('Veuillez remplir tous les champs obligatoires et ajouter au moins une image.');
-                    return;
-                }
-                
-                // Préparer l'objet produit
-                const productData = {
-                    id: id ? parseInt(id) : this.generateId(),
-                    name,
-                    category,
-                    price,
-                    discount,
-                    isNew,
-                    colors: colors.length > 0 ? colors : undefined
-                };
-                
-                // Gérer les images (compatibilité avec l'ancienne structure)
-                if (images.length === 1) {
-                    productData.image = images[0];
+                    this.updateSyncStatus(`✅ ${this.products.length} produits chargés`, 'sync-success');
                 } else {
-                    productData.images = images;
+                    // Si pas de données, initialiser avec les produits par défaut
+                    await this.initializeDefaultProducts();
                 }
-                
-                // Sauvegarder dans Firebase
-                const success = await this.saveProductToFirebase(productData);
-                
-                if (success) {
-                    // Fermer le modal
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-                    modal.hide();
-                    
-                    this.updateSyncStatus('✅ Produit sauvegardé avec succès', 'sync-success');
-                } else {
-                    alert('Erreur lors de la sauvegarde. Veuillez réessayer.');
-                }
-            }
-
-            // Supprimer un produit
-            async deleteProduct(productId) {
-                const success = await this.deleteProductFromFirebase(productId);
-                
-                if (success) {
-                    this.updateSyncStatus('✅ Produit supprimé avec succès', 'sync-success');
-                } else {
-                    alert('Erreur lors de la suppression. Veuillez réessayer.');
-                }
-            }
-
-            // Exporter les données
-            exportData() {
-                const dataStr = JSON.stringify(this.products, null, 2);
-                const dataBlob = new Blob([dataStr], {type: 'application/json'});
-                
-                const url = URL.createObjectURL(dataBlob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'boutique_produits_backup.json';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-                
-                this.updateSyncStatus('✅ Données exportées avec succès', 'sync-success');
-            }
-
-            // Importer les données
-            importData(file) {
-                const reader = new FileReader();
-                
-                reader.onload = async (e) => {
-                    try {
-                        const importedProducts = JSON.parse(e.target.result);
-                        
-                        // Validation basique des données
-                        if (!Array.isArray(importedProducts)) {
-                            throw new Error('Format de fichier invalide');
-                        }
-                        
-                        // Demander confirmation avant d'écraser les données
-                        if (confirm(`Cette action écrasera ${this.products.length} produits actuels avec ${importedProducts.length} nouveaux produits. Êtes-vous sûr ?`)) {
-                            this.products = importedProducts;
-                            const success = await this.saveAllToFirebase();
-                            
-                            if (success) {
-                                this.updateSyncStatus(`✅ ${importedProducts.length} produits importés avec succès`, 'sync-success');
-                            } else {
-                                alert('Erreur lors de l\'importation');
-                            }
-                        }
-                    } catch (error) {
-                        alert('Erreur lors de l\'importation: ' + error.message);
-                    }
-                };
-                
-                reader.readAsText(file);
-            }
-
-            // Réinitialiser les données
-            async resetData() {
-                if (confirm('Êtes-vous sûr de vouloir réinitialiser tous les produits ? Cette action est irréversible.')) {
-                    this.products = defaultProducts;
-                    const success = await this.saveAllToFirebase();
-                    
-                    if (success) {
-                        this.updateSyncStatus('✅ Données réinitialisées avec succès', 'sync-success');
-                    } else {
-                        alert('Erreur lors de la réinitialisation');
-                    }
-                }
-            }
-
-            // Configurer les écouteurs d'événements
-            setupEventListeners() {
-                // Bouton pour ajouter un produit
-                document.querySelector('[data-bs-target="#productModal"]').addEventListener('click', () => {
-                    this.openAddProductModal();
-                });
-                
-                // Boutons pour modifier/supprimer des produits (délégués d'événements)
-                document.getElementById('products-list').addEventListener('click', (e) => {
-                    if (e.target.closest('.edit-product')) {
-                        const productId = e.target.closest('.edit-product').getAttribute('data-id');
-                        this.openEditProductModal(productId);
-                    }
-                    
-                    if (e.target.closest('.delete-product')) {
-                        const productId = e.target.closest('.delete-product').getAttribute('data-id');
-                        this.currentProductId = productId;
-                        
-                        const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                        modal.show();
-                    }
-                });
-                
-                // Confirmation de suppression
-                document.getElementById('confirmDelete').addEventListener('click', () => {
-                    this.deleteProduct(this.currentProductId);
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-                    modal.hide();
-                });
-                
-                // Sauvegarder un produit
-                document.getElementById('saveProduct').addEventListener('click', () => {
-                    this.saveProduct();
-                });
-                
-                // Ajouter un champ d'URL d'image
-                document.getElementById('addImageUrl').addEventListener('click', () => {
-                    this.addImageUrlField();
-                });
-                
-                // Supprimer un champ d'URL d'image (délégué d'événements)
-                document.getElementById('imageUrlsContainer').addEventListener('click', (e) => {
-                    if (e.target.closest('.remove-image-url')) {
-                        e.target.closest('.image-url-input').remove();
-                        this.updateImagePreview();
-                    }
-                });
-                
-                // Ajouter une couleur
-                document.getElementById('addColor').addEventListener('click', () => {
-                    const newColorInput = document.getElementById('newColor');
-                    const color = newColorInput.value.trim();
-                    
-                    if (color) {
-                        this.addColorTag(color);
-                        newColorInput.value = '';
-                    }
-                });
-                
-                // Supprimer une couleur (délégué d'événements)
-                document.getElementById('colorsContainer').addEventListener('click', (e) => {
-                    if (e.target.closest('.remove-color')) {
-                        e.target.closest('.color-tag').remove();
-                    }
-                });
-                
-                // Entrée pour ajouter une couleur
-                document.getElementById('newColor').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        document.getElementById('addColor').click();
-                    }
-                });
-                
-                // Exporter les données
-                document.getElementById('export-data').addEventListener('click', () => {
-                    this.exportData();
-                });
-                
-                // Importer les données
-                document.getElementById('import-data').addEventListener('click', () => {
-                    const fileInput = document.getElementById('import-file');
-                    if (fileInput.files.length > 0) {
-                        this.importData(fileInput.files[0]);
-                    } else {
-                        alert('Veuillez sélectionner un fichier à importer.');
-                    }
-                });
-
-                // Synchronisation manuelle
-                document.getElementById('force-sync').addEventListener('click', async () => {
-                    this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
-                    const success = await this.saveAllToFirebase();
-                    if (success) {
-                        this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
-                    } else {
-                        this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
-                    }
-                });
-
-                // Réinitialiser les données
-                document.getElementById('reset-data').addEventListener('click', () => {
-                    this.resetData();
-                });
-
-                // Synchronisation rapide
-                document.getElementById('syncNowBtn').addEventListener('click', async () => {
-                    this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
-                    const success = await this.saveAllToFirebase();
-                    if (success) {
-                        this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
-                    } else {
-                        this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
-                    }
-                });
+            } catch (error) {
+                console.error('Erreur chargement Firebase:', error);
+                this.updateSyncStatus('❌ Erreur de connexion Firebase', 'sync-error');
+                this.products = [];
+                this.displayProducts();
             }
         }
 
-        // Démarrer l'application
-        document.addEventListener('DOMContentLoaded', () => {
-            new AdminPanel();
-        });
-    </script>
+        // Méthode pour initialiser les produits par défaut
+        async initializeDefaultProducts() {
+            try {
+                const batch = this.db.batch();
+                
+                defaultProducts.forEach(product => {
+                    const docRef = this.db.collection('products').doc(); // Firebase génère l'ID
+                    batch.set(docRef, product);
+                });
+                
+                await batch.commit();
+                
+                // Recharger les produits
+                const snapshot = await this.db.collection('products').get();
+                this.products = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                
+                this.displayProducts();
+                this.updateSyncStatus('✅ Données initiales créées', 'sync-success');
+            } catch (error) {
+                console.error('Erreur initialisation données:', error);
+                this.updateSyncStatus('❌ Erreur création données initiales', 'sync-error');
+            }
+        }
+
+        // Écouter les changements en temps réel
+        listenToChanges() {
+            this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+                this.products = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                this.displayProducts();
+                this.updateStats();
+                this.updateLastSync();
+            }, error => {
+                console.error('Erreur écoute Firebase:', error);
+                this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
+            });
+        }
+
+        // Sauvegarder tous les produits dans Firebase
+        async saveAllToFirebase() {
+            try {
+                // Supprimer tous les documents existants
+                const snapshot = await this.db.collection('products').get();
+                const batch = this.db.batch();
+                
+                snapshot.docs.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                await batch.commit();
+                
+                // Recréer tous les produits avec de nouveaux IDs Firebase
+                const newBatch = this.db.batch();
+                this.products.forEach(product => {
+                    const docRef = this.db.collection('products').doc();
+                    const { id, ...productData } = product;
+                    newBatch.set(docRef, productData);
+                });
+                
+                await newBatch.commit();
+                return true;
+            } catch (error) {
+                console.error('Erreur sauvegarde Firebase:', error);
+                return false;
+            }
+        }
+
+        // Sauvegarder un produit dans Firebase
+        async saveProductToFirebase(product) {
+            try {
+                const { id, ...productData } = product;
+                
+                // Si c'est un nouveau produit (sans ID Firebase), laisser Firebase générer l'ID
+                if (!id) {
+                    await this.db.collection('products').add(productData);
+                    return true;
+                } else {
+                    // Si c'est une modification, utiliser l'ID existant
+                    await this.db.collection('products').doc(id).set(productData);
+                    return true;
+                }
+            } catch (error) {
+                console.error('Erreur sauvegarde produit:', error);
+                return false;
+            }
+        }
+
+        // Supprimer un produit de Firebase
+        async deleteProductFromFirebase(productId) {
+            try {
+                await this.db.collection('products').doc(productId).delete();
+                return true;
+            } catch (error) {
+                console.error('Erreur suppression produit:', error);
+                return false;
+            }
+        }
+
+        // Afficher tous les produits
+        displayProducts() {
+            const container = document.getElementById('products-list');
+            
+            if (this.products.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                        <h4 class="fw-bold mb-3">Aucun produit</h4>
+                        <p class="text-muted mb-4">
+                            Commencez par ajouter votre premier produit.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = this.products.map(product => {
+                const hasDiscount = product.discount > 0;
+                const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                const mainImage = product.images ? product.images[0] : product.image;
+
+                return `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="product-card-admin h-100">
+                            <img src="${mainImage}" class="product-image-admin" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Non+Disponible'">
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="mb-0">${product.name}</h5>
+                                    <span class="badge ${product.category === 'homme' ? 'bg-primary' : 'bg-danger'}">
+                                        ${product.category}
+                                    </span>
+                                </div>
+                                <p class="text-muted small mb-2">${product.colors ? product.colors.join(', ') : 'Aucune couleur spécifiée'}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        ${hasDiscount ? `
+                                            <span class="fw-bold text-primary">${discountPrice} DT</span>
+                                            <span class="text-muted text-decoration-line-through ms-1">${product.price} DT</span>
+                                            <span class="badge bg-danger ms-1">-${product.discount}%</span>
+                                        ` : `
+                                            <span class="fw-bold text-primary">${product.price} DT</span>
+                                        `}
+                                    </div>
+                                    ${product.isNew ? '<span class="badge bg-success">Nouveau</span>' : ''}
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-sm btn-outline-primary action-btn edit-product" data-id="${product.id}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger action-btn delete-product" data-id="${product.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Mettre à jour les statistiques
+        updateStats() {
+            const totalProducts = this.products.length;
+            const hommeProducts = this.products.filter(p => p.category === 'homme').length;
+            const femmeProducts = this.products.filter(p => p.category === 'femme').length;
+
+            document.getElementById('total-products').textContent = totalProducts;
+            document.getElementById('homme-products').textContent = hommeProducts;
+            document.getElementById('femme-products').textContent = femmeProducts;
+
+            document.getElementById('firebaseStatus').textContent = 
+                `✅ ${totalProducts} produits synchronisés - Temps réel activé`;
+        }
+
+        // Mettre à jour le statut de synchronisation
+        updateSyncStatus(message, type) {
+            const statusElement = document.getElementById('syncStatus');
+            statusElement.textContent = message;
+            statusElement.className = `sync-status ${type}`;
+            statusElement.classList.remove('d-none');
+            
+            setTimeout(() => {
+                statusElement.classList.add('d-none');
+            }, 5000);
+        }
+
+        // Mettre à jour la dernière synchronisation
+        updateLastSync() {
+            const now = new Date();
+            document.getElementById('lastSync').textContent = 
+                `Dernière synchronisation: ${now.toLocaleString()}`;
+        }
+
+        // Ouvrir le modal pour ajouter un produit
+        openAddProductModal() {
+            document.getElementById('productModalLabel').textContent = 'Ajouter un produit';
+            document.getElementById('productForm').reset();
+            document.getElementById('productId').value = '';
+            document.getElementById('imageUrlsContainer').innerHTML = '';
+            document.getElementById('colorsContainer').innerHTML = '';
+            document.getElementById('imagePreview').innerHTML = '';
+            
+            // Ajouter un champ d'URL d'image par défaut
+            this.addImageUrlField();
+            
+            const modal = new bootstrap.Modal(document.getElementById('productModal'));
+            modal.show();
+        }
+
+        // Ouvrir le modal pour modifier un produit
+        openEditProductModal(productId) {
+            const product = this.products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('productModalLabel').textContent = 'Modifier le produit';
+            document.getElementById('productId').value = product.id;
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productCategory').value = product.category;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productDiscount').value = product.discount || 0;
+            document.getElementById('productIsNew').checked = product.isNew || false;
+
+            // Gérer les images
+            document.getElementById('imageUrlsContainer').innerHTML = '';
+            const images = product.images || [product.image];
+            images.forEach(url => this.addImageUrlField(url));
+            
+            // Gérer les couleurs
+            document.getElementById('colorsContainer').innerHTML = '';
+            if (product.colors) {
+                product.colors.forEach(color => this.addColorTag(color));
+            }
+            
+            // Afficher l'aperçu des images
+            this.updateImagePreview();
+
+            const modal = new bootstrap.Modal(document.getElementById('productModal'));
+            modal.show();
+        }
+
+        // Ajouter un champ d'URL d'image
+        addImageUrlField(url = '') {
+            const container = document.getElementById('imageUrlsContainer');
+            const index = container.children.length;
+            
+            const div = document.createElement('div');
+            div.className = 'input-group image-url-input';
+            div.innerHTML = `
+                <input type="url" class="form-control" value="${url}" placeholder="URL de l'image" data-index="${index}">
+                <button type="button" class="btn btn-outline-danger remove-image-url">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(div);
+            
+            // Mettre à jour l'aperçu quand l'URL change
+            const input = div.querySelector('input');
+            input.addEventListener('input', () => this.updateImagePreview());
+        }
+
+        // Ajouter un tag de couleur
+        addColorTag(color) {
+            const container = document.getElementById('colorsContainer');
+            
+            const tag = document.createElement('span');
+            tag.className = 'color-tag';
+            tag.innerHTML = `
+                ${color}
+                <span class="remove-color">
+                    <i class="fas fa-times"></i>
+                </span>
+            `;
+            
+            container.appendChild(tag);
+        }
+
+        // Mettre à jour l'aperçu des images
+        updateImagePreview() {
+            const container = document.getElementById('imagePreview');
+            const inputs = document.querySelectorAll('#imageUrlsContainer input');
+            
+            container.innerHTML = '';
+            
+            inputs.forEach(input => {
+                if (input.value) {
+                    const img = document.createElement('img');
+                    img.src = input.value;
+                    img.className = 'product-image-preview me-2 mb-2';
+                    img.alt = 'Aperçu';
+                    img.onerror = function() {
+                        this.style.display = 'none';
+                    };
+                    container.appendChild(img);
+                }
+            });
+        }
+
+        // Sauvegarder un produit (ajout ou modification)
+        async saveProduct() {
+            // Récupérer les données du formulaire
+            const id = document.getElementById('productId').value;
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const discount = parseInt(document.getElementById('productDiscount').value) || 0;
+            const isNew = document.getElementById('productIsNew').checked;
+            
+            // Récupérer les URLs des images
+            const imageInputs = document.querySelectorAll('#imageUrlsContainer input');
+            const images = Array.from(imageInputs)
+                .map(input => input.value.trim())
+                .filter(url => url !== '');
+            
+            // Récupérer les couleurs
+            const colorTags = document.querySelectorAll('#colorsContainer .color-tag');
+            const colors = Array.from(colorTags)
+                .map(tag => tag.textContent.trim().replace('×', '').trim());
+            
+            // Validation
+            if (!name || !category || isNaN(price) || images.length === 0) {
+                alert('Veuillez remplir tous les champs obligatoires et ajouter au moins une image.');
+                return;
+            }
+            
+            // Préparer l'objet produit
+            const productData = {
+                name,
+                category,
+                price,
+                discount,
+                isNew,
+                colors: colors.length > 0 ? colors : undefined
+            };
+            
+            // Gérer les images (compatibilité avec l'ancienne structure)
+            if (images.length === 1) {
+                productData.image = images[0];
+            } else {
+                productData.images = images;
+            }
+            
+            // Ajouter l'ID seulement si c'est une modification
+            if (id) {
+                productData.id = id;
+            }
+            
+            // Sauvegarder dans Firebase
+            const success = await this.saveProductToFirebase(productData);
+            
+            if (success) {
+                // Fermer le modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+                modal.hide();
+                
+                this.updateSyncStatus('✅ Produit sauvegardé avec succès', 'sync-success');
+            } else {
+                alert('Erreur lors de la sauvegarde. Veuillez réessayer.');
+            }
+        }
+
+        // Supprimer un produit
+        async deleteProduct(productId) {
+            const success = await this.deleteProductFromFirebase(productId);
+            
+            if (success) {
+                this.updateSyncStatus('✅ Produit supprimé avec succès', 'sync-success');
+            } else {
+                alert('Erreur lors de la suppression. Veuillez réessayer.');
+            }
+        }
+
+        // Exporter les données
+        exportData() {
+            const dataStr = JSON.stringify(this.products, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'boutique_produits_backup.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            this.updateSyncStatus('✅ Données exportées avec succès', 'sync-success');
+        }
+
+        // Importer les données
+        importData(file) {
+            const reader = new FileReader();
+            
+            reader.onload = async (e) => {
+                try {
+                    const importedProducts = JSON.parse(e.target.result);
+                    
+                    // Validation basique des données
+                    if (!Array.isArray(importedProducts)) {
+                        throw new Error('Format de fichier invalide');
+                    }
+                    
+                    // Demander confirmation avant d'écraser les données
+                    if (confirm(`Cette action écrasera ${this.products.length} produits actuels avec ${importedProducts.length} nouveaux produits. Êtes-vous sûr ?`)) {
+                        this.products = importedProducts;
+                        const success = await this.saveAllToFirebase();
+                        
+                        if (success) {
+                            this.updateSyncStatus(`✅ ${importedProducts.length} produits importés avec succès`, 'sync-success');
+                        } else {
+                            alert('Erreur lors de l\'importation');
+                        }
+                    }
+                } catch (error) {
+                    alert('Erreur lors de l\'importation: ' + error.message);
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // Réinitialiser les données
+        async resetData() {
+            if (confirm('Êtes-vous sûr de vouloir réinitialiser tous les produits ? Cette action est irréversible.')) {
+                this.products = [];
+                const success = await this.initializeDefaultProducts();
+                
+                if (success) {
+                    this.updateSyncStatus('✅ Données réinitialisées avec succès', 'sync-success');
+                } else {
+                    alert('Erreur lors de la réinitialisation');
+                }
+            }
+        }
+
+        // Configurer les écouteurs d'événements
+        setupEventListeners() {
+            // Bouton pour ajouter un produit
+            document.querySelector('[data-bs-target="#productModal"]').addEventListener('click', () => {
+                this.openAddProductModal();
+            });
+            
+            // Boutons pour modifier/supprimer des produits (délégués d'événements)
+            document.getElementById('products-list').addEventListener('click', (e) => {
+                if (e.target.closest('.edit-product')) {
+                    const productId = e.target.closest('.edit-product').getAttribute('data-id');
+                    this.openEditProductModal(productId);
+                }
+                
+                if (e.target.closest('.delete-product')) {
+                    const productId = e.target.closest('.delete-product').getAttribute('data-id');
+                    this.currentProductId = productId;
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                    modal.show();
+                }
+            });
+            
+            // Confirmation de suppression
+            document.getElementById('confirmDelete').addEventListener('click', () => {
+                this.deleteProduct(this.currentProductId);
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                modal.hide();
+            });
+            
+            // Sauvegarder un produit
+            document.getElementById('saveProduct').addEventListener('click', () => {
+                this.saveProduct();
+            });
+            
+            // Ajouter un champ d'URL d'image
+            document.getElementById('addImageUrl').addEventListener('click', () => {
+                this.addImageUrlField();
+            });
+            
+            // Supprimer un champ d'URL d'image (délégué d'événements)
+            document.getElementById('imageUrlsContainer').addEventListener('click', (e) => {
+                if (e.target.closest('.remove-image-url')) {
+                    e.target.closest('.image-url-input').remove();
+                    this.updateImagePreview();
+                }
+            });
+            
+            // Ajouter une couleur
+            document.getElementById('addColor').addEventListener('click', () => {
+                const newColorInput = document.getElementById('newColor');
+                const color = newColorInput.value.trim();
+                
+                if (color) {
+                    this.addColorTag(color);
+                    newColorInput.value = '';
+                }
+            });
+            
+            // Supprimer une couleur (délégué d'événements)
+            document.getElementById('colorsContainer').addEventListener('click', (e) => {
+                if (e.target.closest('.remove-color')) {
+                    e.target.closest('.color-tag').remove();
+                }
+            });
+            
+            // Entrée pour ajouter une couleur
+            document.getElementById('newColor').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('addColor').click();
+                }
+            });
+            
+            // Exporter les données
+            document.getElementById('export-data').addEventListener('click', () => {
+                this.exportData();
+            });
+            
+            // Importer les données
+            document.getElementById('import-data').addEventListener('click', () => {
+                const fileInput = document.getElementById('import-file');
+                if (fileInput.files.length > 0) {
+                    this.importData(fileInput.files[0]);
+                } else {
+                    alert('Veuillez sélectionner un fichier à importer.');
+                }
+            });
+
+            // Synchronisation manuelle
+            document.getElementById('force-sync').addEventListener('click', async () => {
+                this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
+                const success = await this.saveAllToFirebase();
+                if (success) {
+                    this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
+                } else {
+                    this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
+                }
+            });
+
+            // Réinitialiser les données
+            document.getElementById('reset-data').addEventListener('click', () => {
+                this.resetData();
+            });
+
+            // Synchronisation rapide
+            document.getElementById('syncNowBtn').addEventListener('click', async () => {
+                this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
+                const success = await this.saveAllToFirebase();
+                if (success) {
+                    this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
+                }
+            });
+        }
+    }
+
+    // Démarrer l'application
+    document.addEventListener('DOMContentLoaded', () => {
+        new AdminPanel();
+    });
+</script>
 </body>
 </html>
