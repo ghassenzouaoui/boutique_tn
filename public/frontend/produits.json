@@ -1,0 +1,79 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Ensemble survêtement homme",
+    "category": "homme",
+    "price": 45,
+    "images": [
+      "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
+      "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
+      "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
+    ],
+    "colors": ["Gris", "Rouge", "Noir"],
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "id": 2,
+    "name": "T‑shirt sport homme",
+    "category": "homme",
+    "price": 50,
+    "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "isNew": false,
+    "discount": 30
+  },
+  {
+    "id": 3,
+    "name": "Pantalon de jogging homme",
+    "category": "homme",
+    "price": 120,
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "isNew": false,
+    "discount": 25
+  },
+  {
+    "id": 4,
+    "name": "Short running homme",
+    "category": "homme",
+    "price": 100,
+    "image": "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
+    "isNew": false,
+    "discount": 25
+  },
+  {
+    "id": 5,
+    "name": "Legging Yoga Premium",
+    "category": "femme",
+    "price": 65,
+    "image": "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "id": 6,
+    "name": "T-Shirt Fitness Dry",
+    "category": "femme",
+    "price": 42,
+    "image": "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "id": 7,
+    "name": "Ensemble Fitness Pro",
+    "category": "femme",
+    "price": 95,
+    "image": "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "id": 8,
+    "name": "Short Training Fit",
+    "category": "femme",
+    "price": 55,
+    "image": "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
+    "isNew": false,
+    "discount": 50
+  }
+]
