@@ -625,7 +625,9 @@
                 this.products.forEach(product => {
                     const docRef = this.db.collection('products').doc();
                     const { id, ...productData } = product;
-                    newBatch.set(docRef, productData);
+                    // Nettoyer les données avant sauvegarde
+                    const cleanedData = this.cleanProductData(productData);
+                    newBatch.set(docRef, cleanedData);
                 });
                 
                 await newBatch.commit();
@@ -636,22 +638,37 @@
             }
         }
 
+        // Nettoyer les données du produit (supprimer les champs undefined)
+        cleanProductData(productData) {
+            const cleaned = {};
+            for (const [key, value] of Object.entries(productData)) {
+                if (value !== undefined && value !== null) {
+                    cleaned[key] = value;
+                }
+            }
+            return cleaned;
+        }
+
         // Sauvegarder un produit dans Firebase
         async saveProductToFirebase(product) {
             try {
                 const { id, ...productData } = product;
                 
+                // Nettoyer les données avant sauvegarde
+                const cleanedData = this.cleanProductData(productData);
+                
                 // Si c'est un nouveau produit (sans ID Firebase), laisser Firebase générer l'ID
                 if (!id) {
-                    await this.db.collection('products').add(productData);
+                    await this.db.collection('products').add(cleanedData);
                     return true;
                 } else {
                     // Si c'est une modification, utiliser l'ID existant
-                    await this.db.collection('products').doc(id).set(productData);
+                    await this.db.collection('products').doc(id).set(cleanedData);
                     return true;
                 }
             } catch (error) {
                 console.error('Erreur sauvegarde produit:', error);
+                console.error('Données envoyées:', product);
                 return false;
             }
         }
@@ -793,11 +810,15 @@
             // Gérer les images
             document.getElementById('imageUrlsContainer').innerHTML = '';
             const images = product.images || [product.image];
-            images.forEach(url => this.addImageUrlField(url));
+            if (images && images.length > 0) {
+                images.forEach(url => this.addImageUrlField(url));
+            } else {
+                this.addImageUrlField();
+            }
             
             // Gérer les couleurs
             document.getElementById('colorsContainer').innerHTML = '';
-            if (product.colors) {
+            if (product.colors && product.colors.length > 0) {
                 product.colors.forEach(color => this.addColorTag(color));
             }
             
@@ -885,7 +906,11 @@
             // Récupérer les couleurs
             const colorTags = document.querySelectorAll('#colorsContainer .color-tag');
             const colors = Array.from(colorTags)
-                .map(tag => tag.textContent.trim().replace('×', '').trim());
+                .map(tag => {
+                    const text = tag.textContent.trim();
+                    return text.replace('×', '').trim();
+                })
+                .filter(color => color !== '');
             
             // Validation
             if (!name || !category || isNaN(price) || images.length === 0) {
@@ -898,12 +923,16 @@
                 name,
                 category,
                 price,
-                discount,
-                isNew,
-                colors: colors.length > 0 ? colors : undefined
+                discount: discount || 0,
+                isNew: isNew || false
             };
             
-            // Gérer les images (compatibilité avec l'ancienne structure)
+            // Ajouter les couleurs seulement si elles existent
+            if (colors.length > 0) {
+                productData.colors = colors;
+            }
+            
+            // Gérer les images
             if (images.length === 1) {
                 productData.image = images[0];
             } else {
@@ -914,6 +943,8 @@
             if (id) {
                 productData.id = id;
             }
+            
+            console.log('Données à sauvegarder:', productData);
             
             // Sauvegarder dans Firebase
             const success = await this.saveProductToFirebase(productData);
