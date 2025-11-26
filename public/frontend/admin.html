@@ -43,19 +43,6 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 1.5rem;
-            display: none;
-        }
-
-        .authenticated .admin-content {
-            display: block;
-        }
-
-        .auth-required {
-            display: none;
-        }
-
-        .authenticated .auth-required {
-            display: block;
         }
 
         .nav-pills .nav-link.active {
@@ -134,6 +121,25 @@
             cursor: pointer;
             color: #ef4444;
         }
+
+        .sync-status {
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .sync-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .sync-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
     </style>
 </head>
 <body>
@@ -143,16 +149,25 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h1 class="h3 mb-0">
-                        <i class="fas fa-cog me-2"></i>Administration
+                        <i class="fas fa-cog me-2"></i>Administration Boutique
                     </h1>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="products.html" class="btn btn-light btn-sm me-2">
-                        <i class="fas fa-store me-1"></i> Retour à la boutique
+                        <i class="fas fa-store me-1"></i> Voir la boutique
                     </a>
-                   
+                    <button class="btn btn-warning btn-sm" id="syncNowBtn">
+                        <i class="fas fa-sync me-1"></i> Synchroniser
+                    </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Sync Status -->
+    <div class="container mt-3">
+        <div id="syncStatus" class="sync-status d-none">
+            <!-- Le statut de synchronisation sera affiché ici -->
         </div>
     </div>
 
@@ -161,7 +176,7 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-lg-3 mb-4">
-                <div class="admin-sidebar auth-required">
+                <div class="admin-sidebar">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="#products" data-bs-toggle="tab">
@@ -197,7 +212,10 @@
 
                             <!-- Products List -->
                             <div class="row" id="products-list">
-                                <!-- Les produits seront chargés ici dynamiquement -->
+                                <div class="col-12 text-center">
+                                    <div class="loading"></div>
+                                    <p class="text-muted mt-3">Chargement des produits...</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -223,6 +241,20 @@
                                     <div class="stats-card">
                                         <div class="stats-number" id="femme-products">0</div>
                                         <div class="stats-label">Produits Femme</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Statut de synchronisation</h5>
+                                            <p class="card-text" id="firebaseStatus">Connexion en cours...</p>
+                                            <div class="progress mb-3">
+                                                <div id="syncProgress" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                            </div>
+                                            <small class="text-muted" id="lastSync">Dernière synchronisation: --</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -260,38 +292,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Forcer la synchronisation</h5>
+                                            <p class="card-text">Synchroniser manuellement avec Firebase.</p>
+                                            <button class="btn btn-info w-100" id="force-sync">
+                                                <i class="fas fa-sync me-1"></i> Synchroniser maintenant
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Réinitialiser</h5>
+                                            <p class="card-text">Remettre à zéro tous les produits.</p>
+                                            <button class="btn btn-danger w-100" id="reset-data">
+                                                <i class="fas fa-trash me-1"></i> Réinitialiser les données
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="alert alert-warning mt-3">
                                 <i class="fas fa-exclamation-triangle me-2"></i>
                                 <strong>Attention :</strong> L'importation de données écrasera toutes les données actuelles.
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal d'authentification -->
-    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="authModalLabel">Accès Administration</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="authForm">
-                        <div class="mb-3">
-                            <label for="adminPassword" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" id="adminPassword" 
-                                   placeholder="Entrez le mot de passe" required autofocus>
-                        </div>
-                        <div class="alert alert-danger d-none" id="authError">
-                            <i class="fas fa-exclamation-triangle me-2"></i>Mot de passe incorrect !
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">
-                            <i class="fas fa-lock me-2"></i>Se connecter
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -399,10 +429,25 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        // Clé pour le localStorage
-        const STORAGE_KEY = 'sportplus_products';
+        // Configuration Firebase
+        const firebaseConfig = {
+    apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
+    authDomain: "bt-sp-b3ce3.firebaseapp.com",
+    projectId: "bt-sp-b3ce3",
+    storageBucket: "bt-sp-b3ce3.firebasestorage.app",
+    messagingSenderId: "1072895717676",
+    appId: "1:1072895717676:web:bace267352a7941c1dfc89"
+};
+        // Initialiser Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
 
         // Données par défaut des produits
         const defaultProducts = [
@@ -487,81 +532,107 @@
 
         class AdminPanel {
             constructor() {
-                this.products = this.loadProducts();
+                this.db = firebase.firestore();
+                this.products = [];
                 this.currentProductId = null;
+                this.unsubscribe = null;
                 this.init();
             }
 
-            init() {
-                this.checkAuthentication();
-                this.setupAuthListeners();
-            }
-
-            checkAuthentication() {
-                const isAuthenticated = sessionStorage.getItem('adminAuthenticated') === 'true';
-                
-                if (isAuthenticated) {
-                    this.showAdminContent();
-                } else {
-                    this.showAuthModal();
-                }
-            }
-
-            showAuthModal() {
-                const modal = new bootstrap.Modal(document.getElementById('authModal'));
-                modal.show();
-            }
-
-            showAdminContent() {
-                document.body.classList.add('authenticated');
-                this.displayProducts();
+            async init() {
+                await this.loadProducts();
                 this.setupEventListeners();
                 this.updateStats();
+                this.listenToChanges();
+                this.updateSyncStatus('✅ Connecté à Firebase', 'sync-success');
             }
 
-            setupAuthListeners() {
-                const authForm = document.getElementById('authForm');
-                const adminPassword = "admin123"; // Mot de passe - à changer
-                
-                authForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const passwordInput = document.getElementById('adminPassword').value;
-                    const errorElement = document.getElementById('authError');
+            // Charger les produits depuis Firebase
+            async loadProducts() {
+                try {
+                    const snapshot = await this.db.collection('products').get();
                     
-                    if (passwordInput === adminPassword) {
-                        sessionStorage.setItem('adminAuthenticated', 'true');
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('authModal'));
-                        modal.hide();
-                        this.showAdminContent();
+                    if (!snapshot.empty) {
+                        this.products = snapshot.docs.map(doc => ({
+                            id: doc.id,
+                            ...doc.data()
+                        }));
+                        this.updateSyncStatus(`✅ ${this.products.length} produits chargés`, 'sync-success');
                     } else {
-                        errorElement.classList.remove('d-none');
-                        document.getElementById('adminPassword').value = '';
-                        document.getElementById('adminPassword').focus();
+                        this.products = defaultProducts;
+                        await this.saveAllToFirebase();
+                        this.updateSyncStatus('✅ Données initiales créées', 'sync-success');
                     }
-                });
-
-                // Déconnexion
-                document.getElementById('logoutBtn').addEventListener('click', () => {
-                    sessionStorage.removeItem('adminAuthenticated');
-                    location.reload();
-                });
-            }
-
-            // Charger les produits depuis le localStorage
-            loadProducts() {
-                const storedProducts = localStorage.getItem(STORAGE_KEY);
-                if (storedProducts) {
-                    return JSON.parse(storedProducts);
-                } else {
-                    // Initialiser avec les données par défaut
-                    this.saveProducts(defaultProducts);
-                    return defaultProducts;
+                } catch (error) {
+                    console.error('Erreur chargement Firebase:', error);
+                    this.updateSyncStatus('❌ Erreur de connexion Firebase', 'sync-error');
+                    this.products = defaultProducts;
                 }
             }
 
-            // Sauvegarder les produits dans le localStorage
-            saveProducts(products) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+            // Écouter les changements en temps réel
+            listenToChanges() {
+                this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+                    this.products = snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    this.displayProducts();
+                    this.updateStats();
+                    this.updateLastSync();
+                }, error => {
+                    console.error('Erreur écoute Firebase:', error);
+                    this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
+                });
+            }
+
+            // Sauvegarder tous les produits dans Firebase
+            async saveAllToFirebase() {
+                try {
+                    const batch = this.db.batch();
+                    
+                    // Supprimer tous les documents existants
+                    const snapshot = await this.db.collection('products').get();
+                    snapshot.docs.forEach(doc => {
+                        batch.delete(doc.ref);
+                    });
+                    
+                    // Ajouter tous les nouveaux produits
+                    this.products.forEach(product => {
+                        const docRef = this.db.collection('products').doc(product.id.toString());
+                        const { id, ...productData } = product;
+                        batch.set(docRef, productData);
+                    });
+                    
+                    await batch.commit();
+                    return true;
+                } catch (error) {
+                    console.error('Erreur sauvegarde Firebase:', error);
+                    return false;
+                }
+            }
+
+            // Sauvegarder un produit dans Firebase
+            async saveProductToFirebase(product) {
+                try {
+                    const { id, ...productData } = product;
+                    await this.db.collection('products').doc(id.toString()).set(productData);
+                    return true;
+                } catch (error) {
+                    console.error('Erreur sauvegarde produit:', error);
+                    return false;
+                }
+            }
+
+            // Supprimer un produit de Firebase
+            async deleteProductFromFirebase(productId) {
+                try {
+                    await this.db.collection('products').doc(productId.toString()).delete();
+                    return true;
+                } catch (error) {
+                    console.error('Erreur suppression produit:', error);
+                    return false;
+                }
             }
 
             // Générer un ID unique pour un nouveau produit
@@ -639,6 +710,28 @@
                 document.getElementById('total-products').textContent = totalProducts;
                 document.getElementById('homme-products').textContent = hommeProducts;
                 document.getElementById('femme-products').textContent = femmeProducts;
+
+                document.getElementById('firebaseStatus').textContent = 
+                    `✅ ${totalProducts} produits synchronisés - Temps réel activé`;
+            }
+
+            // Mettre à jour le statut de synchronisation
+            updateSyncStatus(message, type) {
+                const statusElement = document.getElementById('syncStatus');
+                statusElement.textContent = message;
+                statusElement.className = `sync-status ${type}`;
+                statusElement.classList.remove('d-none');
+                
+                setTimeout(() => {
+                    statusElement.classList.add('d-none');
+                }, 5000);
+            }
+
+            // Mettre à jour la dernière synchronisation
+            updateLastSync() {
+                const now = new Date();
+                document.getElementById('lastSync').textContent = 
+                    `Dernière synchronisation: ${now.toLocaleString()}`;
             }
 
             // Ouvrir le modal pour ajouter un produit
@@ -659,7 +752,7 @@
 
             // Ouvrir le modal pour modifier un produit
             openEditProductModal(productId) {
-                const product = this.products.find(p => p.id === productId);
+                const product = this.products.find(p => p.id == productId);
                 if (!product) return;
 
                 document.getElementById('productModalLabel').textContent = 'Modifier le produit';
@@ -747,7 +840,7 @@
             }
 
             // Sauvegarder un produit (ajout ou modification)
-            saveProduct() {
+            async saveProduct() {
                 // Récupérer les données du formulaire
                 const id = document.getElementById('productId').value;
                 const name = document.getElementById('productName').value;
@@ -791,38 +884,29 @@
                     productData.images = images;
                 }
                 
-                // Ajouter ou mettre à jour le produit
-                if (id) {
-                    // Modification
-                    const index = this.products.findIndex(p => p.id === parseInt(id));
-                    if (index !== -1) {
-                        this.products[index] = productData;
-                    }
+                // Sauvegarder dans Firebase
+                const success = await this.saveProductToFirebase(productData);
+                
+                if (success) {
+                    // Fermer le modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+                    modal.hide();
+                    
+                    this.updateSyncStatus('✅ Produit sauvegardé avec succès', 'sync-success');
                 } else {
-                    // Ajout
-                    this.products.push(productData);
+                    alert('Erreur lors de la sauvegarde. Veuillez réessayer.');
                 }
-                
-                // Sauvegarder et rafraîchir l'affichage
-                this.saveProducts(this.products);
-                this.displayProducts();
-                this.updateStats();
-                
-                // Fermer le modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-                modal.hide();
-                
-                alert(id ? 'Produit modifié avec succès!' : 'Produit ajouté avec succès!');
             }
 
             // Supprimer un produit
-            deleteProduct(productId) {
-                this.products = this.products.filter(p => p.id !== productId);
-                this.saveProducts(this.products);
-                this.displayProducts();
-                this.updateStats();
+            async deleteProduct(productId) {
+                const success = await this.deleteProductFromFirebase(productId);
                 
-                alert('Produit supprimé avec succès!');
+                if (success) {
+                    this.updateSyncStatus('✅ Produit supprimé avec succès', 'sync-success');
+                } else {
+                    alert('Erreur lors de la suppression. Veuillez réessayer.');
+                }
             }
 
             // Exporter les données
@@ -833,20 +917,20 @@
                 const url = URL.createObjectURL(dataBlob);
                 const link = document.createElement('a');
                 link.href = url;
-                link.download = 'sportplus_products_backup.json';
+                link.download = 'boutique_produits_backup.json';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
                 
-                alert('Données exportées avec succès!');
+                this.updateSyncStatus('✅ Données exportées avec succès', 'sync-success');
             }
 
             // Importer les données
             importData(file) {
                 const reader = new FileReader();
                 
-                reader.onload = (e) => {
+                reader.onload = async (e) => {
                     try {
                         const importedProducts = JSON.parse(e.target.result);
                         
@@ -856,12 +940,15 @@
                         }
                         
                         // Demander confirmation avant d'écraser les données
-                        if (confirm('Cette action écrasera toutes vos données actuelles. Êtes-vous sûr ?')) {
+                        if (confirm(`Cette action écrasera ${this.products.length} produits actuels avec ${importedProducts.length} nouveaux produits. Êtes-vous sûr ?`)) {
                             this.products = importedProducts;
-                            this.saveProducts(this.products);
-                            this.displayProducts();
-                            this.updateStats();
-                            alert('Données importées avec succès!');
+                            const success = await this.saveAllToFirebase();
+                            
+                            if (success) {
+                                this.updateSyncStatus(`✅ ${importedProducts.length} produits importés avec succès`, 'sync-success');
+                            } else {
+                                alert('Erreur lors de l\'importation');
+                            }
                         }
                     } catch (error) {
                         alert('Erreur lors de l\'importation: ' + error.message);
@@ -869,6 +956,20 @@
                 };
                 
                 reader.readAsText(file);
+            }
+
+            // Réinitialiser les données
+            async resetData() {
+                if (confirm('Êtes-vous sûr de vouloir réinitialiser tous les produits ? Cette action est irréversible.')) {
+                    this.products = defaultProducts;
+                    const success = await this.saveAllToFirebase();
+                    
+                    if (success) {
+                        this.updateSyncStatus('✅ Données réinitialisées avec succès', 'sync-success');
+                    } else {
+                        alert('Erreur lors de la réinitialisation');
+                    }
+                }
             }
 
             // Configurer les écouteurs d'événements
@@ -881,12 +982,12 @@
                 // Boutons pour modifier/supprimer des produits (délégués d'événements)
                 document.getElementById('products-list').addEventListener('click', (e) => {
                     if (e.target.closest('.edit-product')) {
-                        const productId = parseInt(e.target.closest('.edit-product').getAttribute('data-id'));
+                        const productId = e.target.closest('.edit-product').getAttribute('data-id');
                         this.openEditProductModal(productId);
                     }
                     
                     if (e.target.closest('.delete-product')) {
-                        const productId = parseInt(e.target.closest('.delete-product').getAttribute('data-id'));
+                        const productId = e.target.closest('.delete-product').getAttribute('data-id');
                         this.currentProductId = productId;
                         
                         const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
@@ -957,6 +1058,36 @@
                         this.importData(fileInput.files[0]);
                     } else {
                         alert('Veuillez sélectionner un fichier à importer.');
+                    }
+                });
+
+                // Synchronisation manuelle
+                document.getElementById('force-sync').addEventListener('click', async () => {
+                    this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
+                    const success = await this.saveAllToFirebase();
+                    if (success) {
+                        this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
+                    } else {
+                        this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
+                    }
+                });
+
+                // Réinitialiser les données
+                document.getElementById('reset-data').addEventListener('click', () => {
+                    this.resetData();
+                });
+
+                // Synchronisation rapide
+                document.getElementById('syncNowBtn').addEventListener('click', async () => {
+                    this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
+                    const success = await this.saveAllToFirebase();
+                    if (success) {
+                        this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                    } else {
+                        this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
                     }
                 });
             }
