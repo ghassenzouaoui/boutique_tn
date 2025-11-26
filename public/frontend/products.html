@@ -791,10 +791,10 @@
             firebase.initializeApp(firebaseConfig);
         }
 
-        // Données par défaut des produits
+        // Données par défaut des produits - VERSION CORRIGÉE
         const defaultProducts = [
             {
-                id: 1,
+                id: "1",
                 name: "Ensemble survêtement homme",
                 category: "homme",
                 price: 45,
@@ -808,65 +808,72 @@
                 discount: 0
             },
             {
-                id: 2,
+                id: "2",
                 name: "T‑shirt sport homme",
                 category: "homme",
                 price: 50,
-                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                images: ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"],
+                colors: ["Noir"],
                 isNew: false,
                 discount: 30
             },
             {
-                id: 3,
+                id: "3",
                 name: "Pantalon de jogging homme",
                 category: "homme",
                 price: 120,
-                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                images: ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"],
+                colors: ["Gris"],
                 isNew: false,
                 discount: 25
             },
             {
-                id: 4,
+                id: "4",
                 name: "Short running homme",
                 category: "homme",
                 price: 100,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
+                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg"],
+                colors: ["Bleu"],
                 isNew: false,
                 discount: 25
             },
             {
-                id: 5,
+                id: "5",
                 name: "Legging Yoga Premium",
                 category: "femme",
                 price: 65,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
+                colors: ["Noir"],
                 isNew: true,
                 discount: 0
             },
             {
-                id: 6,
+                id: "6",
                 name: "T-Shirt Fitness Dry",
                 category: "femme",
                 price: 42,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
+                colors: ["Blanc"],
                 isNew: true,
                 discount: 0
             },
             {
-                id: 7,
+                id: "7",
                 name: "Ensemble Fitness Pro",
                 category: "femme",
                 price: 95,
-                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
+                colors: ["Rose"],
                 isNew: true,
                 discount: 0
             },
             {
-                id: 8,
+                id: "8",
                 name: "Short Training Fit",
                 category: "femme",
                 price: 55,
-                image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
+                images: ["https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown"],
+                colors: ["Vert"],
                 isNew: false,
                 discount: 50
             },
@@ -1030,9 +1037,11 @@
             createProductCard(product) {
                 const hasDiscount = product.discount > 0;
                 const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                
+                // CORRECTION : Utiliser toujours 'images' et 'colors'
                 const hasMultipleColors = product.images && product.images.length > 1;
-                const productImages = hasMultipleColors ? product.images : [product.image];
-                const productColors = hasMultipleColors ? product.colors : [];
+                const productImages = product.images || [product.image]; // Fallback pour compatibilité
+                const productColors = product.colors || ['Couleur unique']; // Fallback
 
                 return `
                     <div class="col-xl-3 col-lg-4 col-md-6">
@@ -1057,7 +1066,7 @@
                                 <div class="product-category">${product.category.toUpperCase()}</div>
                                 <h5 class="product-title">${product.name}</h5>
                                 
-                                ${hasMultipleColors ? this.createColorSelector(product) : '<div class="mb-3"></div>'}
+                                ${this.createColorSelector(product)}
                                 
                                 <div class="product-price mt-auto">
                                     ${hasDiscount ? `
@@ -1080,19 +1089,22 @@
             }
 
             createImageCarousel(product) {
+                const productImages = product.images || [product.image]; // Fallback
+                const productColors = product.colors || ['Couleur unique'];
+                
                 return `
                     <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="false">
                         <div class="carousel-inner">
-                            ${product.images.map((image, index) => `
+                            ${productImages.map((image, index) => `
                                 <div class="carousel-item ${index === 0 ? 'active' : ''}">
                                     <img src="${image}" 
                                          class="product-image d-block w-100" 
-                                         alt="${product.name} - ${product.colors ? product.colors[index] : 'Couleur ' + (index + 1)}"
+                                         alt="${product.name} - ${productColors[index] || 'Couleur ' + (index + 1)}"
                                          loading="lazy">
                                 </div>
                             `).join('')}
                         </div>
-                        ${product.images.length > 1 ? `
+                        ${productImages.length > 1 ? `
                             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Précédent</span>
@@ -1102,7 +1114,7 @@
                                 <span class="visually-hidden">Suivant</span>
                             </button>
                             <div class="carousel-indicators">
-                                ${product.images.map((_, index) => `
+                                ${productImages.map((_, index) => `
                                     <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
                                             class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
                                 `).join('')}
@@ -1113,8 +1125,9 @@
             }
 
             createSingleImage(product) {
+                const productImages = product.images || [product.image]; // Fallback
                 return `
-                    <img src="${product.image}" 
+                    <img src="${productImages[0]}" 
                          class="product-image" 
                          alt="${product.name}"
                          loading="lazy">
@@ -1122,13 +1135,20 @@
             }
 
             createColorSelector(product) {
-                if (!product.colors || product.colors.length <= 1) return '<div class="mb-3"></div>';
+                // CORRECTION : Afficher le sélecteur même pour une seule couleur
+                const productColors = product.colors || ['Couleur unique'];
+                
+                // Ne pas afficher le sélecteur s'il n'y a qu'une seule couleur sans nom spécifique
+                if (productColors.length === 1 && productColors[0] === 'Couleur unique') {
+                    return '<div class="mb-3"></div>';
+                }
 
                 return `
                     <div class="color-selector mb-3">
+                        <small class="text-muted d-block mb-2">Couleurs disponibles:</small>
                         <div class="d-flex gap-2 flex-wrap">
-                            ${product.colors.map((color, index) => `
-                                <button class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
+                            ${productColors.map((color, index) => `
+                                <button type="button" class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
                                         data-product-id="${product.id}" 
                                         data-color-index="${index}"
                                         data-color-name="${color}"
@@ -1194,62 +1214,59 @@
                     }
                 });
 
-                // CORRECTION : Gestion du bouton "Acheter" - version corrigée
-                // Dans la méthode setupEventListeners() - CORRECTION du bouton Acheter
-document.addEventListener('click', (e) => {
-    const buyButton = e.target.closest('.buy-now-btn');
-    if (buyButton) {
-        console.log('Bouton Acheter cliqué');
-        
-        // CORRECTION : Récupérer l'ID comme string (Firebase génère des IDs strings)
-        const productId = buyButton.getAttribute('data-product-id');
-        console.log('ID du produit:', productId);
-        
-        // CORRECTION : Rechercher directement avec l'ID string
-        const product = this.productsManager.products.find(p => p.id === productId);
-        if (!product) {
-            console.error('Produit non trouvé:', productId);
-            console.log('Produits disponibles:', this.productsManager.products.map(p => ({id: p.id, name: p.name})));
-            return;
-        }
-        
-        console.log('Produit trouvé:', product.name);
-        
-        const productCard = buyButton.closest('.product-card');
-        const activeColorOption = productCard.querySelector('.color-option.active');
-        let selectedColorIndex = 0;
-        
-        if (activeColorOption) {
-            selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
-        }
-        
-        this.productColorSelections[productId] = selectedColorIndex;
-        
-        const hasMultipleColors = product.images && product.images.length > 1;
-        const images = hasMultipleColors ? product.images : [product.image];
-        const colors = hasMultipleColors ? product.colors : [];
-        const hasDiscount = product.discount > 0;
-        const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
-        
-        this.currentProduct = {
-            id: product.id,
-            name: product.name,
-            category: product.category,
-            price: price,
-            images: images,
-            colors: colors
-        };
-        
-        console.log('Ouverture du modal pour:', this.currentProduct.name);
-        this.openOrderModal();
-    }
-});
+                // Gestion du bouton "Acheter"
+                document.addEventListener('click', (e) => {
+                    const buyButton = e.target.closest('.buy-now-btn');
+                    if (buyButton) {
+                        console.log('Bouton Acheter cliqué');
+                        
+                        const productId = buyButton.getAttribute('data-product-id');
+                        console.log('ID du produit:', productId);
+                        
+                        const product = this.productsManager.products.find(p => p.id === productId);
+                        if (!product) {
+                            console.error('Produit non trouvé:', productId);
+                            console.log('Produits disponibles:', this.productsManager.products.map(p => ({id: p.id, name: p.name})));
+                            return;
+                        }
+                        
+                        console.log('Produit trouvé:', product.name);
+                        
+                        const productCard = buyButton.closest('.product-card');
+                        const activeColorOption = productCard.querySelector('.color-option.active');
+                        let selectedColorIndex = 0;
+                        
+                        if (activeColorOption) {
+                            selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
+                        }
+                        
+                        this.productColorSelections[productId] = selectedColorIndex;
+                        
+                        const hasMultipleColors = product.images && product.images.length > 1;
+                        const images = product.images || [product.image];
+                        const colors = product.colors || ['Couleur unique'];
+                        const hasDiscount = product.discount > 0;
+                        const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                        
+                        this.currentProduct = {
+                            id: product.id,
+                            name: product.name,
+                            category: product.category,
+                            price: price,
+                            images: images,
+                            colors: colors
+                        };
+                        
+                        console.log('Ouverture du modal pour:', this.currentProduct.name);
+                        this.openOrderModal();
+                    }
+                });
 
                 // Gestion des sélecteurs de couleur
                 document.addEventListener('click', (e) => {
                     if (e.target.classList.contains('color-option')) {
                         const option = e.target;
-                        const productId = parseInt(option.getAttribute('data-product-id'));
+                        const productId = option.getAttribute('data-product-id');
                         const colorIndex = parseInt(option.getAttribute('data-color-index'));
                         
                         this.productColorSelections[productId] = colorIndex;
