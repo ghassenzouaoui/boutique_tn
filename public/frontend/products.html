@@ -8,516 +8,516 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-       /* Variables CSS */
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --accent-color: #f59e0b;
-    --dark-color: #1f2937;
-    --light-color: #f8fafc;
-    --text-dark: #374151;
-    --text-light: #6b7280;
-}
+        /* Variables CSS */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+        }
 
-/* Styles généraux */
-body {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: #ffffff;
-}
+        /* Styles généraux */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #ffffff;
+        }
 
-/* Promo Banner */
-.promo-banner {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
-    font-size: 0.875rem;
-    font-weight: 600;
-}
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
 
-/* Navigation */
-.navbar {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 1rem 0;
-}
+        /* Navigation */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
 
-.navbar-brand {
-    font-size: 1.75rem !important;
-    letter-spacing: -0.5px;
-}
+        .navbar-brand {
+            font-size: 1.75rem !important;
+            letter-spacing: -0.5px;
+        }
 
-.navbar-nav .nav-link {
-    font-size: 0.95rem;
-    padding: 0.5rem 1rem !important;
-    transition: color 0.3s ease;
-}
+        .navbar-nav .nav-link {
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
 
-.navbar-nav .nav-link:hover {
-    color: var(--primary-color) !important;
-}
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
 
-.admin-link {
-    background: linear-gradient(135deg, var(--accent-color), #f59e0b);
-    color: white !important;
-    border-radius: 20px;
-    padding: 0.5rem 1rem !important;
-    margin-left: 0.5rem;
-    font-weight: 600;
-}
+        .admin-link {
+            background: linear-gradient(135deg, var(--accent-color), #f59e0b);
+            color: white !important;
+            border-radius: 20px;
+            padding: 0.5rem 1rem !important;
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
 
-.admin-link:hover {
-    background: linear-gradient(135deg, #e69500, #d97706);
-    color: white !important;
-    transform: translateY(-2px);
-}
+        .admin-link:hover {
+            background: linear-gradient(135deg, #e69500, #d97706);
+            color: white !important;
+            transform: translateY(-2px);
+        }
 
-/* Product Cards */
-.product-card {
-    background: white;
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    position: relative;
-}
+        /* Product Cards */
+        .product-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-.product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
 
-.product-image {
-    height: 300px;
-    object-fit: cover;
-    width: 100%;
-    transition: transform 0.3s ease;
-}
+        .product-image {
+            height: 300px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
 
-.product-card:hover .product-image {
-    transform: scale(1.05);
-}
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
 
-.product-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
 
-.badge-new {
-    background: linear-gradient(45deg, var(--accent-color), #fbbf24);
-    color: white;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.75rem;
-}
+        .badge-new {
+            background: linear-gradient(45deg, var(--accent-color), #fbbf24);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+        }
 
-.badge-sale {
-    background: linear-gradient(45deg, #ef4444, #dc2626);
-    color: white;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.75rem;
-}
+        .badge-sale {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+        }
 
-.badge-colors {
-    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
-    color: white;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.75rem;
-}
+        .badge-colors {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+        }
 
-.product-card-body {
-    padding: 1.5rem;
-}
+        .product-card-body {
+            padding: 1.5rem;
+        }
 
-.product-title {
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
-    line-height: 1.3;
-}
+        .product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
 
-.product-category {
-    color: var(--text-light);
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-}
+        .product-category {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
 
-.product-price {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-}
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
 
-.current-price {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
+        .current-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-.original-price {
-    font-size: 1rem;
-    color: var(--text-light);
-    text-decoration: line-through;
-}
+        .original-price {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
 
-.discount-percent {
-    background: #fee2e2;
-    color: #dc2626;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
+        .discount-percent {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
 
-/* Carousel Styles */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 35px;
-    height: 35px;
-    background: rgba(0,0,0,0.7);
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0;
-    transition: all 0.3s ease;
-}
+        /* Carousel Styles */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 35px;
+            height: 35px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
 
-.product-card:hover .carousel-control-prev,
-.product-card:hover .carousel-control-next {
-    opacity: 1;
-}
+        .product-card:hover .carousel-control-prev,
+        .product-card:hover .carousel-control-next {
+            opacity: 1;
+        }
 
-.carousel-control-prev {
-    left: 10px;
-}
+        .carousel-control-prev {
+            left: 10px;
+        }
 
-.carousel-control-next {
-    right: 10px;
-}
+        .carousel-control-next {
+            right: 10px;
+        }
 
-.carousel-indicators {
-    bottom: 10px;
-    margin-bottom: 0;
-}
+        .carousel-indicators {
+            bottom: 10px;
+            margin-bottom: 0;
+        }
 
-.carousel-indicators button {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin: 0 3px;
-}
+        .carousel-indicators button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin: 0 3px;
+        }
 
-/* Color Selector */
-.color-selector {
-    margin-bottom: 1rem;
-}
+        /* Color Selector */
+        .color-selector {
+            margin-bottom: 1rem;
+        }
 
-.color-option {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    border: 2px solid #e5e7eb;
-    background: white;
-}
+        .color-option {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+            background: white;
+        }
 
-.color-option:hover {
-    transform: scale(1.05);
-    border-color: var(--primary-color);
-}
+        .color-option:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+        }
 
-.color-option.active {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
+        .color-option.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
 
-/* Sections */
-.section-title {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1rem;
-}
+        /* Sections */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 2px;
-}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
 
-/* Loading Animation */
-.loading {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid var(--primary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 2rem auto;
-}
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-/* Footer */
-footer {
-    background: var(--dark-color) !important;
-}
+        /* Footer */
+        footer {
+            background: var(--dark-color) !important;
+        }
 
-.social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
 
-.social-links a:hover {
-    background: var(--primary-color);
-    transform: translateY(-2px);
-}
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
 
-/* Modal Styles */
-.order-modal .modal-content {
-    border-radius: 15px;
-    border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
+        /* Modal Styles */
+        .order-modal .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
-.order-modal .modal-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border-bottom: none;
-    border-radius: 15px 15px 0 0;
-}
+        .order-modal .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-bottom: none;
+            border-radius: 15px 15px 0 0;
+        }
 
-.order-modal .modal-body {
-    padding: 2rem;
-}
+        .order-modal .modal-body {
+            padding: 2rem;
+        }
 
-.order-modal .product-preview {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
+        .order-modal .product-preview {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
 
-.order-modal .product-preview img {
-    max-height: 150px;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
+        .order-modal .product-preview img {
+            max-height: 150px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
 
-.order-modal .form-label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
+        .order-modal .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
 
-.order-modal .form-control {
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    border: 1px solid #e5e7eb;
-}
+        .order-modal .form-control {
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+        }
 
-.order-modal .form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
-}
+        .order-modal .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        }
 
-.order-modal .size-options {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
+        .order-modal .size-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
 
-.order-modal .size-option {
-    flex: 1;
-    min-width: 60px;
-    text-align: center;
-}
+        .order-modal .size-option {
+            flex: 1;
+            min-width: 60px;
+            text-align: center;
+        }
 
-.order-modal .size-option input[type="radio"] {
-    display: none;
-}
+        .order-modal .size-option input[type="radio"] {
+            display: none;
+        }
 
-.order-modal .size-option label {
-    display: block;
-    padding: 0.5rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+        .order-modal .size-option label {
+            display: block;
+            padding: 0.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.order-modal .size-option input[type="radio"]:checked + label {
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
-    color: white;
-}
+        .order-modal .size-option input[type="radio"]:checked + label {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
 
-.order-modal .btn-whatsapp {
-    background-color: #25D366;
-    color: white;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-}
+        .order-modal .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
 
-.order-modal .btn-whatsapp:hover {
-    background-color: #128C7E;
-    transform: translateY(-2px);
-}
+        .order-modal .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .product-image {
-        height: 200px;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .product-title {
-        font-size: 0.95rem;
-    }
-    
-    .product-card-body {
-        padding: 1rem;
-    }
-    
-    .current-price {
-        font-size: 1.1rem;
-    }
-    
-    .original-price {
-        font-size: 0.9rem;
-    }
-    
-    /* 2 produits par ligne sur mobile */
-    .col-md-6 {
-        flex: 0 0 auto;
-        width: 50%;
-    }
-    
-    /* Ajuster les espacements pour 2 produits */
-    .products-grid .row.g-4 {
-        --bs-gutter-x: 0.5rem;
-        --bs-gutter-y: 0.5rem;
-    }
-    
-    /* Réduire la taille des cartes */
-    .product-card {
-        margin-bottom: 0.5rem;
-    }
-    
-    /* Ajuster les badges */
-    .product-badge {
-        top: 10px;
-        left: 10px;
-    }
-    
-    .badge-new,
-    .badge-sale,
-    .badge-colors {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.65rem;
-    }
-    
-    /* Ajuster les boutons de couleur */
-    .color-option {
-        font-size: 0.6rem;
-        padding: 0.2rem 0.4rem;
-    }
-    
-    /* Ajuster le bouton d'achat */
-    .buy-now-btn {
-        font-size: 0.85rem;
-        padding: 0.5rem;
-    }
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-image {
+                height: 200px;
+            }
+            
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .product-title {
+                font-size: 0.95rem;
+            }
+            
+            .product-card-body {
+                padding: 1rem;
+            }
+            
+            .current-price {
+                font-size: 1.1rem;
+            }
+            
+            .original-price {
+                font-size: 0.9rem;
+            }
+            
+            /* 2 produits par ligne sur mobile */
+            .col-md-6 {
+                flex: 0 0 auto;
+                width: 50%;
+            }
+            
+            /* Ajuster les espacements pour 2 produits */
+            .products-grid .row.g-4 {
+                --bs-gutter-x: 0.5rem;
+                --bs-gutter-y: 0.5rem;
+            }
+            
+            /* Réduire la taille des cartes */
+            .product-card {
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Ajuster les badges */
+            .product-badge {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .badge-new,
+            .badge-sale,
+            .badge-colors {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.65rem;
+            }
+            
+            /* Ajuster les boutons de couleur */
+            .color-option {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.4rem;
+            }
+            
+            /* Ajuster le bouton d'achat */
+            .buy-now-btn {
+                font-size: 0.85rem;
+                padding: 0.5rem;
+            }
+        }
 
-/* Pour les très petits écrans (moins de 576px) */
-@media (max-width: 576px) {
-    .product-image {
-        height: 180px;
-    }
-    
-    .product-title {
-        font-size: 0.9rem;
-    }
-    
-    .product-category {
-        font-size: 0.8rem;
-    }
-    
-    .current-price {
-        font-size: 1rem;
-    }
-    
-    /* S'assurer que c'est bien 2 produits par ligne */
-    .col-md-6 {
-        flex: 0 0 auto;
-        width: 50%;
-    }
-    
-    /* Réduire encore les espacements */
-    .products-grid .row.g-4 {
-        --bs-gutter-x: 0.4rem;
-        --bs-gutter-y: 0.4rem;
-    }
-}
+        /* Pour les très petits écrans (moins de 576px) */
+        @media (max-width: 576px) {
+            .product-image {
+                height: 180px;
+            }
+            
+            .product-title {
+                font-size: 0.9rem;
+            }
+            
+            .product-category {
+                font-size: 0.8rem;
+            }
+            
+            .current-price {
+                font-size: 1rem;
+            }
+            
+            /* S'assurer que c'est bien 2 produits par ligne */
+            .col-md-6 {
+                flex: 0 0 auto;
+                width: 50%;
+            }
+            
+            /* Réduire encore les espacements */
+            .products-grid .row.g-4 {
+                --bs-gutter-x: 0.4rem;
+                --bs-gutter-y: 0.4rem;
+            }
+        }
 
-/* Pour les tablettes (768px - 992px) */
-@media (min-width: 768px) and (max-width: 992px) {
-    /* 3 produits par ligne sur tablette */
-    .col-md-6 {
-        flex: 0 0 auto;
-        width: 33.333333%;
-    }
-    
-    .product-image {
-        height: 220px;
-    }
-}
+        /* Pour les tablettes (768px - 992px) */
+        @media (min-width: 768px) and (max-width: 992px) {
+            /* 3 produits par ligne sur tablette */
+            .col-md-6 {
+                flex: 0 0 auto;
+                width: 33.333333%;
+            }
+            
+            .product-image {
+                height: 220px;
+            }
+        }
 
-/* Pour les desktop (992px et plus) */
-@media (min-width: 992px) {
-    /* 4 produits par ligne sur desktop */
-    .col-xl-3 {
-        flex: 0 0 auto;
-        width: 25%;
-    }
-}
+        /* Pour les desktop (992px et plus) */
+        @media (min-width: 992px) {
+            /* 4 produits par ligne sur desktop */
+            .col-xl-3 {
+                flex: 0 0 auto;
+                width: 25%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -561,10 +561,9 @@ footer {
                         <i class="fas fa-shopping-bag"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">0</span>
                     </a>
-                    <!-- Dans la navbar, ajouter cette ligne dans la section des icônes -->
-<a class="nav-link admin-link" href="#" title="Administration" data-bs-toggle="modal" data-bs-target="#adminAuthModal">
-    <i class="fas fa-cog me-1"></i>ADMIN
-</a>
+                    <a class="nav-link admin-link" href="#" title="Administration" data-bs-toggle="modal" data-bs-target="#adminAuthModal">
+                        <i class="fas fa-cog me-1"></i>ADMIN
+                    </a>
                 </div>
             </div>
         </div>
@@ -743,605 +742,607 @@ footer {
         </div>
     </div>
 
+    <!-- Modal d'authentification admin -->
+    <div class="modal fade" id="adminAuthModal" tabindex="-1" aria-labelledby="adminAuthModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminAuthModalLabel">Accès Administration</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminAuthForm">
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="adminPassword" placeholder="Entrez le mot de passe" required>
+                        </div>
+                        <div class="alert alert-danger d-none" id="authError">
+                            Mot de passe incorrect !
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-lock me-2"></i>Se connecter
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Snipcart -->
     <div hidden id="snipcart" data-api-key="test_YOUR_API_KEY"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-<script>
-    // Configuration Firebase - À MODIFIER AVEC VOS CLÉS
-   const firebaseConfig = {
-    apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
-    authDomain: "bt-sp-b3ce3.firebaseapp.com",
-    projectId: "bt-sp-b3ce3",
-    storageBucket: "bt-sp-b3ce3.firebasestorage.app",
-    messagingSenderId: "1072895717676",
-    appId: "1:1072895717676:web:bace267352a7941c1dfc89"
-};
+    <script>
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
+            authDomain: "bt-sp-b3ce3.firebaseapp.com",
+            projectId: "bt-sp-b3ce3",
+            storageBucket: "bt-sp-b3ce3.firebasestorage.app",
+            messagingSenderId: "1072895717676",
+            appId: "1:1072895717676:web:bace267352a7941c1dfc89"
+        };
 
-    // Initialiser Firebase
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-
-    // Données par défaut des produits
-    const defaultProducts = [
-        {
-            id: 1,
-            name: "Ensemble survêtement homme",
-            category: "homme",
-            price: 45,
-            images: [
-                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
-                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
-                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
-            ],
-            colors: ["Gris", "Rouge", "Noir"],
-            isNew: true,
-            discount: 0
-        },
-        {
-            id: 2,
-            name: "T‑shirt sport homme",
-            category: "homme",
-            price: 50,
-            image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-            isNew: false,
-            discount: 30
-        },
-        {
-            id: 3,
-            name: "Pantalon de jogging homme",
-            category: "homme",
-            price: 120,
-            image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-            isNew: false,
-            discount: 25
-        },
-        {
-            id: 4,
-            name: "Short running homme",
-            category: "homme",
-            price: 100,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
-            isNew: false,
-            discount: 25
-        },
-        {
-            id: 5,
-            name: "Legging Yoga Premium",
-            category: "femme",
-            price: 65,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-            isNew: true,
-            discount: 0
-        },
-        {
-            id: 6,
-            name: "T-Shirt Fitness Dry",
-            category: "femme",
-            price: 42,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-            isNew: true,
-            discount: 0
-        },
-        {
-            id: 7,
-            name: "Ensemble Fitness Pro",
-            category: "femme",
-            price: 95,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-            isNew: true,
-            discount: 0
-        },
-        {
-            id: 8,
-            name: "Short Training Fit",
-            category: "femme",
-            price: 55,
-            image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
-            isNew: false,
-            discount: 50
-        },
-    ];
-
-    // Gestionnaire des produits avec Firebase
-    class ProductsManager {
-        constructor() {
-            this.db = firebase.firestore();
-            this.storageKey = 'sportplus_products';
-            this.products = [];
-            this.unsubscribe = null;
-            this.init();
+        // Initialiser Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
         }
 
-        async init() {
-            await this.loadProducts();
+        // Données par défaut des produits
+        const defaultProducts = [
+            {
+                id: 1,
+                name: "Ensemble survêtement homme",
+                category: "homme",
+                price: 45,
+                images: [
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
+                ],
+                colors: ["Gris", "Rouge", "Noir"],
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 2,
+                name: "T‑shirt sport homme",
+                category: "homme",
+                price: 50,
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: false,
+                discount: 30
+            },
+            {
+                id: 3,
+                name: "Pantalon de jogging homme",
+                category: "homme",
+                price: 120,
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: false,
+                discount: 25
+            },
+            {
+                id: 4,
+                name: "Short running homme",
+                category: "homme",
+                price: 100,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
+                isNew: false,
+                discount: 25
+            },
+            {
+                id: 5,
+                name: "Legging Yoga Premium",
+                category: "femme",
+                price: 65,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 6,
+                name: "T-Shirt Fitness Dry",
+                category: "femme",
+                price: 42,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 7,
+                name: "Ensemble Fitness Pro",
+                category: "femme",
+                price: 95,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 8,
+                name: "Short Training Fit",
+                category: "femme",
+                price: 55,
+                image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
+                isNew: false,
+                discount: 50
+            },
+        ];
+
+        // Gestionnaire des produits avec Firebase
+        class ProductsManager {
+            constructor() {
+                this.db = firebase.firestore();
+                this.storageKey = 'sportplus_products';
+                this.products = [];
+                this.unsubscribe = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadProducts();
+                this.listenToChanges();
+            }
+
+            // Charger les produits depuis Firebase
+            async loadProducts() {
+                try {
+                    console.log('Chargement des produits depuis Firebase...');
+                    const snapshot = await this.db.collection('products').get();
+                    
+                    if (!snapshot.empty) {
+                        this.products = snapshot.docs.map(doc => ({
+                            id: doc.id,
+                            ...doc.data()
+                        }));
+                        console.log('Produits chargés depuis Firebase:', this.products.length);
+                        this.saveToLocalStorage();
+                    } else {
+                        console.log('Aucun produit dans Firebase, chargement depuis localStorage');
+                        const storedProducts = localStorage.getItem(this.storageKey);
+                        if (storedProducts) {
+                            this.products = JSON.parse(storedProducts);
+                            await this.saveAllToFirebase();
+                        } else {
+                            this.products = defaultProducts;
+                            await this.saveAllToFirebase();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Erreur Firebase:', error);
+                    const storedProducts = localStorage.getItem(this.storageKey);
+                    if (storedProducts) {
+                        this.products = JSON.parse(storedProducts);
+                    } else {
+                        this.products = defaultProducts;
+                        this.saveToLocalStorage();
+                    }
+                }
+            }
+
             // Écouter les changements en temps réel
-            this.listenToChanges();
-        }
-
-        // Charger les produits depuis Firebase
-        async loadProducts() {
-            try {
-                console.log('Chargement des produits depuis Firebase...');
-                const snapshot = await this.db.collection('products').get();
-                
-                if (!snapshot.empty) {
+            listenToChanges() {
+                this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+                    console.log('Changement détecté dans Firebase');
                     this.products = snapshot.docs.map(doc => ({
                         id: doc.id,
                         ...doc.data()
                     }));
-                    console.log('Produits chargés depuis Firebase:', this.products.length);
                     this.saveToLocalStorage();
-                } else {
-                    console.log('Aucun produit dans Firebase, chargement depuis localStorage');
-                    // Si Firebase est vide, charger depuis localStorage
-                    const storedProducts = localStorage.getItem(this.storageKey);
-                    if (storedProducts) {
-                        this.products = JSON.parse(storedProducts);
-                        // Sauvegarder dans Firebase
-                        await this.saveAllToFirebase();
-                    } else {
-                        // Utiliser les données par défaut
-                        this.products = defaultProducts;
-                        await this.saveAllToFirebase();
+                    
+                    if (window.productsFilterInstance) {
+                        window.productsFilterInstance.displayProducts();
                     }
-                }
-            } catch (error) {
-                console.error('Erreur Firebase:', error);
-                // Fallback vers localStorage
-                const storedProducts = localStorage.getItem(this.storageKey);
-                if (storedProducts) {
-                    this.products = JSON.parse(storedProducts);
-                } else {
-                    this.products = defaultProducts;
-                    this.saveToLocalStorage();
-                }
-            }
-        }
-
-        // Écouter les changements en temps réel
-        listenToChanges() {
-            this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
-                console.log('Changement détecté dans Firebase');
-                this.products = snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                this.saveToLocalStorage();
-                
-                // Rafraîchir l'affichage si la page products est ouverte
-                if (window.productsFilterInstance) {
-                    window.productsFilterInstance.displayProducts();
-                }
-            }, error => {
-                console.error('Erreur écoute Firebase:', error);
-            });
-        }
-
-        // Sauvegarder tous les produits dans Firebase
-        async saveAllToFirebase() {
-            try {
-                console.log('Sauvegarde de tous les produits dans Firebase...');
-                const batch = this.db.batch();
-                
-                // Supprimer tous les documents existants
-                const snapshot = await this.db.collection('products').get();
-                snapshot.docs.forEach(doc => {
-                    batch.delete(doc.ref);
+                }, error => {
+                    console.error('Erreur écoute Firebase:', error);
                 });
-                
-                // Ajouter tous les nouveaux produits
-                this.products.forEach(product => {
-                    const docRef = this.db.collection('products').doc(product.id.toString());
-                    const { id, ...productData } = product;
-                    batch.set(docRef, productData);
-                });
-                
-                await batch.commit();
-                console.log('Tous les produits sauvegardés dans Firebase');
-            } catch (error) {
-                console.error('Erreur sauvegarde Firebase:', error);
+            }
+
+            // Sauvegarder tous les produits dans Firebase
+            async saveAllToFirebase() {
+                try {
+                    console.log('Sauvegarde de tous les produits dans Firebase...');
+                    const batch = this.db.batch();
+                    
+                    const snapshot = await this.db.collection('products').get();
+                    snapshot.docs.forEach(doc => {
+                        batch.delete(doc.ref);
+                    });
+                    
+                    this.products.forEach(product => {
+                        const docRef = this.db.collection('products').doc(product.id.toString());
+                        const { id, ...productData } = product;
+                        batch.set(docRef, productData);
+                    });
+                    
+                    await batch.commit();
+                    console.log('Tous les produits sauvegardés dans Firebase');
+                } catch (error) {
+                    console.error('Erreur sauvegarde Firebase:', error);
+                }
+            }
+
+            saveToLocalStorage() {
+                localStorage.setItem(this.storageKey, JSON.stringify(this.products));
+            }
+
+            // Obtenir les produits filtrés par catégorie
+            getFilteredProducts(category = null) {
+                if (!category) return this.products;
+                return this.products.filter(product => product.category === category);
+            }
+
+            // Nettoyer l'écouteur
+            cleanup() {
+                if (this.unsubscribe) {
+                    this.unsubscribe();
+                }
             }
         }
 
-        // Sauvegarder un produit dans Firebase
-        async saveProductToFirebase(product) {
-            try {
-                const { id, ...productData } = product;
-                await this.db.collection('products').doc(id.toString()).set(productData);
-                console.log('Produit sauvegardé dans Firebase:', product.name);
-                return true;
-            } catch (error) {
-                console.error('Erreur sauvegarde produit:', error);
-                return false;
-            }
-        }
-
-        // Supprimer un produit de Firebase
-        async deleteProductFromFirebase(productId) {
-            try {
-                await this.db.collection('products').doc(productId.toString()).delete();
-                console.log('Produit supprimé de Firebase:', productId);
-                return true;
-            } catch (error) {
-                console.error('Erreur suppression produit:', error);
-                return false;
-            }
-        }
-
-        saveToLocalStorage() {
-            localStorage.setItem(this.storageKey, JSON.stringify(this.products));
-        }
-
-        // Obtenir les produits filtrés par catégorie
-        getFilteredProducts(category = null) {
-            if (!category) return this.products;
-            return this.products.filter(product => product.category === category);
-        }
-
-        // Nettoyer l'écouteur
-        cleanup() {
-            if (this.unsubscribe) {
-                this.unsubscribe();
-            }
-        }
-    }
-
-    // Filtre et affichage des produits
-    class ProductsFilter {
-        constructor() {
-            this.productsManager = new ProductsManager();
-            this.currentCategory = this.getCategoryFromURL();
-            this.currentProduct = null;
-            this.selectedColorIndex = 0;
-            this.productColorSelections = {};
-            // Stocker l'instance globalement pour la mise à jour en temps réel
-            window.productsFilterInstance = this;
-            this.init();
-        }
-
-        async init() {
-            // Attendre que les produits soient chargés
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            await this.displayProducts();
-            this.updatePageTitle();
-            this.setupEventListeners();
-        }
-
-        getCategoryFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('category');
-        }
-
-        getFilteredProducts() {
-            return this.productsManager.getFilteredProducts(this.currentCategory);
-        }
-
-        async displayProducts() {
-            const container = document.getElementById('products-container');
-            const filteredProducts = this.getFilteredProducts();
-
-            if (filteredProducts.length === 0) {
-                container.innerHTML = this.createNoProductsMessage();
-                return;
+        // Filtre et affichage des produits
+        class ProductsFilter {
+            constructor() {
+                this.productsManager = new ProductsManager();
+                this.currentCategory = this.getCategoryFromURL();
+                this.currentProduct = null;
+                this.selectedColorIndex = 0;
+                this.productColorSelections = {};
+                window.productsFilterInstance = this;
+                this.init();
             }
 
-            container.innerHTML = filteredProducts.map(product => 
-                this.createProductCard(product)
-            ).join('');
+            async init() {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                await this.displayProducts();
+                this.updatePageTitle();
+                this.setupEventListeners();
+            }
 
-            this.initializeCarousels();
-        }
+            getCategoryFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('category');
+            }
 
-        createProductCard(product) {
-            const hasDiscount = product.discount > 0;
-            const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
-            const hasMultipleColors = product.images && product.images.length > 1;
-            const productImages = hasMultipleColors ? product.images : [product.image];
-            const productColors = hasMultipleColors ? product.colors : [];
+            getFilteredProducts() {
+                return this.productsManager.getFilteredProducts(this.currentCategory);
+            }
 
-            return `
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="product-card h-100 d-flex flex-column">
-                        <div class="position-relative overflow-hidden">
-                            ${hasMultipleColors ? this.createImageCarousel(product) : this.createSingleImage(product)}
-                            
-                            <div class="product-badge">
-                                ${product.isNew ? '<span class="badge-new">NOUVEAU</span>' : ''}
-                                ${hasDiscount ? '<span class="badge-sale">SOLDES</span>' : ''}
-                                ${hasMultipleColors ? `<span class="badge-colors">${product.images.length} COULEURS</span>` : ''}
+            async displayProducts() {
+                const container = document.getElementById('products-container');
+                const filteredProducts = this.getFilteredProducts();
+
+                if (filteredProducts.length === 0) {
+                    container.innerHTML = this.createNoProductsMessage();
+                    return;
+                }
+
+                container.innerHTML = filteredProducts.map(product => 
+                    this.createProductCard(product)
+                ).join('');
+
+                this.initializeCarousels();
+            }
+
+            createProductCard(product) {
+                const hasDiscount = product.discount > 0;
+                const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                const hasMultipleColors = product.images && product.images.length > 1;
+                const productImages = hasMultipleColors ? product.images : [product.image];
+                const productColors = hasMultipleColors ? product.colors : [];
+
+                return `
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="product-card h-100 d-flex flex-column">
+                            <div class="position-relative overflow-hidden">
+                                ${hasMultipleColors ? this.createImageCarousel(product) : this.createSingleImage(product)}
+                                
+                                <div class="product-badge">
+                                    ${product.isNew ? '<span class="badge-new">NOUVEAU</span>' : ''}
+                                    ${hasDiscount ? '<span class="badge-sale">SOLDES</span>' : ''}
+                                    ${hasMultipleColors ? `<span class="badge-colors">${product.images.length} COULEURS</span>` : ''}
+                                </div>
+                                
+                                <div class="position-absolute top-0 end-0 p-3">
+                                    <button class="btn btn-light btn-sm rounded-circle favorite-btn" data-product-id="${product.id}">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
                             </div>
                             
-                            <div class="position-absolute top-0 end-0 p-3">
-                                <button class="btn btn-light btn-sm rounded-circle favorite-btn" data-product-id="${product.id}">
-                                    <i class="far fa-heart"></i>
+                            <div class="product-card-body d-flex flex-column flex-grow-1">
+                                <div class="product-category">${product.category.toUpperCase()}</div>
+                                <h5 class="product-title">${product.name}</h5>
+                                
+                                ${hasMultipleColors ? this.createColorSelector(product) : '<div class="mb-3"></div>'}
+                                
+                                <div class="product-price mt-auto">
+                                    ${hasDiscount ? `
+                                        <span class="current-price">${discountPrice} DT</span>
+                                        <span class="original-price">${product.price} DT</span>
+                                        <span class="discount-percent">-${product.discount}%</span>
+                                    ` : `
+                                        <span class="current-price">${product.price} DT</span>
+                                    `}
+                                </div>
+                                
+                                <button class="btn btn-primary w-100 buy-now-btn mt-auto"
+                                    data-product-id="${product.id}">
+                                    <i class="fas fa-bolt me-2"></i>ACHETER
                                 </button>
                             </div>
                         </div>
-                        
-                        <div class="product-card-body d-flex flex-column flex-grow-1">
-                            <div class="product-category">${product.category.toUpperCase()}</div>
-                            <h5 class="product-title">${product.name}</h5>
-                            
-                            ${hasMultipleColors ? this.createColorSelector(product) : '<div class="mb-3"></div>'}
-                            
-                            <div class="product-price mt-auto">
-                                ${hasDiscount ? `
-                                    <span class="current-price">${discountPrice} DT</span>
-                                    <span class="original-price">${product.price} DT</span>
-                                    <span class="discount-percent">-${product.discount}%</span>
-                                ` : `
-                                    <span class="current-price">${product.price} DT</span>
-                                `}
-                            </div>
-                            
-                            <button class="btn btn-primary w-100 buy-now-btn mt-auto"
-                                data-product-id="${product.id}">
-                                <i class="fas fa-bolt me-2"></i>ACHETER
-                            </button>
-                        </div>
                     </div>
-                </div>
-            `;
-        }
+                `;
+            }
 
-        createImageCarousel(product) {
-            return `
-                <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="false">
-                    <div class="carousel-inner">
-                        ${product.images.map((image, index) => `
-                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                <img src="${image}" 
-                                     class="product-image d-block w-100" 
-                                     alt="${product.name} - ${product.colors ? product.colors[index] : 'Couleur ' + (index + 1)}"
-                                     loading="lazy">
-                            </div>
-                        `).join('')}
-                    </div>
-                    ${product.images.length > 1 ? `
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Précédent</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Suivant</span>
-                        </button>
-                        <div class="carousel-indicators">
-                            ${product.images.map((_, index) => `
-                                <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
-                                        class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
+            createImageCarousel(product) {
+                return `
+                    <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            ${product.images.map((image, index) => `
+                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                    <img src="${image}" 
+                                         class="product-image d-block w-100" 
+                                         alt="${product.name} - ${product.colors ? product.colors[index] : 'Couleur ' + (index + 1)}"
+                                         loading="lazy">
+                                </div>
                             `).join('')}
                         </div>
-                    ` : ''}
-                </div>
-            `;
-        }
-
-        createSingleImage(product) {
-            return `
-                <img src="${product.image}" 
-                     class="product-image" 
-                     alt="${product.name}"
-                     loading="lazy">
-            `;
-        }
-
-        createColorSelector(product) {
-            if (!product.colors || product.colors.length <= 1) return '<div class="mb-3"></div>';
-
-            return `
-                <div class="color-selector mb-3">
-                    <div class="d-flex gap-2 flex-wrap">
-                        ${product.colors.map((color, index) => `
-                            <button class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
-                                    data-product-id="${product.id}" 
-                                    data-color-index="${index}"
-                                    data-color-name="${color}"
-                                    title="${color}">
-                                ${color}
+                        ${product.images.length > 1 ? `
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Précédent</span>
                             </button>
-                        `).join('')}
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Suivant</span>
+                            </button>
+                            <div class="carousel-indicators">
+                                ${product.images.map((_, index) => `
+                                    <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
+                                            class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
+                                `).join('')}
+                            </div>
+                        ` : ''}
                     </div>
-                </div>
-            `;
-        }
+                `;
+            }
 
-        initializeCarousels() {
-            const carousels = document.querySelectorAll('.carousel');
-            carousels.forEach(carousel => {
-                new bootstrap.Carousel(carousel, {
-                    interval: false
+            createSingleImage(product) {
+                return `
+                    <img src="${product.image}" 
+                         class="product-image" 
+                         alt="${product.name}"
+                         loading="lazy">
+                `;
+            }
+
+            createColorSelector(product) {
+                if (!product.colors || product.colors.length <= 1) return '<div class="mb-3"></div>';
+
+                return `
+                    <div class="color-selector mb-3">
+                        <div class="d-flex gap-2 flex-wrap">
+                            ${product.colors.map((color, index) => `
+                                <button class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
+                                        data-product-id="${product.id}" 
+                                        data-color-index="${index}"
+                                        data-color-name="${color}"
+                                        title="${color}">
+                                    ${color}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            initializeCarousels() {
+                const carousels = document.querySelectorAll('.carousel');
+                carousels.forEach(carousel => {
+                    new bootstrap.Carousel(carousel, {
+                        interval: false
+                    });
                 });
-            });
-        }
-
-        updatePageTitle() {
-            const titleElement = document.getElementById('page-title');
-            const subtitleElement = document.getElementById('page-subtitle');
-
-            if (this.currentCategory === 'homme') {
-                titleElement.textContent = 'Collection Homme';
-                subtitleElement.textContent = 'Découvrez notre collection homme';
-            } else if (this.currentCategory === 'femme') {
-                titleElement.textContent = 'Collection Femme';
-                subtitleElement.textContent = 'Découvrez notre collection femme';
             }
-        }
 
-        createNoProductsMessage() {
-            return `
-                <div class="col-12 text-center py-5">
-                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                    <h4 class="fw-bold mb-3">Aucun produit trouvé</h4>
-                    <p class="text-muted mb-4">
-                        Aucun produit n'est disponible dans cette catégorie.
-                    </p>
-                    <a href="products.html" class="btn btn-primary">Voir tous les produits</a>
-                </div>
-            `;
-        }
+            updatePageTitle() {
+                const titleElement = document.getElementById('page-title');
+                const subtitleElement = document.getElementById('page-subtitle');
 
-        setupEventListeners() {
-            // Gestion des favoris
-            document.addEventListener('click', (e) => {
-                if (e.target.closest('.favorite-btn')) {
-                    const btn = e.target.closest('.favorite-btn');
-                    const productId = btn.getAttribute('data-product-id');
-                    const icon = btn.querySelector('i');
-                    
-                    icon.classList.toggle('far');
-                    icon.classList.toggle('fas');
-                    icon.classList.toggle('text-danger');
-                    
-                    const productName = btn.closest('.product-card').querySelector('.product-title').textContent;
-                    const action = icon.classList.contains('fas') ? 'ajouté aux' : 'retiré des';
-                    alert(`${productName} ${action} favoris !`);
+                if (this.currentCategory === 'homme') {
+                    titleElement.textContent = 'Collection Homme';
+                    subtitleElement.textContent = 'Découvrez notre collection homme';
+                } else if (this.currentCategory === 'femme') {
+                    titleElement.textContent = 'Collection Femme';
+                    subtitleElement.textContent = 'Découvrez notre collection femme';
                 }
-            });
+            }
 
-            // Gestion du bouton "Acheter"
-            document.addEventListener('click', (e) => {
-                if (e.target.closest('.buy-now-btn')) {
-                    const btn = e.target.closest('.buy-now-btn');
-                    const productId = parseInt(btn.getAttribute('data-product-id'));
-                    
-                    // Trouver le produit dans les données
-                    const product = this.productsManager.products.find(p => p.id === productId);
-                    if (!product) return;
-                    
-                    // Déterminer l'index de couleur sélectionné
-                    const productCard = btn.closest('.product-card');
-                    const activeColorOption = productCard.querySelector('.color-option.active');
-                    let selectedColorIndex = 0;
-                    
-                    if (activeColorOption) {
-                        selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
+            createNoProductsMessage() {
+                return `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                        <h4 class="fw-bold mb-3">Aucun produit trouvé</h4>
+                        <p class="text-muted mb-4">
+                            Aucun produit n'est disponible dans cette catégorie.
+                        </p>
+                        <a href="products.html" class="btn btn-primary">Voir tous les produits</a>
+                    </div>
+                `;
+            }
+
+            setupEventListeners() {
+                // Gestion des favoris
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.favorite-btn')) {
+                        const btn = e.target.closest('.favorite-btn');
+                        const productId = btn.getAttribute('data-product-id');
+                        const icon = btn.querySelector('i');
+                        
+                        icon.classList.toggle('far');
+                        icon.classList.toggle('fas');
+                        icon.classList.toggle('text-danger');
+                        
+                        const productName = btn.closest('.product-card').querySelector('.product-title').textContent;
+                        const action = icon.classList.contains('fas') ? 'ajouté aux' : 'retiré des';
+                        alert(`${productName} ${action} favoris !`);
                     }
-                    
-                    // Stocker la sélection de couleur pour ce produit
-                    this.productColorSelections[productId] = selectedColorIndex;
-                    
-                    // Préparer les données du produit
-                    const hasMultipleColors = product.images && product.images.length > 1;
-                    const images = hasMultipleColors ? product.images : [product.image];
-                    const colors = hasMultipleColors ? product.colors : [];
-                    const hasDiscount = product.discount > 0;
-                    const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
-                    
-                    this.currentProduct = {
-                        id: product.id,
-                        name: product.name,
-                        category: product.category,
-                        price: price,
-                        images: images,
-                        colors: colors
-                    };
-                    
-                    this.openOrderModal();
-                }
-            });
+                });
 
-            // Gestion des sélecteurs de couleur
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('color-option')) {
-                    const option = e.target;
-                    const productId = parseInt(option.getAttribute('data-product-id'));
-                    const colorIndex = parseInt(option.getAttribute('data-color-index'));
-                    
-                    // Stocker la sélection
-                    this.productColorSelections[productId] = colorIndex;
-                    
-                    // Mettre à jour le carousel
-                    const carousel = document.getElementById(`carousel-${productId}`);
-                    if (carousel) {
-                        const carouselInstance = bootstrap.Carousel.getInstance(carousel);
-                        if (carouselInstance) {
-                            carouselInstance.to(colorIndex);
+                // CORRECTION : Gestion du bouton "Acheter" - version corrigée
+                // Dans la méthode setupEventListeners() - CORRECTION du bouton Acheter
+document.addEventListener('click', (e) => {
+    const buyButton = e.target.closest('.buy-now-btn');
+    if (buyButton) {
+        console.log('Bouton Acheter cliqué');
+        
+        // CORRECTION : Récupérer l'ID comme string (Firebase génère des IDs strings)
+        const productId = buyButton.getAttribute('data-product-id');
+        console.log('ID du produit:', productId);
+        
+        // CORRECTION : Rechercher directement avec l'ID string
+        const product = this.productsManager.products.find(p => p.id === productId);
+        if (!product) {
+            console.error('Produit non trouvé:', productId);
+            console.log('Produits disponibles:', this.productsManager.products.map(p => ({id: p.id, name: p.name})));
+            return;
+        }
+        
+        console.log('Produit trouvé:', product.name);
+        
+        const productCard = buyButton.closest('.product-card');
+        const activeColorOption = productCard.querySelector('.color-option.active');
+        let selectedColorIndex = 0;
+        
+        if (activeColorOption) {
+            selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
+        }
+        
+        this.productColorSelections[productId] = selectedColorIndex;
+        
+        const hasMultipleColors = product.images && product.images.length > 1;
+        const images = hasMultipleColors ? product.images : [product.image];
+        const colors = hasMultipleColors ? product.colors : [];
+        const hasDiscount = product.discount > 0;
+        const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+        
+        this.currentProduct = {
+            id: product.id,
+            name: product.name,
+            category: product.category,
+            price: price,
+            images: images,
+            colors: colors
+        };
+        
+        console.log('Ouverture du modal pour:', this.currentProduct.name);
+        this.openOrderModal();
+    }
+});
+
+                // Gestion des sélecteurs de couleur
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('color-option')) {
+                        const option = e.target;
+                        const productId = parseInt(option.getAttribute('data-product-id'));
+                        const colorIndex = parseInt(option.getAttribute('data-color-index'));
+                        
+                        this.productColorSelections[productId] = colorIndex;
+                        
+                        const carousel = document.getElementById(`carousel-${productId}`);
+                        if (carousel) {
+                            const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+                            if (carouselInstance) {
+                                carouselInstance.to(colorIndex);
+                            }
                         }
+                        
+                        const allOptions = document.querySelectorAll(`.color-option[data-product-id="${productId}"]`);
+                        allOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
                     }
-                    
-                    // Mettre à jour les boutons actifs
-                    const allOptions = document.querySelectorAll(`.color-option[data-product-id="${productId}"]`);
-                    allOptions.forEach(opt => opt.classList.remove('active'));
-                    option.classList.add('active');
-                }
-            });
+                });
 
-            // Newsletter
-            document.getElementById('newsletter-submit').addEventListener('click', () => {
-                const email = document.getElementById('newsletter-email').value;
-                if (this.validateEmail(email)) {
-                    alert('Merci pour votre inscription à la newsletter !');
-                    document.getElementById('newsletter-email').value = '';
-                } else {
-                    alert('Veuillez entrer une adresse email valide.');
-                }
-            });
+                // Newsletter
+                document.getElementById('newsletter-submit').addEventListener('click', () => {
+                    const email = document.getElementById('newsletter-email').value;
+                    if (this.validateEmail(email)) {
+                        alert('Merci pour votre inscription à la newsletter !');
+                        document.getElementById('newsletter-email').value = '';
+                    } else {
+                        alert('Veuillez entrer une adresse email valide.');
+                    }
+                });
 
-            // Gestion du formulaire de commande
-            document.getElementById('orderForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.sendOrderViaWhatsApp();
-            });
-        }
-
-        openOrderModal() {
-            if (!this.currentProduct) return;
-            
-            // Déterminer l'index de couleur à utiliser
-            const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
-            
-            // Remplir les informations du produit dans le modal
-            const selectedImage = this.currentProduct.images[selectedColorIndex];
-            document.getElementById('orderProductImage').src = selectedImage;
-            document.getElementById('orderProductName').textContent = this.currentProduct.name;
-            document.getElementById('orderProductCategory').textContent = this.currentProduct.category.toUpperCase();
-            document.getElementById('orderProductPrice').textContent = `${this.currentProduct.price} DT`;
-            
-            // Afficher la couleur sélectionnée
-            const colorInfoElement = document.getElementById('selectedColorInfo');
-            if (this.currentProduct.colors && this.currentProduct.colors.length > 0) {
-                const selectedColor = this.currentProduct.colors[selectedColorIndex];
-                colorInfoElement.innerHTML = `<span class="badge bg-primary">Couleur: ${selectedColor}</span>`;
-            } else {
-                colorInfoElement.innerHTML = '';
+                // Gestion du formulaire de commande
+                document.getElementById('orderForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.sendOrderViaWhatsApp();
+                });
             }
-            
-            // Réinitialiser le formulaire
-            document.getElementById('orderForm').reset();
-            
-            // Afficher le modal
-            const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-            orderModal.show();
-        }
 
-        sendOrderViaWhatsApp() {
-            if (!this.currentProduct) return;
-            
-            // Récupérer les données du formulaire
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const size = document.querySelector('input[name="size"]:checked').value;
-            const notes = document.getElementById('notes').value;
-            
-            // Déterminer l'index de couleur à utiliser
-            const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
-            
-            // Récupérer la couleur sélectionnée
-            const selectedColor = this.currentProduct.colors && this.currentProduct.colors.length > 0 
-                ? this.currentProduct.colors[selectedColorIndex] 
-                : 'Non spécifiée';
-            
-            // Construire le message WhatsApp
-            const message = `Bonjour Votre_Boutique ! Je souhaite commander le produit suivant :
-            
+            openOrderModal() {
+                if (!this.currentProduct) {
+                    console.error('Aucun produit sélectionné');
+                    return;
+                }
+                
+                console.log('Ouverture du modal pour le produit:', this.currentProduct.name);
+                
+                const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
+                const selectedImage = this.currentProduct.images[selectedColorIndex];
+                
+                document.getElementById('orderProductImage').src = selectedImage;
+                document.getElementById('orderProductName').textContent = this.currentProduct.name;
+                document.getElementById('orderProductCategory').textContent = this.currentProduct.category.toUpperCase();
+                document.getElementById('orderProductPrice').textContent = `${this.currentProduct.price} DT`;
+                
+                const colorInfoElement = document.getElementById('selectedColorInfo');
+                if (this.currentProduct.colors && this.currentProduct.colors.length > 0) {
+                    const selectedColor = this.currentProduct.colors[selectedColorIndex];
+                    colorInfoElement.innerHTML = `<span class="badge bg-primary">Couleur: ${selectedColor}</span>`;
+                } else {
+                    colorInfoElement.innerHTML = '';
+                }
+                
+                document.getElementById('orderForm').reset();
+                
+                const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+                orderModal.show();
+            }
+
+            sendOrderViaWhatsApp() {
+                if (!this.currentProduct) {
+                    console.error('Aucun produit pour la commande');
+                    return;
+                }
+                
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const sizeElement = document.querySelector('input[name="size"]:checked');
+                
+                if (!sizeElement) {
+                    alert('Veuillez sélectionner une taille');
+                    return;
+                }
+                
+                const size = sizeElement.value;
+                const notes = document.getElementById('notes').value;
+                
+                const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
+                const selectedColor = this.currentProduct.colors && this.currentProduct.colors.length > 0 
+                    ? this.currentProduct.colors[selectedColorIndex] 
+                    : 'Non spécifiée';
+                
+                const message = `Bonjour Votre_Boutique ! Je souhaite commander le produit suivant :
+                
 Produit: ${this.currentProduct.name}
 Catégorie: ${this.currentProduct.category}
 Prix: ${this.currentProduct.price} DT
@@ -1357,89 +1358,51 @@ ${notes ? `Notes: ${notes}` : ''}
 
 Merci de me contacter pour finaliser ma commande.`;
 
-            // Encoder le message pour l'URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Numéro WhatsApp de SportPlus
-            const whatsappNumber = "+21654942408";
-            
-            // Ouvrir WhatsApp avec le message pré-rempli
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-            
-            // Fermer le modal
-            const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
-            orderModal.hide();
-            
-            // Afficher un message de confirmation
-            alert('Votre commande a été envoyée via WhatsApp ! Nous vous contacterons bientôt.');
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappNumber = "+21654942408";
+                
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                
+                const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+                if (orderModal) {
+                    orderModal.hide();
+                }
+                
+                alert('Votre commande a été envoyée via WhatsApp ! Nous vous contacterons bientôt.');
+            }
+
+            validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
         }
 
-        validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-    }
-
-    // Démarrer l'application
-    document.addEventListener('DOMContentLoaded', () => {
-        new ProductsFilter();
-    });
-</script>
-    <!-- Modal d'authentification admin -->
-<div class="modal fade" id="adminAuthModal" tabindex="-1" aria-labelledby="adminAuthModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="adminAuthModalLabel">Accès Administration</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="adminAuthForm">
-                    <div class="mb-3">
-                        <label for="adminPassword" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="adminPassword" placeholder="Entrez le mot de passe" required>
-                    </div>
-                    <div class="alert alert-danger d-none" id="authError">
-                        Mot de passe incorrect !
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-lock me-2"></i>Se connecter
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>// Ajouter cette fonction dans le script
-function setupAdminAuth() {
-    const adminPassword = "admin123"; // Mot de passe - à changer
-    
-    document.getElementById('adminAuthForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const passwordInput = document.getElementById('adminPassword').value;
-        const errorElement = document.getElementById('authError');
-        
-        if (passwordInput === adminPassword) {
-            // Rediriger vers la page admin
-            window.location.href = 'admin.html';
-        } else {
-            errorElement.classList.remove('d-none');
-            document.getElementById('adminPassword').value = '';
-            document.getElementById('adminPassword').focus();
-        }
-    });
-    
-    // Réinitialiser l'erreur quand le modal s'ouvre
-    document.getElementById('adminAuthModal').addEventListener('show.bs.modal', function() {
-        document.getElementById('authError').classList.add('d-none');
-        document.getElementById('adminPassword').value = '';
-    });
-}
-
-// Appeler la fonction dans le DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    new ProductsFilter();
-    setupAdminAuth(); // Ajouter cette ligne
-});</script>
+        // Démarrer l'application
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Démarrage de l application...');
+            new ProductsFilter();
+            
+            // Setup admin auth
+            const adminPassword = "admin123";
+            document.getElementById('adminAuthForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const passwordInput = document.getElementById('adminPassword').value;
+                const errorElement = document.getElementById('authError');
+                
+                if (passwordInput === adminPassword) {
+                    window.location.href = 'admin.html';
+                } else {
+                    errorElement.classList.remove('d-none');
+                    document.getElementById('adminPassword').value = '';
+                    document.getElementById('adminPassword').focus();
+                }
+            });
+            
+            document.getElementById('adminAuthModal').addEventListener('show.bs.modal', function() {
+                document.getElementById('authError').classList.add('d-none');
+                document.getElementById('adminPassword').value = '';
+            });
+        });
+    </script>
 </body>
 </html>
