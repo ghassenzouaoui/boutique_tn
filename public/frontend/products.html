@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits - SportPlus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+        }
+
+        /* Styles généraux */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #ffffff;
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.75rem !important;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Product Cards */
+        .product-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 300px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .badge-new {
+            background: linear-gradient(45deg, var(--accent-color), #fbbf24);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+        }
+
+        .badge-sale {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+        }
+
+        .badge-colors {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+        }
+
+        .product-card-body {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .product-category {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .current-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .original-price {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .discount-percent {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Carousel Styles */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 35px;
+            height: 35px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .carousel-control-prev,
+        .product-card:hover .carousel-control-next {
+            opacity: 1;
+        }
+
+        .carousel-control-prev {
+            left: 10px;
+        }
+
+        .carousel-control-next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            bottom: 10px;
+            margin-bottom: 0;
+        }
+
+        .carousel-indicators button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin: 0 3px;
+        }
+
+        /* Color Selector */
+        .color-selector {
+            margin-bottom: 1rem;
+        }
+
+        .color-option {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+            background: white;
+        }
+
+        .color-option:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+        }
+
+        .color-option.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Sections */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color) !important;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .order-modal .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .order-modal .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-bottom: none;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .order-modal .modal-body {
+            padding: 2rem;
+        }
+
+        .order-modal .product-preview {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-modal .product-preview img {
+            max-height: 150px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .order-modal .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-modal .form-control {
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .order-modal .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        }
+
+        .order-modal .size-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .order-modal .size-option {
+            flex: 1;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .order-modal .size-option input[type="radio"] {
+            display: none;
+        }
+
+        .order-modal .size-option label {
+            display: block;
+            padding: 0.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-modal .size-option input[type="radio"]:checked + label {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .order-modal .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .order-modal .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-image {
+                height: 250px;
+            }
+            
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .product-title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec promo band -->
+    <div class="promo-banner bg-dark text-white text-center py-2">
+        <div class="container">
+            <small>🚀 LIVRAISON GRATUITE À PARTIR DE 99DT | ⚡ LIVRAISON EXPRESS 24H</small>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">
+                <span class="text-primary">SPORT</span><span class="text-dark">PLUS</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">ACCUEIL</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="products.html?category=homme">HOMME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="products.html?category=femme">FEMME</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link position-relative me-3" href="#" title="Recherche">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <a class="nav-link position-relative me-3" href="#" title="Favoris">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a class="nav-link position-relative snipcart-checkout" href="cart.html" title="Panier">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="fw-bold mb-2" id="page-title">Tous nos produits</h1>
+                    <p class="text-muted mb-0" id="page-subtitle">Découvrez notre collection complète de vêtements de sport</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-grid py-5">
+        <div class="container">
+            <div class="row g-4" id="products-container">
+                <div class="col-12 text-center">
+                    <div class="loading"></div>
+                    <p class="text-muted mt-3">Chargement des produits...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h3 class="fw-bold mb-3">NEWSLETTER</h3>
+                    <p class="text-muted mb-4">Recevez en exclusivité nos nouveautés et offres spéciales</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control form-control-lg" placeholder="Votre email" id="newsletter-email">
+                        <button class="btn btn-primary btn-lg" type="button" id="newsletter-submit">S'INSCRIRE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">SPORT<span class="text-primary">PLUS</span></h5>
+                    <p>Votre destination premium pour les vêtements de sport. Qualité, style et performance.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="fw-bold mb-3">BOUTIQUE</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="products.html?category=homme" class="text-white-50">Homme</a></li>
+                        <li><a href="products.html?category=femme" class="text-white-50">Femme</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="fw-bold mb-3">INFORMATIONS</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Livraison</a></li>
+                        <li><a href="#" class="text-white-50">Retours</a></li>
+                        <li><a href="#" class="text-white-50">FAQ</a></li>
+                        <li><a href="contact.html" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h6 class="fw-bold mb-3">CONTACT</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +216 12 345 678</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> contact@sportplus.tn</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Tunis, Tunisia</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-white my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 SportPlus. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <img src="https://via.placeholder.com/40x25/fff/fff?text=CM" class="me-2" alt="Carte" loading="lazy">
+                    <img src="https://via.placeholder.com/40x25/fff/fff?text=VISA" class="me-2" alt="Visa" loading="lazy">
+                    <img src="https://via.placeholder.com/40x25/fff/fff?text=MC" alt="Mastercard" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de commande -->
+    <div class="modal fade order-modal" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Commander ce produit</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="product-preview">
+                        <img id="orderProductImage" src="" alt="Produit" class="img-fluid">
+                        <h4 id="orderProductName" class="fw-bold"></h4>
+                        <p class="text-muted" id="orderProductCategory"></p>
+                        <div class="product-price">
+                            <span class="current-price" id="orderProductPrice"></span>
+                        </div>
+                        <div id="selectedColorInfo" class="mt-2"></div>
+                    </div>
+                    
+                    <form id="orderForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">Prénom *</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Nom *</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Numéro de téléphone *</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Adresse de livraison *</label>
+                            <textarea class="form-control" id="address" rows="2" required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Taille *</label>
+                            <div class="size-options">
+                                <div class="size-option">
+                                    <input type="radio" id="size-s" name="size" value="S" required>
+                                    <label for="size-s">S</label>
+                                </div>
+                                <div class="size-option">
+                                    <input type="radio" id="size-m" name="size" value="M">
+                                    <label for="size-m">M</label>
+                                </div>
+                                <div class="size-option">
+                                    <input type="radio" id="size-l" name="size" value="L">
+                                    <label for="size-l">L</label>
+                                </div>
+                                <div class="size-option">
+                                    <input type="radio" id="size-xl" name="size" value="XL">
+                                    <label for="size-xl">XL</label>
+                                </div>
+                                <div class="size-option">
+                                    <input type="radio" id="size-xxl" name="size" value="XXL">
+                                    <label for="size-xxl">XXL</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Notes supplémentaires (optionnel)</label>
+                            <textarea class="form-control" id="notes" rows="2" placeholder="Couleur préférée, délai de livraison, etc."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-whatsapp w-100 mt-3">
+                            <i class="fab fa-whatsapp"></i> Commander via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snipcart -->
+    <div hidden id="snipcart" data-api-key="test_YOUR_API_KEY"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Données des produits
+        const productsData = [
+            {
+                id: 1,
+                name: "Ensemble survêtement homme",
+                category: "homme",
+                price: 45,
+                images: [
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
+                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
+                ],
+                colors: ["Gris", "Rouge", "Noir"],
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 2,
+                name: "T‑shirt sport homme",
+                category: "homme",
+                price: 50,
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: false,
+                discount: 30
+            },
+            {
+                id: 3,
+                name: "Pantalon de jogging homme",
+                category: "homme",
+                price: 120,
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: false,
+                discount: 25
+            },
+            {
+                id: 4,
+                name: "Short running homme",
+                category: "homme",
+                price: 100,
+                image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
+                isNew: false,
+                discount: 25
+            },
+            {
+                id: 5,
+                name: "Legging Yoga Premium",
+                category: "femme",
+                price: 65,
+                image: "https://images.unsplash.com/photo-1584670747140-36b9c8d88e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 6,
+                name: "T-Shirt Fitness Dry",
+                category: "femme",
+                price: 42,
+                image: "https://images.unsplash.com/photo-1506629905607-e48b0e67d879?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 7,
+                name: "Ensemble Fitness Pro",
+                category: "femme",
+                price: 95,
+                image: "https://images.unsplash.com/photo-1591361878699-90d26c1d2d66?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                isNew: true,
+                discount: 0
+            },
+            {
+                id: 8,
+                name: "Short Training Fit",
+                category: "femme",
+                price: 55,
+                image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
+                isNew: false,
+                discount: 50
+            },
+        ];
+
+        class ProductsFilter {
+            constructor() {
+                this.products = productsData;
+                this.currentCategory = this.getCategoryFromURL();
+                this.currentProduct = null;
+                this.selectedColorIndex = 0;
+                this.productColorSelections = {}; // Stocker les sélections de couleur par produit
+                this.init();
+            }
+
+            async init() {
+                await this.displayProducts();
+                this.updatePageTitle();
+                this.setupEventListeners();
+            }
+
+            getCategoryFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('category');
+            }
+
+            getFilteredProducts() {
+                if (!this.currentCategory) {
+                    return this.products;
+                }
+                return this.products.filter(product => product.category === this.currentCategory);
+            }
+
+            async displayProducts() {
+                const container = document.getElementById('products-container');
+                const filteredProducts = this.getFilteredProducts();
+
+                // Simuler un chargement
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                if (filteredProducts.length === 0) {
+                    container.innerHTML = this.createNoProductsMessage();
+                    return;
+                }
+
+                container.innerHTML = filteredProducts.map(product => 
+                    this.createProductCard(product)
+                ).join('');
+
+                this.initializeCarousels();
+            }
+
+            createProductCard(product) {
+                const hasDiscount = product.discount > 0;
+                const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                const hasMultipleColors = product.images && product.images.length > 1;
+                const productImages = hasMultipleColors ? product.images : [product.image];
+                const productColors = hasMultipleColors ? product.colors : [];
+
+                return `
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="product-card h-100 d-flex flex-column">
+                            <div class="position-relative overflow-hidden">
+                                ${hasMultipleColors ? this.createImageCarousel(product) : this.createSingleImage(product)}
+                                
+                                <div class="product-badge">
+                                    ${product.isNew ? '<span class="badge-new">NOUVEAU</span>' : ''}
+                                    ${hasDiscount ? '<span class="badge-sale">SOLDES</span>' : ''}
+                                    ${hasMultipleColors ? `<span class="badge-colors">${product.images.length} COULEURS</span>` : ''}
+                                </div>
+                                
+                                <div class="position-absolute top-0 end-0 p-3">
+                                    <button class="btn btn-light btn-sm rounded-circle favorite-btn" data-product-id="${product.id}">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-card-body d-flex flex-column flex-grow-1">
+                                <div class="product-category">${product.category.toUpperCase()}</div>
+                                <h5 class="product-title">${product.name}</h5>
+                                
+                                ${hasMultipleColors ? this.createColorSelector(product) : '<div class="mb-3"></div>'}
+                                
+                                <div class="product-price mt-auto">
+                                    ${hasDiscount ? `
+                                        <span class="current-price">${discountPrice} DT</span>
+                                        <span class="original-price">${product.price} DT</span>
+                                        <span class="discount-percent">-${product.discount}%</span>
+                                    ` : `
+                                        <span class="current-price">${product.price} DT</span>
+                                    `}
+                                </div>
+                                
+                                <button class="btn btn-primary w-100 buy-now-btn mt-auto"
+                                    data-product-id="${product.id}">
+                                    <i class="fas fa-bolt me-2"></i>ACHETER
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            createImageCarousel(product) {
+                return `
+                    <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            ${product.images.map((image, index) => `
+                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                    <img src="${image}" 
+                                         class="product-image d-block w-100" 
+                                         alt="${product.name} - ${product.colors ? product.colors[index] : 'Couleur ' + (index + 1)}"
+                                         loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${product.images.length > 1 ? `
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Précédent</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Suivant</span>
+                            </button>
+                            <div class="carousel-indicators">
+                                ${product.images.map((_, index) => `
+                                    <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
+                                            class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            createSingleImage(product) {
+                return `
+                    <img src="${product.image}" 
+                         class="product-image" 
+                         alt="${product.name}"
+                         loading="lazy">
+                `;
+            }
+
+            createColorSelector(product) {
+                if (!product.colors || product.colors.length <= 1) return '<div class="mb-3"></div>';
+
+                return `
+                    <div class="color-selector mb-3">
+                        <div class="d-flex gap-2 flex-wrap">
+                            ${product.colors.map((color, index) => `
+                                <button class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
+                                        data-product-id="${product.id}" 
+                                        data-color-index="${index}"
+                                        data-color-name="${color}"
+                                        title="${color}">
+                                    ${color}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            initializeCarousels() {
+                const carousels = document.querySelectorAll('.carousel');
+                carousels.forEach(carousel => {
+                    new bootstrap.Carousel(carousel, {
+                        interval: false
+                    });
+                });
+            }
+
+            updatePageTitle() {
+                const titleElement = document.getElementById('page-title');
+                const subtitleElement = document.getElementById('page-subtitle');
+
+                if (this.currentCategory === 'homme') {
+                    titleElement.textContent = 'Collection Homme';
+                    subtitleElement.textContent = 'Découvrez notre collection homme';
+                } else if (this.currentCategory === 'femme') {
+                    titleElement.textContent = 'Collection Femme';
+                    subtitleElement.textContent = 'Découvrez notre collection femme';
+                }
+            }
+
+            createNoProductsMessage() {
+                return `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                        <h4 class="fw-bold mb-3">Aucun produit trouvé</h4>
+                        <p class="text-muted mb-4">
+                            Aucun produit n'est disponible dans cette catégorie.
+                        </p>
+                        <a href="products.html" class="btn btn-primary">Voir tous les produits</a>
+                    </div>
+                `;
+            }
+
+            setupEventListeners() {
+                // Gestion des favoris
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.favorite-btn')) {
+                        const btn = e.target.closest('.favorite-btn');
+                        const productId = btn.getAttribute('data-product-id');
+                        const icon = btn.querySelector('i');
+                        
+                        icon.classList.toggle('far');
+                        icon.classList.toggle('fas');
+                        icon.classList.toggle('text-danger');
+                        
+                        const productName = btn.closest('.product-card').querySelector('.product-title').textContent;
+                        const action = icon.classList.contains('fas') ? 'ajouté aux' : 'retiré des';
+                        alert(`${productName} ${action} favoris !`);
+                    }
+                });
+
+                // Gestion du bouton "Acheter"
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.buy-now-btn')) {
+                        const btn = e.target.closest('.buy-now-btn');
+                        const productId = parseInt(btn.getAttribute('data-product-id'));
+                        
+                        // Trouver le produit dans les données
+                        const product = this.products.find(p => p.id === productId);
+                        if (!product) return;
+                        
+                        // Déterminer l'index de couleur sélectionné
+                        const productCard = btn.closest('.product-card');
+                        const activeColorOption = productCard.querySelector('.color-option.active');
+                        let selectedColorIndex = 0;
+                        
+                        if (activeColorOption) {
+                            selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
+                        }
+                        
+                        // Stocker la sélection de couleur pour ce produit
+                        this.productColorSelections[productId] = selectedColorIndex;
+                        
+                        // Préparer les données du produit
+                        const hasMultipleColors = product.images && product.images.length > 1;
+                        const images = hasMultipleColors ? product.images : [product.image];
+                        const colors = hasMultipleColors ? product.colors : [];
+                        const hasDiscount = product.discount > 0;
+                        const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                        
+                        this.currentProduct = {
+                            id: product.id,
+                            name: product.name,
+                            category: product.category,
+                            price: price,
+                            images: images,
+                            colors: colors
+                        };
+                        
+                        this.openOrderModal();
+                    }
+                });
+
+                // Gestion des sélecteurs de couleur
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('color-option')) {
+                        const option = e.target;
+                        const productId = parseInt(option.getAttribute('data-product-id'));
+                        const colorIndex = parseInt(option.getAttribute('data-color-index'));
+                        
+                        // Stocker la sélection
+                        this.productColorSelections[productId] = colorIndex;
+                        
+                        // Mettre à jour le carousel
+                        const carousel = document.getElementById(`carousel-${productId}`);
+                        if (carousel) {
+                            const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+                            if (carouselInstance) {
+                                carouselInstance.to(colorIndex);
+                            }
+                        }
+                        
+                        // Mettre à jour les boutons actifs
+                        const allOptions = document.querySelectorAll(`.color-option[data-product-id="${productId}"]`);
+                        allOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                    }
+                });
+
+                // Newsletter
+                document.getElementById('newsletter-submit').addEventListener('click', () => {
+                    const email = document.getElementById('newsletter-email').value;
+                    if (this.validateEmail(email)) {
+                        alert('Merci pour votre inscription à la newsletter !');
+                        document.getElementById('newsletter-email').value = '';
+                    } else {
+                        alert('Veuillez entrer une adresse email valide.');
+                    }
+                });
+
+                // Gestion du formulaire de commande
+                document.getElementById('orderForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.sendOrderViaWhatsApp();
+                });
+            }
+
+            openOrderModal() {
+                if (!this.currentProduct) return;
+                
+                // Déterminer l'index de couleur à utiliser
+                const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
+                
+                // Remplir les informations du produit dans le modal
+                const selectedImage = this.currentProduct.images[selectedColorIndex];
+                document.getElementById('orderProductImage').src = selectedImage;
+                document.getElementById('orderProductName').textContent = this.currentProduct.name;
+                document.getElementById('orderProductCategory').textContent = this.currentProduct.category.toUpperCase();
+                document.getElementById('orderProductPrice').textContent = `${this.currentProduct.price} DT`;
+                
+                // Afficher la couleur sélectionnée
+                const colorInfoElement = document.getElementById('selectedColorInfo');
+                if (this.currentProduct.colors && this.currentProduct.colors.length > 0) {
+                    const selectedColor = this.currentProduct.colors[selectedColorIndex];
+                    colorInfoElement.innerHTML = `<span class="badge bg-primary">Couleur: ${selectedColor}</span>`;
+                } else {
+                    colorInfoElement.innerHTML = '';
+                }
+                
+                // Réinitialiser le formulaire
+                document.getElementById('orderForm').reset();
+                
+                // Afficher le modal
+                const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+                orderModal.show();
+            }
+
+            sendOrderViaWhatsApp() {
+                if (!this.currentProduct) return;
+                
+                // Récupérer les données du formulaire
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const size = document.querySelector('input[name="size"]:checked').value;
+                const notes = document.getElementById('notes').value;
+                
+                // Déterminer l'index de couleur à utiliser
+                const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
+                
+                // Récupérer la couleur sélectionnée
+                const selectedColor = this.currentProduct.colors && this.currentProduct.colors.length > 0 
+                    ? this.currentProduct.colors[selectedColorIndex] 
+                    : 'Non spécifiée';
+                
+                // Construire le message WhatsApp
+                const message = `Bonjour SportPlus ! Je souhaite commander le produit suivant :
+                
+Produit: ${this.currentProduct.name}
+Catégorie: ${this.currentProduct.category}
+Prix: ${this.currentProduct.price} DT
+Couleur: ${selectedColor}
+Taille: ${size}
+
+Informations personnelles:
+Nom: ${firstName} ${lastName}
+Téléphone: ${phone}
+Adresse: ${address}
+
+${notes ? `Notes: ${notes}` : ''}
+
+Merci de me contacter pour finaliser ma commande.`;
+
+                // Encoder le message pour l'URL
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Numéro WhatsApp de SportPlus
+                const whatsappNumber = "+21654942408";
+                
+                // Ouvrir WhatsApp avec le message pré-rempli
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                
+                // Fermer le modal
+                const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+                orderModal.hide();
+                
+                // Afficher un message de confirmation
+                alert('Votre commande a été envoyée via WhatsApp ! Nous vous contacterons bientôt.');
+            }
+
+            validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+        }
+
+        // Démarrer l'application
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProductsFilter();
+        });
+    </script>
+</body>
+</html>
