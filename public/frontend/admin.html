@@ -18,10 +18,11 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: #f8f9fa;
+            overflow-x: hidden;
         }
 
         .admin-header {
@@ -29,6 +30,9 @@
             color: white;
             padding: 1rem 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .admin-sidebar {
@@ -45,6 +49,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 1.5rem;
             min-height: 600px;
+            overflow-x: auto;
         }
 
         .nav-pills .nav-link {
@@ -53,6 +58,7 @@
             margin-bottom: 0.5rem;
             border-radius: 8px;
             transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .nav-pills .nav-link:hover {
@@ -70,6 +76,7 @@
             border-radius: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
+            height: 100%;
         }
 
         .product-card-admin:hover {
@@ -87,10 +94,11 @@
         .stats-card {
             background: white;
             border-radius: 10px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
             transition: all 0.3s ease;
+            height: 100%;
         }
 
         .stats-card:hover {
@@ -99,7 +107,7 @@
         }
 
         .stats-number {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
@@ -107,7 +115,7 @@
 
         .stats-label {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .action-btn {
@@ -221,15 +229,16 @@
         }
 
         .product-image-preview {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 120px;
+            max-height: 120px;
             object-fit: cover;
             border-radius: 8px;
-            margin-top: 10px;
+            margin: 5px;
         }
 
         .modal-xl {
-            max-width: 90%;
+            max-width: 95%;
+            margin: 10px auto;
         }
 
         .customer-info {
@@ -237,18 +246,21 @@
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         .customer-info h6 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            font-size: 1rem;
         }
 
         .alert-custom {
             border-left: 4px solid;
-            padding: 1rem;
+            padding: 0.75rem;
             margin-bottom: 1rem;
             border-radius: 6px;
+            font-size: 0.9rem;
         }
 
         .alert-new-order {
@@ -260,13 +272,15 @@
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
             border: 1px solid #e5e7eb;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
+            width: 100%;
         }
 
         .quick-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .search-box {
@@ -275,6 +289,7 @@
 
         .search-box input {
             padding-left: 2.5rem;
+            font-size: 0.875rem;
         }
 
         .search-box i {
@@ -283,18 +298,397 @@
             top: 50%;
             transform: translateY(-50%);
             color: #6b7280;
+            font-size: 0.875rem;
         }
 
         .export-btn {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .stats-icon {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
             color: var(--primary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1199.98px) {
+            .admin-sidebar {
+                padding: 1rem;
+            }
+            
+            .admin-content {
+                padding: 1rem;
+            }
+            
+            .stats-number {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .admin-sidebar {
+                margin-bottom: 1.5rem;
+                position: static;
+            }
+            
+            .admin-header .container {
+                padding: 0 1rem;
+            }
+            
+            .stats-card {
+                padding: 1rem;
+            }
+            
+            .stats-number {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .admin-header h1 {
+                font-size: 1.25rem;
+            }
+            
+            .admin-header .btn-sm {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .tab-content h2 {
+                font-size: 1.25rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.8rem;
+            }
+            
+            .product-card-admin {
+                margin-bottom: 1rem;
+            }
+            
+            .modal-lg {
+                margin: 10px;
+            }
+            
+            .stats-icon {
+                font-size: 1rem;
+            }
+            
+            .stats-number {
+                font-size: 1rem;
+            }
+            
+            .d-flex.justify-content-between.align-items-center.mb-4 {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            
+            .d-flex.gap-2 {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-box input {
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            body {
+                font-size: 0.9rem;
+            }
+            
+            .admin-header {
+                padding: 0.75rem 0;
+            }
+            
+            .admin-header .btn-group {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 0.25rem;
+            }
+            
+            .tab-content {
+                padding: 0.5rem;
+            }
+            
+            .stats-card {
+                margin-bottom: 0.75rem;
+                padding: 0.75rem;
+            }
+            
+            .nav-pills .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+            
+            .modal-body {
+                padding: 1rem;
+            }
+            
+            .modal-header h5 {
+                font-size: 1rem;
+            }
+            
+            .btn-group .btn {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            #products-list .col-md-6.col-lg-4.mb-4 {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+            
+            .table td, .table th {
+                padding: 0.5rem;
+            }
+            
+            .ordersTable .btn-sm {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.7rem;
+            }
+            
+            /* Optimisation pour les très petits écrans */
+            .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .admin-content {
+                border-radius: 8px;
+                padding: 0.75rem;
+            }
+            
+            /* Amélioration de l'affichage des cartes produits sur mobile */
+            .product-card-admin .p-3 {
+                padding: 0.75rem !important;
+            }
+            
+            .product-card-admin .btn-sm {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.75rem;
+            }
+            
+            /* Ajustement des modales pour mobile */
+            .modal-dialog {
+                margin: 10px;
+                max-width: calc(100% - 20px);
+            }
+            
+            .modal-content {
+                border-radius: 8px;
+            }
+            
+            /* Ajustement du formulaire produit sur mobile */
+            #productModal .row {
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+            
+            #productModal .col-md-6 {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+            
+            /* Ajustement des boutons d'action dans les tableaux */
+            .table td .btn-group {
+                display: flex;
+                flex-wrap: nowrap;
+            }
+            
+            /* Amélioration de l'affichage des filtres commandes */
+            .card-body .row.g-2 {
+                margin-left: -5px;
+                margin-right: -5px;
+            }
+            
+            .card-body .col-md-3 {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            
+            /* Ajustement des badges */
+            .badge {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.4rem;
+            }
+            
+            /* Optimisation de l'espace dans le header admin */
+            .admin-header .row {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .admin-header .text-md-end {
+                text-align: center !important;
+            }
+        }
+
+        @media (max-width: 375px) {
+            /* Optimisations pour très petits smartphones */
+            :root {
+                font-size: 14px;
+            }
+            
+            .stats-number {
+                font-size: 0.9rem;
+            }
+            
+            .stats-label {
+                font-size: 0.75rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.75rem;
+            }
+            
+            .modal-body {
+                padding: 0.75rem;
+            }
+            
+            .btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            /* Réduction de l'espacement dans les cartes */
+            .card-body {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Ajustements pour l'orientation paysage sur mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .admin-header {
+                padding: 0.5rem 0;
+            }
+            
+            .admin-sidebar {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .modal.show {
+                overflow-y: auto;
+            }
+            
+            .modal-body {
+                max-height: 60vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* Amélioration du contraste pour l'accessibilité */
+        @media (prefers-contrast: high) {
+            .btn {
+                border-width: 2px;
+            }
+            
+            .table-hover tbody tr:hover {
+                background-color: #e9ecef;
+            }
+        }
+
+        /* Support du mode sombre */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #e0e0e0;
+            }
+            
+            .admin-sidebar,
+            .admin-content,
+            .stats-card,
+            .product-card-admin,
+            .card {
+                background-color: #1e1e1e;
+                border-color: #333;
+            }
+            
+            .nav-pills .nav-link {
+                color: #e0e0e0;
+            }
+            
+            .nav-pills .nav-link:hover {
+                background-color: #2d2d2d;
+            }
+            
+            .table {
+                color: #e0e0e0;
+            }
+            
+            .table-hover tbody tr:hover {
+                background-color: #2d2d2d;
+            }
+            
+            .table-light {
+                background-color: #2d2d2d;
+            }
+            
+            .customer-info {
+                background-color: #2d2d2d;
+            }
+            
+            .text-muted {
+                color: #aaa !important;
+            }
+            
+            .form-control,
+            .form-select {
+                background-color: #2d2d2d;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+            
+            .form-control:focus,
+            .form-select:focus {
+                background-color: #2d2d2d;
+                border-color: var(--primary-color);
+                color: #e0e0e0;
+            }
+        }
+
+        /* Correction du débordement horizontal */
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .row > * {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        /* Amélioration du touch sur mobile */
+        .btn,
+        .nav-link,
+        .form-control,
+        .form-select {
+            min-height: 44px;
+        }
+
+        .btn-sm {
+            min-height: 36px;
+        }
+
+        /* Optimisation des transitions pour les appareils mobiles */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
