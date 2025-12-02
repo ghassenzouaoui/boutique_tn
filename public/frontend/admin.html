@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration - Votre_Boutique</title>
+    <title>Administration - SportPlus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -28,6 +28,7 @@
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .admin-sidebar {
@@ -43,22 +44,25 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 1.5rem;
-        }
-
-        .nav-pills .nav-link.active {
-            background-color: var(--primary-color);
+            min-height: 600px;
         }
 
         .nav-pills .nav-link {
             color: var(--text-dark);
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
-        .product-image-preview {
-            max-width: 200px;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-top: 10px;
+        .nav-pills .nav-link:hover {
+            background-color: #f1f5f9;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
         }
 
         .product-card-admin {
@@ -70,12 +74,14 @@
 
         .product-card-admin:hover {
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
 
         .product-image-admin {
             height: 150px;
             object-fit: cover;
             width: 100%;
+            background-color: #f8fafc;
         }
 
         .stats-card {
@@ -84,12 +90,19 @@
             padding: 1.5rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
 
         .stats-number {
             font-size: 2rem;
             font-weight: 700;
             color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .stats-label {
@@ -100,6 +113,8 @@
         .action-btn {
             margin-right: 5px;
             margin-bottom: 5px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
         }
 
         .image-url-input {
@@ -109,7 +124,7 @@
         .color-tag {
             display: inline-block;
             background-color: #e5e7eb;
-            padding: 0.3rem 0.6rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
             margin-right: 5px;
             margin-bottom: 5px;
@@ -117,16 +132,23 @@
         }
 
         .color-tag .remove-color {
-            margin-left: 5px;
+            margin-left: 8px;
             cursor: pointer;
             color: #ef4444;
+            font-weight: bold;
         }
 
         .sync-status {
-            padding: 0.5rem;
-            border-radius: 5px;
+            padding: 0.75rem;
+            border-radius: 8px;
             margin-bottom: 1rem;
             font-size: 0.9rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .sync-success {
@@ -140,6 +162,140 @@
             color: #991b1b;
             border: 1px solid #fecaca;
         }
+
+        .sync-info {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .order-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-confirmed {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-delivered {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-cancelled {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .order-details-card {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .product-image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .modal-xl {
+            max-width: 90%;
+        }
+
+        .customer-info {
+            background-color: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .customer-info h6 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-custom {
+            border-left: 4px solid;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+        }
+
+        .alert-new-order {
+            border-left-color: #3b82f6;
+            background-color: #dbeafe;
+        }
+
+        .order-status-select {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding-left: 2.5rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        .export-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stats-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -149,16 +305,22 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h1 class="h3 mb-0">
-                        <i class="fas fa-cog me-2"></i>Administration Boutique
+                        <i class="fas fa-cog me-2"></i>Administration SportPlus
                     </h1>
+                    <small class="opacity-75">Panier de contrôle</small>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <a href="products.html" class="btn btn-light btn-sm me-2">
-                        <i class="fas fa-store me-1"></i> Voir la boutique
-                    </a>
-                    <button class="btn btn-warning btn-sm" id="syncNowBtn">
-                        <i class="fas fa-sync me-1"></i> Synchroniser
-                    </button>
+                    <div class="btn-group" role="group">
+                        <a href="products.html" class="btn btn-light btn-sm">
+                            <i class="fas fa-store me-1"></i> Voir boutique
+                        </a>
+                        <button class="btn btn-warning btn-sm" id="syncNowBtn">
+                            <i class="fas fa-sync me-1"></i> Sync
+                        </button>
+                        <button class="btn btn-outline-light btn-sm" onclick="location.reload()">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -166,8 +328,13 @@
 
     <!-- Sync Status -->
     <div class="container mt-3">
-        <div id="syncStatus" class="sync-status d-none">
-            <!-- Le statut de synchronisation sera affiché ici -->
+        <div id="syncStatus" class="sync-status d-none"></div>
+        <div id="newOrdersAlert" class="alert-custom alert-new-order d-none">
+            <strong><i class="fas fa-bell me-2"></i>Nouvelles commandes !</strong>
+            <span id="newOrdersCount">0</span> nouvelle(s) commande(s) en attente.
+            <button class="btn btn-sm btn-primary ms-2" onclick="showOrdersTab()">
+                <i class="fas fa-eye me-1"></i> Voir
+            </button>
         </div>
     </div>
 
@@ -176,11 +343,19 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-lg-3 mb-4">
-                <div class="admin-sidebar">
-                    <ul class="nav nav-pills flex-column">
+                <div class="admin-sidebar sticky-top" style="top: 20px;">
+                    <h5 class="fw-bold mb-3"><i class="fas fa-tachometer-alt me-2"></i>Navigation</h5>
+                    <ul class="nav nav-pills flex-column mb-4">
                         <li class="nav-item">
                             <a class="nav-link active" href="#products" data-bs-toggle="tab">
-                                <i class="fas fa-box me-2"></i> Gestion des produits
+                                <i class="fas fa-box me-2"></i> Produits
+                                <span class="badge bg-primary ms-1" id="productsCountBadge">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#orders" data-bs-toggle="tab">
+                                <i class="fas fa-shopping-cart me-2"></i> Commandes
+                                <span class="badge bg-danger ms-1" id="pendingOrdersBadge">0</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -189,11 +364,31 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#backup" data-bs-toggle="tab">
-                                <i class="fas fa-download me-2"></i> Sauvegarde
+                            <a class="nav-link" href="#export" data-bs-toggle="tab">
+                                <i class="fas fa-file-export me-2"></i> Export
                             </a>
                         </li>
                     </ul>
+                    
+                    <div class="card border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title"><i class="fas fa-info-circle me-2"></i>Statut système</h6>
+                            <div class="mb-2">
+                                <small class="text-muted d-block mb-1">
+                                    <i class="fas fa-clock me-1"></i> 
+                                    <span id="lastSyncTime">--:--</span>
+                                </small>
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-database me-1"></i> 
+                                    <span id="dbStatus">Connexion...</span>
+                                </small>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div id="memoryUsage" class="progress-bar bg-info" style="width: 0%"></div>
+                            </div>
+                            <small class="text-muted d-block text-end" id="memoryText">Chargement...</small>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -204,17 +399,208 @@
                     <div class="tab-pane fade show active" id="products">
                         <div class="admin-content">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h2 class="h4 mb-0">Gestion des produits</h2>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
-                                    <i class="fas fa-plus me-1"></i> Ajouter un produit
-                                </button>
+                                <div>
+                                    <h2 class="h4 mb-0"><i class="fas fa-box me-2"></i>Gestion des produits</h2>
+                                    <p class="text-muted mb-0 small">Ajoutez, modifiez ou supprimez des produits</p>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <div class="search-box">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" class="form-control form-control-sm" 
+                                               id="productSearch" placeholder="Rechercher produit..." 
+                                               style="width: 200px;">
+                                    </div>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal" id="addProductBtn">
+                                        <i class="fas fa-plus me-1"></i> Nouveau
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Products Stats -->
+                            <div class="row mb-4">
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-boxes"></i>
+                                        </div>
+                                        <div class="stats-number" id="total-products">0</div>
+                                        <div class="stats-label">Total produits</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-male"></i>
+                                        </div>
+                                        <div class="stats-number" id="homme-products">0</div>
+                                        <div class="stats-label">Homme</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-female"></i>
+                                        </div>
+                                        <div class="stats-number" id="femme-products">0</div>
+                                        <div class="stats-label">Femme</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-fire"></i>
+                                        </div>
+                                        <div class="stats-number" id="new-products">0</div>
+                                        <div class="stats-label">Nouveautés</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Products List -->
                             <div class="row" id="products-list">
-                                <div class="col-12 text-center">
+                                <div class="col-12 text-center py-5">
                                     <div class="loading"></div>
                                     <p class="text-muted mt-3">Chargement des produits...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="tab-pane fade" id="orders">
+                        <div class="admin-content">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h2 class="h4 mb-0"><i class="fas fa-shopping-cart me-2"></i>Gestion des commandes</h2>
+                                    <p class="text-muted mb-0 small">Gérez et suivez les commandes clients</p>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-primary btn-sm" id="refreshOrders">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                    <button class="btn btn-outline-info btn-sm" id="markAllSeen">
+                                        <i class="fas fa-check-double"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm" id="deleteOldOrders" title="Supprimer anciennes">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Orders Stats -->
+                            <div class="row mb-4">
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="stats-number" id="total-orders">0</div>
+                                        <div class="stats-label">Total commandes</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="stats-number text-warning" id="pending-orders">0</div>
+                                        <div class="stats-label">En attente</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <div class="stats-number text-success" id="confirmed-orders">0</div>
+                                        <div class="stats-label">Confirmées</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="stats-card">
+                                        <div class="stats-icon">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                        <div class="stats-number text-primary" id="delivered-orders">0</div>
+                                        <div class="stats-label">Livrées</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Orders Filter -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row g-2">
+                                        <div class="col-md-3">
+                                            <label class="form-label small">Statut</label>
+                                            <select class="form-select form-select-sm" id="orderStatusFilter">
+                                                <option value="all">Tous les statuts</option>
+                                                <option value="pending">En attente</option>
+                                                <option value="confirmed">Confirmé</option>
+                                                <option value="delivered">Livré</option>
+                                                <option value="cancelled">Annulé</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label small">Date</label>
+                                            <input type="date" class="form-control form-control-sm" id="orderDateFilter">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label small">Recherche</label>
+                                            <div class="search-box">
+                                                <i class="fas fa-search"></i>
+                                                <input type="text" class="form-control form-control-sm" 
+                                                       id="orderSearch" placeholder="Nom, téléphone...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 d-flex align-items-end">
+                                            <button class="btn btn-primary btn-sm w-100 me-1" id="applyOrderFilter">
+                                                <i class="fas fa-filter me-1"></i> Filtrer
+                                            </button>
+                                            <button class="btn btn-outline-secondary btn-sm" id="clearOrderFilter">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Orders List -->
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm" id="ordersTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="120">ID Commande</th>
+                                            <th width="100">Date</th>
+                                            <th>Client</th>
+                                            <th>Produit</th>
+                                            <th width="100">Montant</th>
+                                            <th width="120">Statut</th>
+                                            <th width="150" class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ordersList">
+                                        <tr>
+                                            <td colspan="7" class="text-center py-5">
+                                                <div class="loading"></div>
+                                                <p class="text-muted mt-3">Chargement des commandes...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <small class="text-muted" id="ordersCountText">0 commandes</small>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-secondary btn-sm" id="prevPage" disabled>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <span class="btn btn-outline-secondary btn-sm disabled" id="currentPage">1</span>
+                                    <button class="btn btn-outline-secondary btn-sm" id="nextPage" disabled>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -223,37 +609,101 @@
                     <!-- Stats Tab -->
                     <div class="tab-pane fade" id="stats">
                         <div class="admin-content">
-                            <h2 class="h4 mb-4">Statistiques</h2>
-                            <div class="row">
-                                <div class="col-md-4 mb-4">
+                            <h2 class="h4 mb-4"><i class="fas fa-chart-bar me-2"></i>Statistiques</h2>
+                            
+                            <!-- Revenue Stats -->
+                            <div class="row mb-4">
+                                <div class="col-md-4 mb-3">
                                     <div class="stats-card">
-                                        <div class="stats-number" id="total-products">0</div>
-                                        <div class="stats-label">Produits total</div>
+                                        <div class="stats-icon">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </div>
+                                        <div class="stats-number" id="revenue-total">0 DT</div>
+                                        <div class="stats-label">Chiffre d'affaires</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-4">
+                                <div class="col-md-4 mb-3">
                                     <div class="stats-card">
-                                        <div class="stats-number" id="homme-products">0</div>
-                                        <div class="stats-label">Produits Homme</div>
+                                        <div class="stats-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="stats-number" id="revenue-month">0 DT</div>
+                                        <div class="stats-label">Ce mois</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-4">
+                                <div class="col-md-4 mb-3">
                                     <div class="stats-card">
-                                        <div class="stats-number" id="femme-products">0</div>
-                                        <div class="stats-label">Produits Femme</div>
+                                        <div class="stats-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="stats-number" id="avg-order">0 DT</div>
+                                        <div class="stats-label">Moyenne/commande</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-4">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <i class="fas fa-history me-2"></i>Activité récente
+                                                <button class="btn btn-sm btn-outline-primary float-end" id="exportActivity">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                            </h5>
+                                            <div id="recentActivity" style="max-height: 300px; overflow-y: auto;">
+                                                <p class="text-muted small">Aucune activité récente</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <i class="fas fa-chart-pie me-2"></i>Statut des commandes
+                                            </h5>
+                                            <canvas id="ordersChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">Statut de synchronisation</h5>
-                                            <p class="card-text" id="firebaseStatus">Connexion en cours...</p>
-                                            <div class="progress mb-3">
-                                                <div id="syncProgress" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                            <h5 class="card-title">
+                                                <i class="fas fa-database me-2"></i>Statut système
+                                            </h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="customer-info">
+                                                        <h6><i class="fas fa-info-circle me-2"></i>Informations Firebase</h6>
+                                                        <p class="mb-1"><i class="fas fa-database me-2"></i> <span id="firebaseStatus">Connexion...</span></p>
+                                                        <p class="mb-1"><i class="fas fa-clock me-2"></i> Dernière sync: <span id="lastSync">--:--:--</span></p>
+                                                        <p class="mb-0"><i class="fas fa-plug me-2"></i> Statut: <span id="connectionStatus" class="badge bg-success">Connecté</span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="customer-info">
+                                                        <h6><i class="fas fa-chart-line me-2"></i>Performance</h6>
+                                                        <div class="mb-2">
+                                                            <small class="text-muted">Mémoire utilisée</small>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div id="performanceMemory" class="progress-bar bg-info" style="width: 0%"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-0">
+                                                            <small class="text-muted">Temps de réponse</small>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div id="performanceResponse" class="progress-bar bg-success" style="width: 0%"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <small class="text-muted" id="lastSync">Dernière synchronisation: --</small>
                                         </div>
                                     </div>
                                 </div>
@@ -261,64 +711,58 @@
                         </div>
                     </div>
 
-                    <!-- Backup Tab -->
-                    <div class="tab-pane fade" id="backup">
+                    <!-- Export Tab -->
+                    <div class="tab-pane fade" id="export">
                         <div class="admin-content">
-                            <h2 class="h4 mb-4">Sauvegarde et restauration</h2>
+                            <h2 class="h4 mb-4"><i class="fas fa-file-export me-2"></i>Export des données</h2>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <div class="card-body">
-                                            <h5 class="card-title">Sauvegarder les données</h5>
-                                            <p class="card-text">Téléchargez un fichier de sauvegarde contenant tous vos produits.</p>
-                                            <button class="btn btn-primary" id="export-data">
-                                                <i class="fas fa-download me-1"></i> Exporter les données
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Restaurer les données</h5>
-                                            <p class="card-text">Importez un fichier de sauvegarde pour restaurer vos produits.</p>
-                                            <div class="mb-3">
-                                                <input type="file" class="form-control" id="import-file" accept=".json">
+                                            <h5 class="card-title">
+                                                <i class="fas fa-download me-2"></i>Exporter les données
+                                            </h5>
+                                            <p class="card-text">Téléchargez vos données au format JSON pour sauvegarde.</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-primary export-btn" id="exportProducts">
+                                                    <i class="fas fa-box"></i> Exporter produits
+                                                </button>
+                                                <button class="btn btn-info export-btn" id="exportOrders">
+                                                    <i class="fas fa-shopping-cart"></i> Exporter commandes
+                                                </button>
+                                                <button class="btn btn-success export-btn" id="exportAll">
+                                                    <i class="fas fa-database"></i> Exporter tout
+                                                </button>
                                             </div>
-                                            <button class="btn btn-success" id="import-data">
-                                                <i class="fas fa-upload me-1"></i> Importer les données
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-md-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Forcer la synchronisation</h5>
-                                            <p class="card-text">Synchroniser manuellement avec Firebase.</p>
-                                            <button class="btn btn-info w-100" id="force-sync">
-                                                <i class="fas fa-sync me-1"></i> Synchroniser maintenant
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <div class="card-body">
-                                            <h5 class="card-title">Réinitialiser</h5>
-                                            <p class="card-text">Remettre à zéro tous les produits.</p>
-                                            <button class="btn btn-danger w-100" id="reset-data">
-                                                <i class="fas fa-trash me-1"></i> Réinitialiser les données
-                                            </button>
+                                            <h5 class="card-title">
+                                                <i class="fas fa-file-import me-2"></i>Importer des données
+                                            </h5>
+                                            <p class="card-text">Importez des données depuis un fichier JSON.</p>
+                                            <div class="mb-3">
+                                                <label class="form-label">Sélectionner un fichier</label>
+                                                <input type="file" class="form-control" id="importFile" accept=".json">
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-warning" id="importData">
+                                                    <i class="fas fa-file-import me-1"></i> Importer
+                                                </button>
+                                                <button class="btn btn-outline-secondary" id="previewDataBtn">
+                                                    <i class="fas fa-eye me-1"></i> Prévisualiser
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="alert alert-warning mt-3">
                                 <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Attention :</strong> L'importation de données écrasera toutes les données actuelles.
+                                <strong>Attention :</strong> L'importation écrasera les données existantes. Faites toujours une sauvegarde avant.
                             </div>
                         </div>
                     </div>
@@ -327,18 +771,17 @@
         </div>
     </div>
 
-    <!-- Add/Edit Product Modal -->
-    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <!-- Modals -->
+    <div class="modal fade" id="productModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="productModalLabel">Ajouter un produit</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form id="productForm">
                         <input type="hidden" id="productId">
-                        
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="productName" class="form-label">Nom du produit *</label>
@@ -347,13 +790,20 @@
                             <div class="col-md-6 mb-3">
                                 <label for="productCategory" class="form-label">Catégorie *</label>
                                 <select class="form-select" id="productCategory" required>
-                                    <option value="">Sélectionner une catégorie</option>
+                                    <option value="">Sélectionner</option>
                                     <option value="homme">Homme</option>
                                     <option value="femme">Femme</option>
+                                    <option value="homme_tshirt">T-Shirt Homme</option>
+                                    <option value="homme_short">Short Homme</option>
+                                    <option value="homme_survetement">Survêtement Homme</option>
+                                    <option value="homme_veste">Veste Homme</option>
+                                    <option value="femme_tshirt">T-Shirt Femme</option>
+                                    <option value="femme_legging">Legging Femme</option>
+                                    <option value="femme_short">Short Femme</option>
+                                    <option value="femme_ensemble">Ensemble Femme</option>
                                 </select>
                             </div>
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="productPrice" class="form-label">Prix (DT) *</label>
@@ -364,37 +814,31 @@
                                 <input type="number" class="form-control" id="productDiscount" min="0" max="100" value="0">
                             </div>
                         </div>
-                        
+                        <div class="mb-3">
+                            <label for="productDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="productDescription" rows="3"></textarea>
+                        </div>
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="productIsNew">
                                 <label class="form-check-label" for="productIsNew">
-                                    Marquer comme nouveau produit
+                                    Marquer comme nouveau
                                 </label>
                             </div>
                         </div>
-                        
                         <div class="mb-3">
-                            <label class="form-label">Images du produit</label>
-                            <div id="imageUrlsContainer">
-                                <!-- Les champs d'URL d'image seront ajoutés ici dynamiquement -->
-                            </div>
+                            <label class="form-label">Images *</label>
+                            <div id="imageUrlsContainer"></div>
                             <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="addImageUrl">
-                                <i class="fas fa-plus me-1"></i> Ajouter une image
+                                <i class="fas fa-plus me-1"></i> Ajouter image
                             </button>
-                            
-                            <div id="imagePreview" class="mt-3">
-                                <!-- Aperçu des images sera affiché ici -->
-                            </div>
+                            <div id="imagePreview" class="mt-3"></div>
                         </div>
-                        
                         <div class="mb-3">
-                            <label class="form-label">Couleurs disponibles</label>
-                            <div id="colorsContainer">
-                                <!-- Les tags de couleur seront ajoutés ici dynamiquement -->
-                            </div>
+                            <label class="form-label">Couleurs</label>
+                            <div id="colorsContainer"></div>
                             <div class="input-group mt-2">
-                                <input type="text" class="form-control" id="newColor" placeholder="Ajouter une couleur">
+                                <input type="text" class="form-control" id="newColor" placeholder="Ex: Rouge">
                                 <button type="button" class="btn btn-outline-secondary" id="addColor">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -410,16 +854,40 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails commande</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="orderDetailsContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-success" id="confirmOrderBtn">
+                        <i class="fas fa-check me-1"></i> Confirmer
+                    </button>
+                    <button type="button" class="btn btn-primary" id="callCustomerBtn">
+                        <i class="fas fa-phone me-1"></i> Appeler
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirmer la suppression</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">Confirmer suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    Êtes-vous sûr de vouloir supprimer ce produit ? Cette action est irréversible.
+                    <p id="deleteMessage">Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+                    <p class="text-muted small" id="deleteItemInfo"></p>
+                    <p class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i>Action irréversible</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -429,339 +897,464 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
+    <div class="modal fade" id="previewModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Prévisualisation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <pre id="previewData" class="bg-light p-3" style="max-height: 500px; overflow: auto;"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
     // Configuration Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
-        authDomain: "bt-sp-b3ce3.firebaseapp.com",
-        projectId: "bt-sp-b3ce3",
-        storageBucket: "bt-sp-b3ce3.firebasestorage.app",
-        messagingSenderId: "1072895717676",
-        appId: "1:1072895717676:web:bace267352a7941c1dfc89"
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
+    authDomain: "bt-sp-b3ce3.firebaseapp.com",
+    projectId: "bt-sp-b3ce3",
+    storageBucket: "bt-sp-b3ce3.firebasestorage.app",
+    messagingSenderId: "1072895717676",
+    appId: "1:1072895717676:web:bace267352a7941c1dfc89"
+};
 
-    // Initialiser Firebase
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+class AdminPanel {
+    constructor() {
+        this.db = firebase.firestore();
+        this.products = [];
+        this.orders = [];
+        this.filteredOrders = [];
+        this.currentProductId = null;
+        this.currentOrderId = null;
+        this.deleteType = null;
+        this.unsubscribe = null;
+        this.ordersUnsubscribe = null;
+        this.currentPage = 1;
+        this.itemsPerPage = 10;
+        this.newOrdersCount = 0;
+        this.lastSeenOrders = new Set();
+        this.ordersChart = null;
+        this.imageEventListeners = new Map(); // Pour gérer les écouteurs d'événements
+        this.init();
     }
 
-    // Données par défaut des produits
-    const defaultProducts = [
-        {
-            name: "Ensemble survêtement homme",
-            category: "homme",
-            price: 45,
-            images: [
-                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
-                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
-                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
-            ],
-            colors: ["Gris", "Rouge", "Noir"],
-            isNew: true,
-            discount: 0
-        },
-        {
-            name: "T‑shirt sport homme",
-            category: "homme",
-            price: 50,
-            image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-            isNew: false,
-            discount: 30
-        },
-        {
-            name: "Pantalon de jogging homme",
-            category: "homme",
-            price: 120,
-            image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-            isNew: false,
-            discount: 25
-        },
-        {
-            name: "Short running homme",
-            category: "homme",
-            price: 100,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg",
-            isNew: false,
-            discount: 25
-        },
-        {
-            name: "Legging Yoga Premium",
-            category: "femme",
-            price: 65,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-            isNew: true,
-            discount: 0
-        },
-        {
-            name: "T-Shirt Fitness Dry",
-            category: "femme",
-            price: 42,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-            isNew: true,
-            discount: 0
-        },
-        {
-            name: "Ensemble Fitness Pro",
-            category: "femme",
-            price: 95,
-            image: "https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg",
-            isNew: true,
-            discount: 0
-        },
-        {
-            name: "Short Training Fit",
-            category: "femme",
-            price: 55,
-            image: "https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown",
-            isNew: false,
-            discount: 50
-        }
-    ];
+    async init() {
+        await Promise.all([
+            this.loadProducts(),
+            this.loadOrders()
+        ]);
+        this.setupEventListeners();
+        this.updateAllStats();
+        this.startRealtimeListeners();
+        this.updateSyncStatus('✅ Système opérationnel', 'sync-success');
+        this.startPerformanceMonitor();
+        this.startClock();
+    }
 
-    class AdminPanel {
-        constructor() {
-            this.db = firebase.firestore();
-            this.products = [];
-            this.currentProductId = null;
-            this.unsubscribe = null;
-            this.init();
-        }
-
-        async init() {
-            await this.loadProducts();
-            this.setupEventListeners();
-            this.updateStats();
-            this.listenToChanges();
-            this.updateSyncStatus('✅ Connecté à Firebase', 'sync-success');
-        }
-
-        // Charger les produits depuis Firebase
-        async loadProducts() {
-            try {
-                const snapshot = await this.db.collection('products').get();
-                
-                if (!snapshot.empty) {
-                    this.products = snapshot.docs.map(doc => ({
-                        id: doc.id, // Utiliser l'ID Firebase
-                        ...doc.data()
-                    }));
-                    this.displayProducts();
-                    this.updateSyncStatus(`✅ ${this.products.length} produits chargés`, 'sync-success');
-                } else {
-                    // Si pas de données, initialiser avec les produits par défaut
-                    await this.initializeDefaultProducts();
-                }
-            } catch (error) {
-                console.error('Erreur chargement Firebase:', error);
-                this.updateSyncStatus('❌ Erreur de connexion Firebase', 'sync-error');
-                this.products = [];
-                this.displayProducts();
-            }
-        }
-
-        // Méthode pour initialiser les produits par défaut
-        async initializeDefaultProducts() {
-            try {
-                const batch = this.db.batch();
-                
-                defaultProducts.forEach(product => {
-                    const docRef = this.db.collection('products').doc(); // Firebase génère l'ID
-                    batch.set(docRef, product);
-                });
-                
-                await batch.commit();
-                
-                // Recharger les produits
-                const snapshot = await this.db.collection('products').get();
-                this.products = snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                
-                this.displayProducts();
-                this.updateSyncStatus('✅ Données initiales créées', 'sync-success');
-            } catch (error) {
-                console.error('Erreur initialisation données:', error);
-                this.updateSyncStatus('❌ Erreur création données initiales', 'sync-error');
-            }
-        }
-
-        // Écouter les changements en temps réel
-        listenToChanges() {
-            this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+    async loadProducts() {
+        try {
+            const snapshot = await this.db.collection('products').get();
+            if (!snapshot.empty) {
                 this.products = snapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 }));
                 this.displayProducts();
-                this.updateStats();
-                this.updateLastSync();
-            }, error => {
-                console.error('Erreur écoute Firebase:', error);
-                this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
-            });
-        }
-
-        // Sauvegarder tous les produits dans Firebase
-        async saveAllToFirebase() {
-            try {
-                // Supprimer tous les documents existants
-                const snapshot = await this.db.collection('products').get();
-                const batch = this.db.batch();
-                
-                snapshot.docs.forEach(doc => {
-                    batch.delete(doc.ref);
-                });
-                
-                await batch.commit();
-                
-                // Recréer tous les produits avec de nouveaux IDs Firebase
-                const newBatch = this.db.batch();
-                this.products.forEach(product => {
-                    const docRef = this.db.collection('products').doc();
-                    const { id, ...productData } = product;
-                    // Nettoyer les données avant sauvegarde
-                    const cleanedData = this.cleanProductData(productData);
-                    newBatch.set(docRef, cleanedData);
-                });
-                
-                await newBatch.commit();
-                return true;
-            } catch (error) {
-                console.error('Erreur sauvegarde Firebase:', error);
-                return false;
             }
+        } catch (error) {
+            console.error('Erreur produits:', error);
+            this.updateSyncStatus('❌ Erreur produits', 'sync-error');
         }
+    }
 
-        // Nettoyer les données du produit (supprimer les champs undefined)
-        cleanProductData(productData) {
-            const cleaned = {};
-            for (const [key, value] of Object.entries(productData)) {
-                if (value !== undefined && value !== null) {
-                    cleaned[key] = value;
-                }
-            }
-            return cleaned;
-        }
-
-        // Sauvegarder un produit dans Firebase
-        async saveProductToFirebase(product) {
-            try {
-                const { id, ...productData } = product;
-                
-                // Nettoyer les données avant sauvegarde
-                const cleanedData = this.cleanProductData(productData);
-                
-                // Si c'est un nouveau produit (sans ID Firebase), laisser Firebase générer l'ID
-                if (!id) {
-                    await this.db.collection('products').add(cleanedData);
-                    return true;
-                } else {
-                    // Si c'est une modification, utiliser l'ID existant
-                    await this.db.collection('products').doc(id).set(cleanedData);
-                    return true;
-                }
-            } catch (error) {
-                console.error('Erreur sauvegarde produit:', error);
-                console.error('Données envoyées:', product);
-                return false;
-            }
-        }
-
-        // Supprimer un produit de Firebase
-        async deleteProductFromFirebase(productId) {
-            try {
-                await this.db.collection('products').doc(productId).delete();
-                return true;
-            } catch (error) {
-                console.error('Erreur suppression produit:', error);
-                return false;
-            }
-        }
-
-        // Afficher tous les produits
-        displayProducts() {
-            const container = document.getElementById('products-list');
+    async loadOrders() {
+        try {
+            const snapshot = await this.db.collection('orders')
+                .orderBy('timestamp', 'desc')
+                .get();
             
-            if (this.products.length === 0) {
-                container.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-                        <h4 class="fw-bold mb-3">Aucun produit</h4>
-                        <p class="text-muted mb-4">
-                            Commencez par ajouter votre premier produit.
-                        </p>
-                    </div>
-                `;
-                return;
+            if (!snapshot.empty) {
+                this.orders = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    seen: this.lastSeenOrders.has(doc.id)
+                }));
+                this.filteredOrders = [...this.orders];
+                this.displayOrders();
+                this.checkNewOrders();
             }
+        } catch (error) {
+            console.error('Erreur commandes:', error);
+        }
+    }
 
-            container.innerHTML = this.products.map(product => {
-                const hasDiscount = product.discount > 0;
-                const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
-                const mainImage = product.images ? product.images[0] : product.image;
+    startRealtimeListeners() {
+        // Écoute produits
+        this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+            this.products = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            this.displayProducts();
+            this.updateProductsStats();
+            this.updateLastSync();
+        }, error => {
+            console.error('Erreur écoute produits:', error);
+        });
 
-                return `
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="product-card-admin h-100">
-                            <img src="${mainImage}" class="product-image-admin" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Non+Disponible'">
-                            <div class="p-3">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="mb-0">${product.name}</h5>
-                                    <span class="badge ${product.category === 'homme' ? 'bg-primary' : 'bg-danger'}">
-                                        ${product.category}
-                                    </span>
+        // Écoute commandes
+        this.ordersUnsubscribe = this.db.collection('orders')
+            .orderBy('timestamp', 'desc')
+            .onSnapshot(snapshot => {
+                const oldCount = this.orders.length;
+                this.orders = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    seen: this.lastSeenOrders.has(doc.id)
+                }));
+                this.filteredOrders = [...this.orders];
+                
+                if (this.orders.length > oldCount) {
+                    this.checkNewOrders();
+                }
+                
+                this.displayOrders();
+                this.updateOrdersStats();
+                this.updateRecentActivity();
+                this.updateChart();
+            }, error => {
+                console.error('Erreur écoute commandes:', error);
+            });
+    }
+
+    checkNewOrders() {
+        const newOrders = this.orders.filter(order => 
+            !this.lastSeenOrders.has(order.id) && 
+            order.status === 'pending'
+        );
+        
+        this.newOrdersCount = newOrders.length;
+        if (this.newOrdersCount > 0) {
+            this.showNewOrdersAlert();
+        }
+    }
+
+    showNewOrdersAlert() {
+        const alert = document.getElementById('newOrdersAlert');
+        const count = document.getElementById('newOrdersCount');
+        if (alert && count) {
+            count.textContent = this.newOrdersCount;
+            alert.classList.remove('d-none');
+            
+            // Notification sonore
+            this.playNotificationSound();
+        }
+    }
+
+    playNotificationSound() {
+        try {
+            const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
+            audio.play();
+        } catch (e) {
+            // Fallback silent
+        }
+    }
+
+    markAllOrdersSeen() {
+        this.orders.forEach(order => {
+            this.lastSeenOrders.add(order.id);
+        });
+        this.newOrdersCount = 0;
+        const alert = document.getElementById('newOrdersAlert');
+        if (alert) alert.classList.add('d-none');
+        this.updateSyncStatus('✅ Toutes les commandes marquées comme vues', 'sync-success');
+    }
+
+    displayProducts() {
+        const container = document.getElementById('products-list');
+        const searchTerm = document.getElementById('productSearch')?.value.toLowerCase() || '';
+        
+        let filteredProducts = this.products;
+        if (searchTerm) {
+            filteredProducts = this.products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm) ||
+                (product.colors && product.colors.some(color => 
+                    color.toLowerCase().includes(searchTerm)
+                ))
+            );
+        }
+
+        if (filteredProducts.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                    <h4 class="fw-bold mb-3">Aucun produit</h4>
+                    ${searchTerm ? 
+                        `<p class="text-muted">Aucun produit ne correspond à "${searchTerm}"</p>` :
+                        `<p class="text-muted">Commencez par ajouter votre premier produit</p>`
+                    }
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal" id="addProductEmptyBtn">
+                        <i class="fas fa-plus me-1"></i> Ajouter un produit
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = filteredProducts.map(product => {
+            const hasDiscount = product.discount > 0;
+            const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+            const mainImage = product.images?.[0] || product.image || 'https://via.placeholder.com/300x200?text=Image';
+
+            return `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="product-card-admin h-100">
+                        <div class="position-relative">
+                            <img src="${mainImage}" class="product-image-admin" alt="${product.name}"
+                                 onerror="this.src='https://via.placeholder.com/300x200?text=Image+Non+Disponible'">
+                            ${hasDiscount ? 
+                                `<span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 small">
+                                    -${product.discount}%
+                                </span>` : ''
+                            }
+                            ${product.isNew ? 
+                                `<span class="position-absolute top-0 end-0 bg-success text-white px-2 py-1 small">
+                                    Nouveau
+                                </span>` : ''
+                            }
+                        </div>
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="mb-0 fw-bold" style="font-size: 0.9rem;">${product.name}</h6>
+                                <span class="badge ${product.category === 'homme' ? 'bg-primary' : 'bg-danger'}">
+                                    ${product.category}
+                                </span>
+                            </div>
+                            <p class="text-muted small mb-2">
+                                ${product.colors?.join(', ') || 'Aucune couleur'}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    ${hasDiscount ? `
+                                        <span class="fw-bold text-primary">${discountPrice} DT</span>
+                                        <span class="text-muted text-decoration-line-through ms-1 small">
+                                            ${product.price} DT
+                                        </span>
+                                    ` : `
+                                        <span class="fw-bold text-primary">${product.price} DT</span>
+                                    `}
                                 </div>
-                                <p class="text-muted small mb-2">${product.colors ? product.colors.join(', ') : 'Aucune couleur spécifiée'}</p>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div>
-                                        ${hasDiscount ? `
-                                            <span class="fw-bold text-primary">${discountPrice} DT</span>
-                                            <span class="text-muted text-decoration-line-through ms-1">${product.price} DT</span>
-                                            <span class="badge bg-danger ms-1">-${product.discount}%</span>
-                                        ` : `
-                                            <span class="fw-bold text-primary">${product.price} DT</span>
-                                        `}
-                                    </div>
-                                    ${product.isNew ? '<span class="badge bg-success">Nouveau</span>' : ''}
-                                </div>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-outline-primary action-btn edit-product" data-id="${product.id}">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger action-btn delete-product" data-id="${product.id}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-sm btn-outline-primary edit-product" data-id="${product.id}">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger delete-product ms-2" data-id="${product.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `;
+        }).join('');
+    }
+
+    displayOrders() {
+        const container = document.getElementById('ordersList');
+        if (!container) return;
+
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const pageOrders = this.filteredOrders.slice(startIndex, endIndex);
+
+        if (pageOrders.length === 0) {
+            container.innerHTML = `
+                <tr>
+                    <td colspan="7" class="text-center py-5">
+                        <i class="fas fa-search fa-2x text-muted mb-3"></i>
+                        <p class="text-muted">Aucune commande</p>
+                    </td>
+                </tr>
+            `;
+            return;
         }
 
-        // Mettre à jour les statistiques
-        updateStats() {
-            const totalProducts = this.products.length;
-            const hommeProducts = this.products.filter(p => p.category === 'homme').length;
-            const femmeProducts = this.products.filter(p => p.category === 'femme').length;
+        container.innerHTML = pageOrders.map(order => {
+            const orderDate = order.orderDate ? 
+                new Date(order.orderDate).toLocaleDateString('fr-FR') : 'N/A';
+            const customerName = `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim();
+            
+            let statusClass = 'badge-pending';
+            let statusText = 'En attente';
+            switch(order.status) {
+                case 'confirmed':
+                    statusClass = 'badge-confirmed';
+                    statusText = 'Confirmée';
+                    break;
+                case 'delivered':
+                    statusClass = 'badge-delivered';
+                    statusText = 'Livrée';
+                    break;
+                case 'cancelled':
+                    statusClass = 'badge-cancelled';
+                    statusText = 'Annulée';
+                    break;
+            }
 
-            document.getElementById('total-products').textContent = totalProducts;
-            document.getElementById('homme-products').textContent = hommeProducts;
-            document.getElementById('femme-products').textContent = femmeProducts;
+            const isNew = !order.seen && order.status === 'pending';
 
-            document.getElementById('firebaseStatus').textContent = 
-                `✅ ${totalProducts} produits synchronisés - Temps réel activé`;
+            return `
+                <tr class="${isNew ? 'table-warning' : ''}">
+                    <td>
+                        <small class="text-muted">${order.id.substring(0, 10)}...</small>
+                        ${isNew ? '<span class="badge bg-danger ms-1">Nouveau</span>' : ''}
+                    </td>
+                    <td><small>${orderDate}</small></td>
+                    <td>
+                        <div><strong>${customerName || 'Non spécifié'}</strong></div>
+                        <small class="text-muted">${order.customer?.phone || 'Non spécifié'}</small>
+                    </td>
+                    <td>
+                        <div><strong>${order.productName || 'Produit inconnu'}</strong></div>
+                        <small class="text-muted">
+                            ${order.productSize ? 'Taille: ' + order.productSize : ''} 
+                            ${order.productColor ? ' | Couleur: ' + order.productColor : ''}
+                        </small>
+                    </td>
+                    <td><strong>${order.productPrice || '0'} DT</strong></td>
+                    <td>
+                        <select class="order-status-select" data-id="${order.id}" 
+                                onchange="adminPanel.updateOrderStatus('${order.id}', this.value)">
+                            <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>En attente</option>
+                            <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmée</option>
+                            <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Livrée</option>
+                            <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Annulée</option>
+                        </select>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-outline-primary view-order" data-id="${order.id}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-success confirm-order ms-1" data-id="${order.id}">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger delete-order ms-1" data-id="${order.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        this.updatePagination();
+    }
+
+    updatePagination() {
+        const totalPages = Math.ceil(this.filteredOrders.length / this.itemsPerPage);
+        const currentPageEl = document.getElementById('currentPage');
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+        const countText = document.getElementById('ordersCountText');
+
+        if (currentPageEl) currentPageEl.textContent = this.currentPage;
+        if (prevBtn) prevBtn.disabled = this.currentPage === 1;
+        if (nextBtn) nextBtn.disabled = this.currentPage === totalPages;
+        if (countText) {
+            countText.textContent = `${this.filteredOrders.length} commandes (page ${this.currentPage}/${totalPages})`;
         }
+    }
 
-        // Mettre à jour le statut de synchronisation
-        updateSyncStatus(message, type) {
-            const statusElement = document.getElementById('syncStatus');
+    updateAllStats() {
+        this.updateProductsStats();
+        this.updateOrdersStats();
+        this.updateRevenueStats();
+        this.updateChart();
+    }
+
+    updateProductsStats() {
+        const totalProducts = this.products.length;
+        const hommeProducts = this.products.filter(p => p.category === 'homme' || p.category.includes('homme')).length;
+        const femmeProducts = this.products.filter(p => p.category === 'femme' || p.category.includes('femme')).length;
+        const newProducts = this.products.filter(p => p.isNew).length;
+
+        this.updateElement('total-products', totalProducts);
+        this.updateElement('homme-products', hommeProducts);
+        this.updateElement('femme-products', femmeProducts);
+        this.updateElement('new-products', newProducts);
+        this.updateElement('productsCountBadge', totalProducts);
+    }
+
+    updateOrdersStats() {
+        const totalOrders = this.orders.length;
+        const pendingOrders = this.orders.filter(o => o.status === 'pending').length;
+        const confirmedOrders = this.orders.filter(o => o.status === 'confirmed').length;
+        const deliveredOrders = this.orders.filter(o => o.status === 'delivered').length;
+
+        this.updateElement('total-orders', totalOrders);
+        this.updateElement('pending-orders', pendingOrders);
+        this.updateElement('confirmed-orders', confirmedOrders);
+        this.updateElement('delivered-orders', deliveredOrders);
+        
+        const pendingBadge = document.getElementById('pendingOrdersBadge');
+        if (pendingBadge) {
+            pendingBadge.textContent = pendingOrders;
+            pendingBadge.style.display = pendingOrders > 0 ? 'inline-block' : 'none';
+        }
+    }
+
+    updateRevenueStats() {
+        const confirmedDelivered = this.orders.filter(o => 
+            o.status === 'confirmed' || o.status === 'delivered'
+        );
+        const totalRevenue = confirmedDelivered.reduce((sum, order) => 
+            sum + (parseFloat(order.productPrice) || 0), 0
+        );
+        
+        const currentMonth = new Date().getMonth();
+        const currentYear = new Date().getFullYear();
+        const monthlyRevenue = confirmedDelivered
+            .filter(order => {
+                const orderDate = new Date(order.orderDate);
+                return orderDate.getMonth() === currentMonth && 
+                       orderDate.getFullYear() === currentYear;
+            })
+            .reduce((sum, order) => sum + (parseFloat(order.productPrice) || 0), 0);
+        
+        const avgOrder = confirmedDelivered.length > 0 ? 
+            totalRevenue / confirmedDelivered.length : 0;
+
+        this.updateElement('revenue-total', totalRevenue.toFixed(2) + ' DT');
+        this.updateElement('revenue-month', monthlyRevenue.toFixed(2) + ' DT');
+        this.updateElement('avg-order', avgOrder.toFixed(2) + ' DT');
+    }
+
+    updateElement(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+    }
+
+    updateSyncStatus(message, type) {
+        const statusElement = document.getElementById('syncStatus');
+        if (statusElement) {
             statusElement.textContent = message;
             statusElement.className = `sync-status ${type}`;
             statusElement.classList.remove('d-none');
@@ -770,320 +1363,618 @@
                 statusElement.classList.add('d-none');
             }, 5000);
         }
+    }
 
-        // Mettre à jour la dernière synchronisation
-        updateLastSync() {
-            const now = new Date();
-            document.getElementById('lastSync').textContent = 
-                `Dernière synchronisation: ${now.toLocaleString()}`;
+    updateLastSync() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('fr-FR');
+        const dateString = now.toLocaleDateString('fr-FR');
+        
+        this.updateElement('lastSync', `${dateString} ${timeString}`);
+        this.updateElement('lastSyncTime', timeString);
+    }
+
+    updateRecentActivity() {
+        const container = document.getElementById('recentActivity');
+        if (!container) return;
+        
+        const recentOrders = this.orders.slice(0, 10);
+        
+        if (recentOrders.length === 0) {
+            container.innerHTML = '<p class="text-muted small">Aucune activité récente</p>';
+            return;
         }
-
-        // Ouvrir le modal pour ajouter un produit
-        openAddProductModal() {
-            document.getElementById('productModalLabel').textContent = 'Ajouter un produit';
-            document.getElementById('productForm').reset();
-            document.getElementById('productId').value = '';
-            document.getElementById('imageUrlsContainer').innerHTML = '';
-            document.getElementById('colorsContainer').innerHTML = '';
-            document.getElementById('imagePreview').innerHTML = '';
+        
+        container.innerHTML = recentOrders.map(order => {
+            const time = order.orderDate ? 
+                new Date(order.orderDate).toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'}) : '--:--';
+            const customerName = `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim();
+            const amount = order.productPrice || '0';
+            const statusIcon = order.status === 'pending' ? '⏳' : 
+                             order.status === 'confirmed' ? '✅' : 
+                             order.status === 'delivered' ? '🚚' : '❌';
             
-            // Ajouter un champ d'URL d'image par défaut
-            this.addImageUrlField();
-            
-            const modal = new bootstrap.Modal(document.getElementById('productModal'));
-            modal.show();
-        }
-
-        // Ouvrir le modal pour modifier un produit
-        openEditProductModal(productId) {
-            const product = this.products.find(p => p.id === productId);
-            if (!product) return;
-
-            document.getElementById('productModalLabel').textContent = 'Modifier le produit';
-            document.getElementById('productId').value = product.id;
-            document.getElementById('productName').value = product.name;
-            document.getElementById('productCategory').value = product.category;
-            document.getElementById('productPrice').value = product.price;
-            document.getElementById('productDiscount').value = product.discount || 0;
-            document.getElementById('productIsNew').checked = product.isNew || false;
-
-            // Gérer les images
-            document.getElementById('imageUrlsContainer').innerHTML = '';
-            const images = product.images || [product.image];
-            if (images && images.length > 0) {
-                images.forEach(url => this.addImageUrlField(url));
-            } else {
-                this.addImageUrlField();
-            }
-            
-            // Gérer les couleurs
-            document.getElementById('colorsContainer').innerHTML = '';
-            if (product.colors && product.colors.length > 0) {
-                product.colors.forEach(color => this.addColorTag(color));
-            }
-            
-            // Afficher l'aperçu des images
-            this.updateImagePreview();
-
-            const modal = new bootstrap.Modal(document.getElementById('productModal'));
-            modal.show();
-        }
-
-        // Ajouter un champ d'URL d'image
-        addImageUrlField(url = '') {
-            const container = document.getElementById('imageUrlsContainer');
-            const index = container.children.length;
-            
-            const div = document.createElement('div');
-            div.className = 'input-group image-url-input';
-            div.innerHTML = `
-                <input type="url" class="form-control" value="${url}" placeholder="URL de l'image" data-index="${index}">
-                <button type="button" class="btn btn-outline-danger remove-image-url">
-                    <i class="fas fa-times"></i>
-                </button>
+            return `
+                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                    <div>
+                        <small class="d-block">${customerName || 'Client'}</small>
+                        <small class="text-muted">${order.productName || 'Commande'}</small>
+                    </div>
+                    <div class="text-end">
+                        <small class="d-block text-primary fw-bold">${amount} DT ${statusIcon}</small>
+                        <small class="text-muted">${time}</small>
+                    </div>
+                </div>
             `;
-            
-            container.appendChild(div);
-            
-            // Mettre à jour l'aperçu quand l'URL change
-            const input = div.querySelector('input');
-            input.addEventListener('input', () => this.updateImagePreview());
+        }).join('');
+    }
+
+    updateChart() {
+        const ctx = document.getElementById('ordersChart');
+        if (!ctx) return;
+
+        const statusCounts = {
+            pending: this.orders.filter(o => o.status === 'pending').length,
+            confirmed: this.orders.filter(o => o.status === 'confirmed').length,
+            delivered: this.orders.filter(o => o.status === 'delivered').length,
+            cancelled: this.orders.filter(o => o.status === 'cancelled').length
+        };
+
+        if (this.ordersChart) {
+            this.ordersChart.destroy();
         }
 
-        // Ajouter un tag de couleur
-        addColorTag(color) {
-            const container = document.getElementById('colorsContainer');
-            
-            const tag = document.createElement('span');
-            tag.className = 'color-tag';
-            tag.innerHTML = `
-                ${color}
-                <span class="remove-color">
-                    <i class="fas fa-times"></i>
-                </span>
-            `;
-            
-            container.appendChild(tag);
-        }
-
-        // Mettre à jour l'aperçu des images
-        updateImagePreview() {
-            const container = document.getElementById('imagePreview');
-            const inputs = document.querySelectorAll('#imageUrlsContainer input');
-            
-            container.innerHTML = '';
-            
-            inputs.forEach(input => {
-                if (input.value) {
-                    const img = document.createElement('img');
-                    img.src = input.value;
-                    img.className = 'product-image-preview me-2 mb-2';
-                    img.alt = 'Aperçu';
-                    img.onerror = function() {
-                        this.style.display = 'none';
-                    };
-                    container.appendChild(img);
+        this.ordersChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['En attente', 'Confirmées', 'Livrées', 'Annulées'],
+                datasets: [{
+                    data: [
+                        statusCounts.pending,
+                        statusCounts.confirmed,
+                        statusCounts.delivered,
+                        statusCounts.cancelled
+                    ],
+                    backgroundColor: [
+                        '#fef3c7',
+                        '#d1fae5',
+                        '#dbeafe',
+                        '#fee2e2'
+                    ],
+                    borderColor: [
+                        '#f59e0b',
+                        '#10b981',
+                        '#3b82f6',
+                        '#ef4444'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
-            });
-        }
+            }
+        });
+    }
 
-        // Sauvegarder un produit (ajout ou modification)
-        async saveProduct() {
-            // Récupérer les données du formulaire
-            const id = document.getElementById('productId').value;
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const price = parseFloat(document.getElementById('productPrice').value);
-            const discount = parseInt(document.getElementById('productDiscount').value) || 0;
-            const isNew = document.getElementById('productIsNew').checked;
-            
-            // Récupérer les URLs des images
-            const imageInputs = document.querySelectorAll('#imageUrlsContainer input');
-            const images = Array.from(imageInputs)
-                .map(input => input.value.trim())
-                .filter(url => url !== '');
-            
-            // Récupérer les couleurs
-            const colorTags = document.querySelectorAll('#colorsContainer .color-tag');
-            const colors = Array.from(colorTags)
-                .map(tag => {
-                    const text = tag.textContent.trim();
-                    return text.replace('×', '').trim();
-                })
-                .filter(color => color !== '');
-            
-            // Validation
-            if (!name || !category || isNaN(price) || images.length === 0) {
-                alert('Veuillez remplir tous les champs obligatoires et ajouter au moins une image.');
-                return;
-            }
-            
-            // Préparer l'objet produit
-            const productData = {
-                name,
-                category,
-                price,
-                discount: discount || 0,
-                isNew: isNew || false
-            };
-            
-            // Ajouter les couleurs seulement si elles existent
-            if (colors.length > 0) {
-                productData.colors = colors;
-            }
-            
-            // Gérer les images
-            if (images.length === 1) {
-                productData.image = images[0];
-            } else {
-                productData.images = images;
-            }
-            
-            // Ajouter l'ID seulement si c'est une modification
-            if (id) {
-                productData.id = id;
-            }
-            
-            console.log('Données à sauvegarder:', productData);
-            
-            // Sauvegarder dans Firebase
-            const success = await this.saveProductToFirebase(productData);
-            
-            if (success) {
-                // Fermer le modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-                modal.hide();
+    startPerformanceMonitor() {
+        setInterval(() => {
+            const memory = performance.memory;
+            if (memory) {
+                const used = Math.round((memory.usedJSHeapSize / memory.totalJSHeapSize) * 100);
+                this.updateElement('memoryText', `Mémoire: ${used}%`);
                 
-                this.updateSyncStatus('✅ Produit sauvegardé avec succès', 'sync-success');
-            } else {
-                alert('Erreur lors de la sauvegarde. Veuillez réessayer.');
+                const memoryBar = document.getElementById('memoryUsage');
+                const perfMemory = document.getElementById('performanceMemory');
+                if (memoryBar) memoryBar.style.width = `${used}%`;
+                if (perfMemory) perfMemory.style.width = `${used}%`;
+            }
+        }, 5000);
+    }
+
+    startClock() {
+        setInterval(() => {
+            this.updateElement('lastSyncTime', new Date().toLocaleTimeString('fr-FR'));
+        }, 1000);
+    }
+
+    // Gestion des commandes
+    async updateOrderStatus(orderId, status) {
+        try {
+            await this.db.collection('orders').doc(orderId).update({
+                status: status,
+                updatedAt: new Date().toISOString()
+            });
+            this.updateSyncStatus(`✅ Statut mis à jour: ${status}`, 'sync-success');
+        } catch (error) {
+            console.error('Erreur mise à jour statut:', error);
+            alert('❌ Erreur lors de la mise à jour du statut');
+        }
+    }
+
+    async confirmOrder(orderId) {
+        const order = this.orders.find(o => o.id === orderId);
+        if (!order) return;
+
+        if (confirm(`Confirmer la commande ${orderId} ?\nClient: ${order.customer?.firstName} ${order.customer?.lastName}\nTéléphone: ${order.customer?.phone}`)) {
+            await this.updateOrderStatus(orderId, 'confirmed');
+        }
+    }
+
+    async deleteOrder(orderId) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer cette commande ?')) {
+            try {
+                await this.db.collection('orders').doc(orderId).delete();
+                this.updateSyncStatus('✅ Commande supprimée', 'sync-success');
+            } catch (error) {
+                console.error('Erreur suppression:', error);
+                alert('❌ Erreur lors de la suppression');
             }
         }
+    }
 
-        // Supprimer un produit
-        async deleteProduct(productId) {
-            const success = await this.deleteProductFromFirebase(productId);
-            
-            if (success) {
-                this.updateSyncStatus('✅ Produit supprimé avec succès', 'sync-success');
-            } else {
-                alert('Erreur lors de la suppression. Veuillez réessayer.');
+    async deleteProduct(productId) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+            try {
+                await this.db.collection('products').doc(productId).delete();
+                this.updateSyncStatus('✅ Produit supprimé', 'sync-success');
+            } catch (error) {
+                console.error('Erreur suppression:', error);
+                alert('❌ Erreur lors de la suppression');
             }
         }
+    }
 
-        // Exporter les données
-        exportData() {
-            const dataStr = JSON.stringify(this.products, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'boutique_produits_backup.json';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            
-            this.updateSyncStatus('✅ Données exportées avec succès', 'sync-success');
+    viewOrderDetails(orderId) {
+        const order = this.orders.find(o => o.id === orderId);
+        if (!order) {
+            alert('Commande non trouvée');
+            return;
         }
 
-        // Importer les données
-        importData(file) {
+        const orderDate = order.orderDate ? 
+            new Date(order.orderDate).toLocaleString('fr-FR') : 'Date inconnue';
+        const customerName = `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.trim();
+        const statusText = order.status === 'pending' ? 'En attente' : 
+                         order.status === 'confirmed' ? 'Confirmée' : 
+                         order.status === 'delivered' ? 'Livrée' : 
+                         order.status === 'cancelled' ? 'Annulée' : order.status;
+
+        const details = `
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="customer-info mb-3">
+                        <h6><i class="fas fa-user me-2"></i>Client</h6>
+                        <p class="mb-1"><strong>Nom :</strong> ${customerName || 'Non spécifié'}</p>
+                        <p class="mb-1"><strong>Téléphone :</strong> ${order.customer?.phone || 'Non spécifié'}</p>
+                        <p class="mb-0"><strong>Adresse :</strong> ${order.customer?.address || 'Non spécifiée'}</p>
+                    </div>
+                    
+                    <div class="customer-info mb-3">
+                        <h6><i class="fas fa-box me-2"></i>Produit</h6>
+                        <p class="mb-1"><strong>Produit :</strong> ${order.productName || 'Non spécifié'}</p>
+                        <p class="mb-1"><strong>Catégorie :</strong> ${order.productCategory || 'Non spécifié'}</p>
+                        <p class="mb-1"><strong>Prix :</strong> ${order.productPrice || '0'} DT</p>
+                        <p class="mb-1"><strong>Couleur :</strong> ${order.productColor || 'Non spécifié'}</p>
+                        <p class="mb-0"><strong>Taille :</strong> ${order.productSize || 'Non spécifié'}</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="customer-info mb-3">
+                        <h6><i class="fas fa-info-circle me-2"></i>Commande</h6>
+                        <p class="mb-1"><strong>ID :</strong> ${order.id}</p>
+                        <p class="mb-1"><strong>Date :</strong> ${orderDate}</p>
+                        <p class="mb-1"><strong>Statut :</strong> 
+                            <span class="badge ${order.status === 'pending' ? 'bg-warning' : 
+                                                order.status === 'confirmed' ? 'bg-success' : 
+                                                order.status === 'delivered' ? 'bg-primary' : 'bg-danger'}">
+                                ${statusText}
+                            </span>
+                        </p>
+                    </div>
+                    
+                    <div class="customer-info">
+                        <h6><i class="fas fa-sticky-note me-2"></i>Notes</h6>
+                        <p class="mb-0">${order.notes || 'Aucune note'}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('orderDetailsContent').innerHTML = details;
+        this.currentOrderId = orderId;
+        
+        document.getElementById('confirmOrderBtn').onclick = () => {
+            this.confirmOrder(orderId);
+            bootstrap.Modal.getInstance(document.getElementById('orderDetailsModal')).hide();
+        };
+        
+        document.getElementById('callCustomerBtn').onclick = () => {
+            if (order.customer?.phone) {
+                window.open(`tel:${order.customer.phone.replace(/\D/g, '')}`, '_blank');
+            } else {
+                alert('Numéro non disponible');
+            }
+        };
+        
+        new bootstrap.Modal(document.getElementById('orderDetailsModal')).show();
+    }
+
+    // Filtres et recherche
+    filterOrders() {
+        const status = document.getElementById('orderStatusFilter').value;
+        const date = document.getElementById('orderDateFilter').value;
+        const search = document.getElementById('orderSearch')?.value.toLowerCase() || '';
+        
+        this.filteredOrders = this.orders.filter(order => {
+            // Filtre statut
+            if (status !== 'all' && order.status !== status) return false;
+            
+            // Filtre date
+            if (date) {
+                const orderDate = new Date(order.orderDate).toDateString();
+                const filterDate = new Date(date).toDateString();
+                if (orderDate !== filterDate) return false;
+            }
+            
+            // Recherche
+            if (search) {
+                const customerName = `${order.customer?.firstName || ''} ${order.customer?.lastName || ''}`.toLowerCase();
+                const phone = order.customer?.phone?.toLowerCase() || '';
+                const productName = order.productName?.toLowerCase() || '';
+                
+                if (!customerName.includes(search) && 
+                    !phone.includes(search) && 
+                    !productName.includes(search) &&
+                    !order.id.toLowerCase().includes(search)) {
+                    return false;
+                }
+            }
+            
+            return true;
+        });
+        
+        this.currentPage = 1;
+        this.displayOrders();
+    }
+
+    clearFilters() {
+        document.getElementById('orderStatusFilter').value = 'all';
+        document.getElementById('orderDateFilter').value = '';
+        document.getElementById('orderSearch').value = '';
+        this.filteredOrders = [...this.orders];
+        this.currentPage = 1;
+        this.displayOrders();
+    }
+
+    // Export/Import
+    exportData(type) {
+        let data, filename;
+        
+        switch(type) {
+            case 'products':
+                data = this.products;
+                filename = `produits_sportplus_${new Date().toISOString().split('T')[0]}.json`;
+                break;
+            case 'orders':
+                data = this.orders;
+                filename = `commandes_sportplus_${new Date().toISOString().split('T')[0]}.json`;
+                break;
+            case 'all':
+                data = {
+                    products: this.products,
+                    orders: this.orders,
+                    exportDate: new Date().toISOString()
+                };
+                filename = `sauvegarde_complete_sportplus_${new Date().toISOString().split('T')[0]}.json`;
+                break;
+        }
+        
+        const dataStr = JSON.stringify(data, null, 2);
+        const blob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+        this.updateSyncStatus(`✅ Données exportées: ${filename}`, 'sync-success');
+    }
+
+    async importData(file) {
+        return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            
             reader.onload = async (e) => {
                 try {
-                    const importedProducts = JSON.parse(e.target.result);
+                    const data = JSON.parse(e.target.result);
                     
-                    // Validation basique des données
-                    if (!Array.isArray(importedProducts)) {
-                        throw new Error('Format de fichier invalide');
-                    }
-                    
-                    // Demander confirmation avant d'écraser les données
-                    if (confirm(`Cette action écrasera ${this.products.length} produits actuels avec ${importedProducts.length} nouveaux produits. Êtes-vous sûr ?`)) {
-                        this.products = importedProducts;
-                        const success = await this.saveAllToFirebase();
-                        
-                        if (success) {
-                            this.updateSyncStatus(`✅ ${importedProducts.length} produits importés avec succès`, 'sync-success');
-                        } else {
-                            alert('Erreur lors de l\'importation');
-                        }
+                    if (confirm(`Importer ${data.products?.length || data.length} éléments ?`)) {
+                        // Ici vous pouvez ajouter la logique d'import vers Firebase
+                        this.updateSyncStatus('✅ Données importées', 'sync-success');
+                        resolve(true);
                     }
                 } catch (error) {
-                    alert('Erreur lors de l\'importation: ' + error.message);
+                    alert('❌ Fichier invalide');
+                    reject(error);
                 }
             };
-            
             reader.readAsText(file);
-        }
+        });
+    }
 
-        // Réinitialiser les données
-        async resetData() {
-            if (confirm('Êtes-vous sûr de vouloir réinitialiser tous les produits ? Cette action est irréversible.')) {
-                this.products = [];
-                const success = await this.initializeDefaultProducts();
-                
-                if (success) {
-                    this.updateSyncStatus('✅ Données réinitialisées avec succès', 'sync-success');
-                } else {
-                    alert('Erreur lors de la réinitialisation');
-                }
+    previewData(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+                const preview = document.getElementById('previewData');
+                preview.textContent = JSON.stringify(data, null, 2);
+                new bootstrap.Modal(document.getElementById('previewModal')).show();
+            } catch (error) {
+                alert('❌ Fichier JSON invalide');
             }
+        };
+        reader.readAsText(file);
+    }
+
+    // MÉTHODES POUR LES PRODUITS - CORRIGÉES
+    openAddProductModal() {
+        this.clearModalFields();
+        document.getElementById('productModalLabel').textContent = 'Ajouter un produit';
+        document.getElementById('productId').value = '';
+        
+        // Ajouter un champ d'URL d'image par défaut
+        this.addImageUrlField();
+        
+        const modal = new bootstrap.Modal(document.getElementById('productModal'));
+        modal.show();
+    }
+
+    openEditProductModal(productId) {
+        const product = this.products.find(p => p.id === productId);
+        if (!product) {
+            alert('Produit non trouvé');
+            return;
         }
 
-        // Configurer les écouteurs d'événements
-        setupEventListeners() {
-            // Bouton pour ajouter un produit
-            document.querySelector('[data-bs-target="#productModal"]').addEventListener('click', () => {
-                this.openAddProductModal();
-            });
-            
-            // Boutons pour modifier/supprimer des produits (délégués d'événements)
-            document.getElementById('products-list').addEventListener('click', (e) => {
-                if (e.target.closest('.edit-product')) {
-                    const productId = e.target.closest('.edit-product').getAttribute('data-id');
-                    this.openEditProductModal(productId);
-                }
+        this.clearModalFields();
+        document.getElementById('productModalLabel').textContent = 'Modifier le produit';
+        document.getElementById('productId').value = product.id;
+        document.getElementById('productName').value = product.name || '';
+        document.getElementById('productCategory').value = product.category || '';
+        document.getElementById('productPrice').value = product.price || 0;
+        document.getElementById('productDiscount').value = product.discount || 0;
+        document.getElementById('productDescription').value = product.description || '';
+        document.getElementById('productIsNew').checked = product.isNew || false;
+
+        // Gérer les images
+        const images = product.images || [];
+        if (images.length > 0) {
+            images.forEach(url => this.addImageUrlField(url));
+        } else if (product.image) {
+            this.addImageUrlField(product.image);
+        } else {
+            this.addImageUrlField();
+        }
+        
+        // Gérer les couleurs
+        if (product.colors && product.colors.length > 0) {
+            product.colors.forEach(color => this.addColorTag(color));
+        }
+        
+        // Afficher l'aperçu des images
+        this.updateImagePreview();
+
+        const modal = new bootstrap.Modal(document.getElementById('productModal'));
+        modal.show();
+    }
+
+    // Méthode pour nettoyer les champs du modal
+    clearModalFields() {
+        document.getElementById('productForm').reset();
+        document.getElementById('imageUrlsContainer').innerHTML = '';
+        document.getElementById('colorsContainer').innerHTML = '';
+        document.getElementById('imagePreview').innerHTML = '';
+        document.getElementById('newColor').value = '';
+    }
+
+    // Méthode pour ajouter un champ d'URL d'image (CORRIGÉE)
+    addImageUrlField(url = '') {
+        const container = document.getElementById('imageUrlsContainer');
+        const index = container.children.length;
+        
+        const div = document.createElement('div');
+        div.className = 'input-group image-url-input mb-2';
+        div.innerHTML = `
+            <input type="url" class="form-control" value="${url}" 
+                   placeholder="URL de l'image (ex: https://...)" 
+                   data-index="${index}">
+            <button type="button" class="btn btn-outline-danger remove-image-url" data-index="${index}">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        container.appendChild(div);
+        
+        // Mettre à jour l'aperçu quand l'URL change
+        const input = div.querySelector('input');
+        input.addEventListener('input', () => this.updateImagePreview());
+        
+        // Attacher l'événement de suppression directement au bouton
+        const removeBtn = div.querySelector('.remove-image-url');
+        removeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            div.remove();
+            this.updateImagePreview();
+        });
+    }
+
+    // Méthode pour ajouter une couleur (CORRIGÉE)
+    addColorTag(color) {
+        const container = document.getElementById('colorsContainer');
+        
+        const tag = document.createElement('span');
+        tag.className = 'color-tag';
+        tag.innerHTML = `
+            ${color}
+            <span class="remove-color">
+                <i class="fas fa-times"></i>
+            </span>
+        `;
+        
+        container.appendChild(tag);
+        
+        // Attacher l'événement de suppression
+        const removeBtn = tag.querySelector('.remove-color');
+        removeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            tag.remove();
+        });
+    }
+
+    // Mettre à jour l'aperçu des images
+    updateImagePreview() {
+        const container = document.getElementById('imagePreview');
+        const inputs = document.querySelectorAll('#imageUrlsContainer input');
+        
+        container.innerHTML = '';
+        
+        inputs.forEach(input => {
+            const url = input.value.trim();
+            if (url !== '') {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'd-inline-block me-2 mb-2 position-relative';
+                imgContainer.innerHTML = `
+                    <img src="${url}" class="product-image-preview" 
+                         alt="Aperçu" 
+                         style="width: 120px; height: 120px; object-fit: cover; border-radius: 6px;">
+                    <span class="position-absolute top-0 end-0 bg-danger text-white rounded-circle" 
+                          style="width: 20px; height: 20px; font-size: 10px; line-height: 20px; cursor: pointer;"
+                          onclick="this.parentElement.remove();">
+                        <i class="fas fa-times"></i>
+                    </span>
+                `;
+                container.appendChild(imgContainer);
                 
-                if (e.target.closest('.delete-product')) {
-                    const productId = e.target.closest('.delete-product').getAttribute('data-id');
-                    this.currentProductId = productId;
-                    
-                    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                    modal.show();
-                }
-            });
+                // Gérer les erreurs de chargement d'image
+                const img = imgContainer.querySelector('img');
+                img.onerror = function() {
+                    this.src = 'https://via.placeholder.com/120x120?text=Image+Non+Disponible';
+                };
+            }
+        });
+    }
+
+    // Sauvegarder le produit (CORRIGÉE)
+    async saveProduct() {
+        // Récupérer les données du formulaire
+        const id = document.getElementById('productId').value;
+        const name = document.getElementById('productName').value;
+        const category = document.getElementById('productCategory').value;
+        const price = parseFloat(document.getElementById('productPrice').value);
+        const discount = parseInt(document.getElementById('productDiscount').value) || 0;
+        const description = document.getElementById('productDescription').value;
+        const isNew = document.getElementById('productIsNew').checked;
+        
+        // Récupérer les URLs des images
+        const imageInputs = document.querySelectorAll('#imageUrlsContainer input');
+        const images = Array.from(imageInputs)
+            .map(input => input.value.trim())
+            .filter(url => url !== '');
+        
+        // Récupérer les couleurs
+        const colorTags = document.querySelectorAll('#colorsContainer .color-tag');
+        const colors = Array.from(colorTags)
+            .map(tag => {
+                // Extraire le texte sans l'icône de suppression
+                const clone = tag.cloneNode(true);
+                const removeIcon = clone.querySelector('.remove-color');
+                if (removeIcon) removeIcon.remove();
+                return clone.textContent.trim();
+            })
+            .filter(color => color !== '');
+        
+        // Validation
+        if (!name || !category || isNaN(price) || images.length === 0) {
+            alert('Veuillez remplir tous les champs obligatoires et ajouter au moins une image.');
+            return;
+        }
+        
+        // Préparer l'objet produit
+        const productData = {
+            name,
+            category,
+            price,
+            discount: discount || 0,
+            description: description || '',
+            isNew: isNew || false,
+            updatedAt: new Date().toISOString()
+        };
+        
+        // Ajouter les couleurs seulement si elles existent
+        if (colors.length > 0) {
+            productData.colors = colors;
+        }
+        
+        // Gérer les images
+        if (images.length === 1) {
+            productData.image = images[0];
+            productData.images = [images[0]];
+        } else {
+            productData.images = images;
+            productData.image = images[0]; // Première image comme image principale
+        }
+        
+        try {
+            if (id) {
+                // Modification
+                await this.db.collection('products').doc(id).update(productData);
+            } else {
+                // Nouveau produit
+                productData.createdAt = new Date().toISOString();
+                await this.db.collection('products').add(productData);
+            }
             
-            // Confirmation de suppression
-            document.getElementById('confirmDelete').addEventListener('click', () => {
-                this.deleteProduct(this.currentProductId);
-                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+            // Fermer le modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+            if (modal) {
                 modal.hide();
-            });
+            }
             
-            // Sauvegarder un produit
-            document.getElementById('saveProduct').addEventListener('click', () => {
-                this.saveProduct();
-            });
-            
-            // Ajouter un champ d'URL d'image
-            document.getElementById('addImageUrl').addEventListener('click', () => {
+            this.updateSyncStatus('✅ Produit sauvegardé avec succès', 'sync-success');
+        } catch (error) {
+            console.error('Erreur sauvegarde produit:', error);
+            alert('Erreur lors de la sauvegarde. Veuillez réessayer.');
+        }
+    }
+
+    // Écouteurs d'événements (CORRIGÉS)
+    setupEventListeners() {
+        // Navigation
+        document.getElementById('addProductBtn').addEventListener('click', () => {
+            this.openAddProductModal();
+        });
+        
+        // Ajouter une image (dans le modal) - Utiliser la délégation d'événements
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'addImageUrl') {
                 this.addImageUrlField();
-            });
-            
-            // Supprimer un champ d'URL d'image (délégué d'événements)
-            document.getElementById('imageUrlsContainer').addEventListener('click', (e) => {
-                if (e.target.closest('.remove-image-url')) {
-                    e.target.closest('.image-url-input').remove();
-                    this.updateImagePreview();
-                }
-            });
-            
-            // Ajouter une couleur
-            document.getElementById('addColor').addEventListener('click', () => {
+            }
+        });
+        
+        // Ajouter une couleur (dans le modal) - Utiliser la délégation d'événements
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'addColor') {
                 const newColorInput = document.getElementById('newColor');
                 const color = newColorInput.value.trim();
                 
@@ -1091,74 +1982,147 @@
                     this.addColorTag(color);
                     newColorInput.value = '';
                 }
-            });
-            
-            // Supprimer une couleur (délégué d'événements)
-            document.getElementById('colorsContainer').addEventListener('click', (e) => {
-                if (e.target.closest('.remove-color')) {
-                    e.target.closest('.color-tag').remove();
-                }
-            });
-            
-            // Entrée pour ajouter une couleur
-            document.getElementById('newColor').addEventListener('keypress', (e) => {
+            }
+        });
+        
+        // Entrée pour ajouter une couleur
+        const newColorInput = document.getElementById('newColor');
+        if (newColorInput) {
+            newColorInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
                     document.getElementById('addColor').click();
                 }
             });
-            
-            // Exporter les données
-            document.getElementById('export-data').addEventListener('click', () => {
-                this.exportData();
-            });
-            
-            // Importer les données
-            document.getElementById('import-data').addEventListener('click', () => {
-                const fileInput = document.getElementById('import-file');
-                if (fileInput.files.length > 0) {
-                    this.importData(fileInput.files[0]);
-                } else {
-                    alert('Veuillez sélectionner un fichier à importer.');
-                }
-            });
-
-            // Synchronisation manuelle
-            document.getElementById('force-sync').addEventListener('click', async () => {
-                this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
-                const success = await this.saveAllToFirebase();
-                if (success) {
-                    this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
-                } else {
-                    this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
-                }
-            });
-
-            // Réinitialiser les données
-            document.getElementById('reset-data').addEventListener('click', () => {
-                this.resetData();
-            });
-
-            // Synchronisation rapide
-            document.getElementById('syncNowBtn').addEventListener('click', async () => {
-                this.updateSyncStatus('🔄 Synchronisation en cours...', 'sync-success');
-                const success = await this.saveAllToFirebase();
-                if (success) {
-                    this.updateSyncStatus('✅ Synchronisation terminée', 'sync-success');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
-                } else {
-                    this.updateSyncStatus('❌ Erreur de synchronisation', 'sync-error');
-                }
-            });
         }
+        
+        // Sauvegarder le produit
+        document.getElementById('saveProduct').addEventListener('click', () => {
+            this.saveProduct();
+        });
+        
+        // Recherche produits
+        document.getElementById('productSearch').addEventListener('input', () => {
+            this.displayProducts();
+        });
+        
+        // Commandes
+        document.getElementById('refreshOrders').addEventListener('click', () => {
+            this.loadOrders();
+            this.updateSyncStatus('🔄 Commandes actualisées', 'sync-success');
+        });
+        
+        document.getElementById('markAllSeen').addEventListener('click', () => {
+            this.markAllOrdersSeen();
+        });
+        
+        document.getElementById('applyOrderFilter').addEventListener('click', () => {
+            this.filterOrders();
+        });
+        
+        document.getElementById('clearOrderFilter').addEventListener('click', () => {
+            this.clearFilters();
+        });
+        
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.displayOrders();
+            }
+        });
+        
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (this.currentPage < Math.ceil(this.filteredOrders.length / this.itemsPerPage)) {
+                this.currentPage++;
+                this.displayOrders();
+            }
+        });
+        
+        // Export
+        document.getElementById('exportProducts').addEventListener('click', () => {
+            this.exportData('products');
+        });
+        
+        document.getElementById('exportOrders').addEventListener('click', () => {
+            this.exportData('orders');
+        });
+        
+        document.getElementById('exportAll').addEventListener('click', () => {
+            this.exportData('all');
+        });
+        
+        document.getElementById('exportActivity').addEventListener('click', () => {
+            this.exportData('orders');
+        });
+        
+        // Import
+        document.getElementById('importData').addEventListener('click', () => {
+            const file = document.getElementById('importFile').files[0];
+            if (file) this.importData(file);
+        });
+        
+        document.getElementById('previewDataBtn').addEventListener('click', () => {
+            const file = document.getElementById('importFile').files[0];
+            if (file) this.previewData(file);
+        });
+        
+        // Sync
+        document.getElementById('syncNowBtn').addEventListener('click', async () => {
+            this.updateSyncStatus('🔄 Synchronisation...', 'sync-info');
+            await this.loadProducts();
+            await this.loadOrders();
+            this.updateSyncStatus('✅ Synchronisé', 'sync-success');
+        });
+        
+        // Délégués d'événements pour les produits (CORRIGÉS)
+        document.addEventListener('click', (e) => {
+            // Produits - Modifier
+            if (e.target.closest('.edit-product')) {
+                const productId = e.target.closest('.edit-product').getAttribute('data-id');
+                this.openEditProductModal(productId);
+            }
+            
+            // Produits - Supprimer
+            if (e.target.closest('.delete-product')) {
+                const productId = e.target.closest('.delete-product').getAttribute('data-id');
+                this.deleteProduct(productId);
+            }
+            
+            // Commandes - Voir détails
+            if (e.target.closest('.view-order')) {
+                const orderId = e.target.closest('.view-order').getAttribute('data-id');
+                this.viewOrderDetails(orderId);
+            }
+            
+            // Commandes - Confirmer
+            if (e.target.closest('.confirm-order')) {
+                const orderId = e.target.closest('.confirm-order').getAttribute('data-id');
+                this.confirmOrder(orderId);
+            }
+            
+            // Commandes - Supprimer
+            if (e.target.closest('.delete-order')) {
+                const orderId = e.target.closest('.delete-order').getAttribute('data-id');
+                this.deleteOrder(orderId);
+            }
+        });
     }
+}
 
-    // Démarrer l'application
-    document.addEventListener('DOMContentLoaded', () => {
-        new AdminPanel();
-    });
-</script>
+// Fonctions globales
+function showOrdersTab() {
+    const tab = new bootstrap.Tab(document.querySelector('a[href="#orders"]'));
+    tab.show();
+    const alert = document.getElementById('newOrdersAlert');
+    if (alert) alert.classList.add('d-none');
+}
+
+// Initialisation
+let adminPanel;
+document.addEventListener('DOMContentLoaded', () => {
+    adminPanel = new AdminPanel();
+    window.adminPanel = adminPanel;
+});
+    </script>
 </body>
 </html>

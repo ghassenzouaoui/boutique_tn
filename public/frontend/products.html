@@ -662,85 +662,87 @@
     </footer>
 
     <!-- Modal de commande -->
-    <div class="modal fade order-modal" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderModalLabel">Commander ce produit</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+   <!-- Modal de commande -->
+<div class="modal fade order-modal" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderModalLabel">Commander ce produit</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="product-preview">
+                    <img id="orderProductImage" src="" alt="Produit" class="img-fluid">
+                    <h4 id="orderProductName" class="fw-bold"></h4>
+                    <p class="text-muted" id="orderProductCategory"></p>
+                    <div class="product-price">
+                        <span class="current-price" id="orderProductPrice"></span>
+                    </div>
+                    <div id="selectedColorInfo" class="mt-2"></div>
                 </div>
-                <div class="modal-body">
-                    <div class="product-preview">
-                        <img id="orderProductImage" src="" alt="Produit" class="img-fluid">
-                        <h4 id="orderProductName" class="fw-bold"></h4>
-                        <p class="text-muted" id="orderProductCategory"></p>
-                        <div class="product-price">
-                            <span class="current-price" id="orderProductPrice"></span>
+                
+                <form id="orderForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">Prénom *</label>
+                            <input type="text" class="form-control" id="firstName" required>
                         </div>
-                        <div id="selectedColorInfo" class="mt-2"></div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Nom *</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
                     </div>
                     
-                    <form id="orderForm">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName" class="form-label">Prénom *</label>
-                                <input type="text" class="form-control" id="firstName" required>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Numéro de téléphone *</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Adresse de livraison *</label>
+                        <textarea class="form-control" id="address" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Taille *</label>
+                        <div class="size-options">
+                            <div class="size-option">
+                                <input type="radio" id="size-s" name="size" value="S" required>
+                                <label for="size-s">S</label>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName" class="form-label">Nom *</label>
-                                <input type="text" class="form-control" id="lastName" required>
+                            <div class="size-option">
+                                <input type="radio" id="size-m" name="size" value="M">
+                                <label for="size-m">M</label>
                             </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Numéro de téléphone *</label>
-                            <input type="tel" class="form-control" id="phone" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Adresse de livraison *</label>
-                            <textarea class="form-control" id="address" rows="2" required></textarea>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Taille *</label>
-                            <div class="size-options">
-                                <div class="size-option">
-                                    <input type="radio" id="size-s" name="size" value="S" required>
-                                    <label for="size-s">S</label>
-                                </div>
-                                <div class="size-option">
-                                    <input type="radio" id="size-m" name="size" value="M">
-                                    <label for="size-m">M</label>
-                                </div>
-                                <div class="size-option">
-                                    <input type="radio" id="size-l" name="size" value="L">
-                                    <label for="size-l">L</label>
-                                </div>
-                                <div class="size-option">
-                                    <input type="radio" id="size-xl" name="size" value="XL">
-                                    <label for="size-xl">XL</label>
-                                </div>
-                                <div class="size-option">
-                                    <input type="radio" id="size-xxl" name="size" value="XXL">
-                                    <label for="size-xxl">XXL</label>
-                                </div>
+                            <div class="size-option">
+                                <input type="radio" id="size-l" name="size" value="L">
+                                <label for="size-l">L</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="size-xl" name="size" value="XL">
+                                <label for="size-xl">XL</label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="size-xxl" name="size" value="XXL">
+                                <label for="size-xxl">XXL</label>
                             </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="notes" class="form-label">Notes supplémentaires (optionnel)</label>
-                            <textarea class="form-control" id="notes" rows="2" placeholder="Couleur préférée, délai de livraison, etc."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-whatsapp w-100 mt-3">
-                            <i class="fab fa-whatsapp"></i> Commander via WhatsApp
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes supplémentaires (optionnel)</label>
+                        <textarea class="form-control" id="notes" rows="2" placeholder="Couleur préférée, délai de livraison, etc."></textarea>
+                    </div>
+                    
+                    <!-- REMPLACER le bouton WhatsApp par un bouton normal -->
+                    <button type="submit" class="btn btn-success w-100 mt-3" id="submitOrderBtn">
+                        <i class="fas fa-check-circle me-2"></i> Confirmer la commande
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Modal d'authentification admin -->
     <div class="modal fade" id="adminAuthModal" tabindex="-1" aria-labelledby="adminAuthModalLabel" aria-hidden="true">
@@ -775,651 +777,707 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-    <script>
-        // Configuration Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
-            authDomain: "bt-sp-b3ce3.firebaseapp.com",
-            projectId: "bt-sp-b3ce3",
-            storageBucket: "bt-sp-b3ce3.firebasestorage.app",
-            messagingSenderId: "1072895717676",
-            appId: "1:1072895717676:web:bace267352a7941c1dfc89"
-        };
+   <script>
+    // Configuration Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyC9m0oGpt0nFABacCNsmD1SaYhGZbVnzsA",
+        authDomain: "bt-sp-b3ce3.firebaseapp.com",
+        projectId: "bt-sp-b3ce3",
+        storageBucket: "bt-sp-b3ce3.firebasestorage.app",
+        messagingSenderId: "1072895717676",
+        appId: "1:1072895717676:web:bace267352a7941c1dfc89"
+    };
 
-        // Initialiser Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
+    // Initialiser Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    // Données par défaut des produits - VERSION CORRIGÉE
+    const defaultProducts = [
+        {
+            id: "1",
+            name: "Ensemble survêtement homme",
+            category: "homme",
+            price: 45,
+            images: [
+                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
+                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
+                "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
+            ],
+            colors: ["Gris", "Rouge", "Noir"],
+            isNew: true,
+            discount: 0
+        },
+        {
+            id: "2",
+            name: "T‑shirt sport homme",
+            category: "homme",
+            price: 50,
+            images: ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"],
+            colors: ["Noir"],
+            isNew: false,
+            discount: 30
+        },
+        {
+            id: "3",
+            name: "Pantalon de jogging homme",
+            category: "homme",
+            price: 120,
+            images: ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"],
+            colors: ["Gris"],
+            isNew: false,
+            discount: 25
+        },
+        {
+            id: "4",
+            name: "Short running homme",
+            category: "homme",
+            price: 100,
+            images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg"],
+            colors: ["Bleu"],
+            isNew: false,
+            discount: 25
+        },
+        {
+            id: "5",
+            name: "Legging Yoga Premium",
+            category: "femme",
+            price: 65,
+            images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
+            colors: ["Noir"],
+            isNew: true,
+            discount: 0
+        },
+        {
+            id: "6",
+            name: "T-Shirt Fitness Dry",
+            category: "femme",
+            price: 42,
+            images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
+            colors: ["Blanc"],
+            isNew: true,
+            discount: 0
+        },
+        {
+            id: "7",
+            name: "Ensemble Fitness Pro",
+            category: "femme",
+            price: 95,
+            images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
+            colors: ["Rose"],
+            isNew: true,
+            discount: 0
+        },
+        {
+            id: "8",
+            name: "Short Training Fit",
+            category: "femme",
+            price: 55,
+            images: ["https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown"],
+            colors: ["Vert"],
+            isNew: false,
+            discount: 50
+        },
+    ];
+
+    // Gestionnaire des produits avec Firebase
+    class ProductsManager {
+        constructor() {
+            this.db = firebase.firestore();
+            this.storageKey = 'sportplus_products';
+            this.products = [];
+            this.unsubscribe = null;
+            this.init();
         }
 
-        // Données par défaut des produits - VERSION CORRIGÉE
-        const defaultProducts = [
-            {
-                id: "1",
-                name: "Ensemble survêtement homme",
-                category: "homme",
-                price: 45,
-                images: [
-                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157329/3_px1x8l.jpg",
-                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157327/2_hl5ajb.jpg",
-                    "https://res.cloudinary.com/dctqq99vw/image/upload/v1764157326/1_lvki0b.jpg"
-                ],
-                colors: ["Gris", "Rouge", "Noir"],
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: "2",
-                name: "T‑shirt sport homme",
-                category: "homme",
-                price: 50,
-                images: ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"],
-                colors: ["Noir"],
-                isNew: false,
-                discount: 30
-            },
-            {
-                id: "3",
-                name: "Pantalon de jogging homme",
-                category: "homme",
-                price: 120,
-                images: ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"],
-                colors: ["Gris"],
-                isNew: false,
-                discount: 25
-            },
-            {
-                id: "4",
-                name: "Short running homme",
-                category: "homme",
-                price: 100,
-                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764156846/veste_zkjzot.jpg"],
-                colors: ["Bleu"],
-                isNew: false,
-                discount: 25
-            },
-            {
-                id: "5",
-                name: "Legging Yoga Premium",
-                category: "femme",
-                price: 65,
-                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
-                colors: ["Noir"],
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: "6",
-                name: "T-Shirt Fitness Dry",
-                category: "femme",
-                price: 42,
-                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
-                colors: ["Blanc"],
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: "7",
-                name: "Ensemble Fitness Pro",
-                category: "femme",
-                price: 95,
-                images: ["https://res.cloudinary.com/dctqq99vw/image/upload/v1764166809/fm_cln9da.jpg"],
-                colors: ["Rose"],
-                isNew: true,
-                discount: 0
-            },
-            {
-                id: "8",
-                name: "Short Training Fit",
-                category: "femme",
-                price: 55,
-                images: ["https://res-console.cloudinary.com/dctqq99vw/thumbnails/v1/image/upload/v1764155114/U2hvcnRfRmVtbWVfd2hpdnpp/drilldown"],
-                colors: ["Vert"],
-                isNew: false,
-                discount: 50
-            },
-        ];
+        async init() {
+            await this.loadProducts();
+            this.listenToChanges();
+        }
 
-        // Gestionnaire des produits avec Firebase
-        class ProductsManager {
-            constructor() {
-                this.db = firebase.firestore();
-                this.storageKey = 'sportplus_products';
-                this.products = [];
-                this.unsubscribe = null;
-                this.init();
-            }
-
-            async init() {
-                await this.loadProducts();
-                this.listenToChanges();
-            }
-
-            // Charger les produits depuis Firebase
-            async loadProducts() {
-                try {
-                    console.log('Chargement des produits depuis Firebase...');
-                    const snapshot = await this.db.collection('products').get();
-                    
-                    if (!snapshot.empty) {
-                        this.products = snapshot.docs.map(doc => ({
-                            id: doc.id,
-                            ...doc.data()
-                        }));
-                        console.log('Produits chargés depuis Firebase:', this.products.length);
-                        this.saveToLocalStorage();
-                    } else {
-                        console.log('Aucun produit dans Firebase, chargement depuis localStorage');
-                        const storedProducts = localStorage.getItem(this.storageKey);
-                        if (storedProducts) {
-                            this.products = JSON.parse(storedProducts);
-                            await this.saveAllToFirebase();
-                        } else {
-                            this.products = defaultProducts;
-                            await this.saveAllToFirebase();
-                        }
-                    }
-                } catch (error) {
-                    console.error('Erreur Firebase:', error);
-                    const storedProducts = localStorage.getItem(this.storageKey);
-                    if (storedProducts) {
-                        this.products = JSON.parse(storedProducts);
-                    } else {
-                        this.products = defaultProducts;
-                        this.saveToLocalStorage();
-                    }
-                }
-            }
-
-            // Écouter les changements en temps réel
-            listenToChanges() {
-                this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
-                    console.log('Changement détecté dans Firebase');
+        // Charger les produits depuis Firebase
+        async loadProducts() {
+            try {
+                console.log('Chargement des produits depuis Firebase...');
+                const snapshot = await this.db.collection('products').get();
+                
+                if (!snapshot.empty) {
                     this.products = snapshot.docs.map(doc => ({
                         id: doc.id,
                         ...doc.data()
                     }));
+                    console.log('Produits chargés depuis Firebase:', this.products.length);
                     this.saveToLocalStorage();
-                    
-                    if (window.productsFilterInstance) {
-                        window.productsFilterInstance.displayProducts();
+                } else {
+                    console.log('Aucun produit dans Firebase, chargement depuis localStorage');
+                    const storedProducts = localStorage.getItem(this.storageKey);
+                    if (storedProducts) {
+                        this.products = JSON.parse(storedProducts);
+                        await this.saveAllToFirebase();
+                    } else {
+                        this.products = defaultProducts;
+                        await this.saveAllToFirebase();
                     }
-                }, error => {
-                    console.error('Erreur écoute Firebase:', error);
-                });
-            }
-
-            // Sauvegarder tous les produits dans Firebase
-            async saveAllToFirebase() {
-                try {
-                    console.log('Sauvegarde de tous les produits dans Firebase...');
-                    const batch = this.db.batch();
-                    
-                    const snapshot = await this.db.collection('products').get();
-                    snapshot.docs.forEach(doc => {
-                        batch.delete(doc.ref);
-                    });
-                    
-                    this.products.forEach(product => {
-                        const docRef = this.db.collection('products').doc(product.id.toString());
-                        const { id, ...productData } = product;
-                        batch.set(docRef, productData);
-                    });
-                    
-                    await batch.commit();
-                    console.log('Tous les produits sauvegardés dans Firebase');
-                } catch (error) {
-                    console.error('Erreur sauvegarde Firebase:', error);
                 }
-            }
-
-            saveToLocalStorage() {
-                localStorage.setItem(this.storageKey, JSON.stringify(this.products));
-            }
-
-            // Obtenir les produits filtrés par catégorie
-            getFilteredProducts(category = null) {
-                if (!category) return this.products;
-                return this.products.filter(product => product.category === category);
-            }
-
-            // Nettoyer l'écouteur
-            cleanup() {
-                if (this.unsubscribe) {
-                    this.unsubscribe();
+            } catch (error) {
+                console.error('Erreur Firebase:', error);
+                const storedProducts = localStorage.getItem(this.storageKey);
+                if (storedProducts) {
+                    this.products = JSON.parse(storedProducts);
+                } else {
+                    this.products = defaultProducts;
+                    this.saveToLocalStorage();
                 }
             }
         }
 
-        // Filtre et affichage des produits
-        class ProductsFilter {
-            constructor() {
-                this.productsManager = new ProductsManager();
-                this.currentCategory = this.getCategoryFromURL();
-                this.currentProduct = null;
-                this.selectedColorIndex = 0;
-                this.productColorSelections = {};
-                window.productsFilterInstance = this;
-                this.init();
-            }
-
-            async init() {
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                await this.displayProducts();
-                this.updatePageTitle();
-                this.setupEventListeners();
-            }
-
-            getCategoryFromURL() {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get('category');
-            }
-
-            getFilteredProducts() {
-                return this.productsManager.getFilteredProducts(this.currentCategory);
-            }
-
-            async displayProducts() {
-                const container = document.getElementById('products-container');
-                const filteredProducts = this.getFilteredProducts();
-
-                if (filteredProducts.length === 0) {
-                    container.innerHTML = this.createNoProductsMessage();
-                    return;
-                }
-
-                container.innerHTML = filteredProducts.map(product => 
-                    this.createProductCard(product)
-                ).join('');
-
-                this.initializeCarousels();
-            }
-
-            createProductCard(product) {
-                const hasDiscount = product.discount > 0;
-                const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+        // Écouter les changements en temps réel
+        listenToChanges() {
+            this.unsubscribe = this.db.collection('products').onSnapshot(snapshot => {
+                console.log('Changement détecté dans Firebase');
+                this.products = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                this.saveToLocalStorage();
                 
-                // CORRECTION : Utiliser toujours 'images' et 'colors'
-                const hasMultipleColors = product.images && product.images.length > 1;
-                const productImages = product.images || [product.image]; // Fallback pour compatibilité
-                const productColors = product.colors || ['Couleur unique']; // Fallback
+                if (window.productsFilterInstance) {
+                    window.productsFilterInstance.displayProducts();
+                }
+            }, error => {
+                console.error('Erreur écoute Firebase:', error);
+            });
+        }
 
-                return `
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="product-card h-100 d-flex flex-column">
-                            <div class="position-relative overflow-hidden">
-                                ${hasMultipleColors ? this.createImageCarousel(product) : this.createSingleImage(product)}
-                                
-                                <div class="product-badge">
-                                    ${product.isNew ? '<span class="badge-new">NOUVEAU</span>' : ''}
-                                    ${hasDiscount ? '<span class="badge-sale">SOLDES</span>' : ''}
-                                    ${hasMultipleColors ? `<span class="badge-colors">${product.images.length} COULEURS</span>` : ''}
-                                </div>
-                                
-                                <div class="position-absolute top-0 end-0 p-3">
-                                    <button class="btn btn-light btn-sm rounded-circle favorite-btn" data-product-id="${product.id}">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
+        // Sauvegarder tous les produits dans Firebase
+        async saveAllToFirebase() {
+            try {
+                console.log('Sauvegarde de tous les produits dans Firebase...');
+                const batch = this.db.batch();
+                
+                const snapshot = await this.db.collection('products').get();
+                snapshot.docs.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                
+                this.products.forEach(product => {
+                    const docRef = this.db.collection('products').doc(product.id.toString());
+                    const { id, ...productData } = product;
+                    batch.set(docRef, productData);
+                });
+                
+                await batch.commit();
+                console.log('Tous les produits sauvegardés dans Firebase');
+            } catch (error) {
+                console.error('Erreur sauvegarde Firebase:', error);
+            }
+        }
+
+        saveToLocalStorage() {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.products));
+        }
+
+        // Obtenir les produits filtrés par catégorie
+        getFilteredProducts(category = null) {
+            if (!category) return this.products;
+            return this.products.filter(product => product.category === category);
+        }
+
+        // Nettoyer l'écouteur
+        cleanup() {
+            if (this.unsubscribe) {
+                this.unsubscribe();
+            }
+        }
+    }
+
+    // Filtre et affichage des produits
+    class ProductsFilter {
+        constructor() {
+            this.productsManager = new ProductsManager();
+            this.currentCategory = this.getCategoryFromURL();
+            this.currentProduct = null;
+            this.selectedColorIndex = 0;
+            this.productColorSelections = {};
+            window.productsFilterInstance = this;
+            this.init();
+        }
+
+        async init() {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            await this.displayProducts();
+            this.updatePageTitle();
+            this.setupEventListeners();
+        }
+
+        getCategoryFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('category');
+        }
+
+        getFilteredProducts() {
+            return this.productsManager.getFilteredProducts(this.currentCategory);
+        }
+
+        async displayProducts() {
+            const container = document.getElementById('products-container');
+            const filteredProducts = this.getFilteredProducts();
+
+            if (filteredProducts.length === 0) {
+                container.innerHTML = this.createNoProductsMessage();
+                return;
+            }
+
+            container.innerHTML = filteredProducts.map(product => 
+                this.createProductCard(product)
+            ).join('');
+
+            this.initializeCarousels();
+        }
+
+        createProductCard(product) {
+            const hasDiscount = product.discount > 0;
+            const discountPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+            
+            const hasMultipleColors = product.images && product.images.length > 1;
+            const productImages = product.images || [product.image];
+            const productColors = product.colors || ['Couleur unique'];
+
+            return `
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="product-card h-100 d-flex flex-column">
+                        <div class="position-relative overflow-hidden">
+                            ${hasMultipleColors ? this.createImageCarousel(product) : this.createSingleImage(product)}
+                            
+                            <div class="product-badge">
+                                ${product.isNew ? '<span class="badge-new">NOUVEAU</span>' : ''}
+                                ${hasDiscount ? '<span class="badge-sale">SOLDES</span>' : ''}
+                                ${hasMultipleColors ? `<span class="badge-colors">${product.images.length} COULEURS</span>` : ''}
                             </div>
                             
-                            <div class="product-card-body d-flex flex-column flex-grow-1">
-                                <div class="product-category">${product.category.toUpperCase()}</div>
-                                <h5 class="product-title">${product.name}</h5>
-                                
-                                ${this.createColorSelector(product)}
-                                
-                                <div class="product-price mt-auto">
-                                    ${hasDiscount ? `
-                                        <span class="current-price">${discountPrice} DT</span>
-                                        <span class="original-price">${product.price} DT</span>
-                                        <span class="discount-percent">-${product.discount}%</span>
-                                    ` : `
-                                        <span class="current-price">${product.price} DT</span>
-                                    `}
-                                </div>
-                                
-                                <button class="btn btn-primary w-100 buy-now-btn mt-auto"
-                                    data-product-id="${product.id}">
-                                    <i class="fas fa-bolt me-2"></i>ACHETER
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <button class="btn btn-light btn-sm rounded-circle favorite-btn" data-product-id="${product.id}">
+                                    <i class="far fa-heart"></i>
                                 </button>
                             </div>
                         </div>
-                    </div>
-                `;
-            }
-
-            createImageCarousel(product) {
-                const productImages = product.images || [product.image]; // Fallback
-                const productColors = product.colors || ['Couleur unique'];
-                
-                return `
-                    <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="false">
-                        <div class="carousel-inner">
-                            ${productImages.map((image, index) => `
-                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                    <img src="${image}" 
-                                         class="product-image d-block w-100" 
-                                         alt="${product.name} - ${productColors[index] || 'Couleur ' + (index + 1)}"
-                                         loading="lazy">
-                                </div>
-                            `).join('')}
-                        </div>
-                        ${productImages.length > 1 ? `
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Précédent</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Suivant</span>
-                            </button>
-                            <div class="carousel-indicators">
-                                ${productImages.map((_, index) => `
-                                    <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
-                                            class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
-                                `).join('')}
+                        
+                        <div class="product-card-body d-flex flex-column flex-grow-1">
+                            <div class="product-category">${product.category.toUpperCase()}</div>
+                            <h5 class="product-title">${product.name}</h5>
+                            
+                            ${this.createColorSelector(product)}
+                            
+                            <div class="product-price mt-auto">
+                                ${hasDiscount ? `
+                                    <span class="current-price">${discountPrice} DT</span>
+                                    <span class="original-price">${product.price} DT</span>
+                                    <span class="discount-percent">-${product.discount}%</span>
+                                ` : `
+                                    <span class="current-price">${product.price} DT</span>
+                                `}
                             </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-
-            createSingleImage(product) {
-                const productImages = product.images || [product.image]; // Fallback
-                return `
-                    <img src="${productImages[0]}" 
-                         class="product-image" 
-                         alt="${product.name}"
-                         loading="lazy">
-                `;
-            }
-
-            createColorSelector(product) {
-                // CORRECTION : Afficher le sélecteur même pour une seule couleur
-                const productColors = product.colors || ['Couleur unique'];
-                
-                // Ne pas afficher le sélecteur s'il n'y a qu'une seule couleur sans nom spécifique
-                if (productColors.length === 1 && productColors[0] === 'Couleur unique') {
-                    return '<div class="mb-3"></div>';
-                }
-
-                return `
-                    <div class="color-selector mb-3">
-                        <small class="text-muted d-block mb-2">Couleurs disponibles:</small>
-                        <div class="d-flex gap-2 flex-wrap">
-                            ${productColors.map((color, index) => `
-                                <button type="button" class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
-                                        data-product-id="${product.id}" 
-                                        data-color-index="${index}"
-                                        data-color-name="${color}"
-                                        title="${color}">
-                                    ${color}
-                                </button>
-                            `).join('')}
+                            
+                            <button class="btn btn-primary w-100 buy-now-btn mt-auto"
+                                data-product-id="${product.id}">
+                                <i class="fas fa-bolt me-2"></i>ACHETER
+                            </button>
                         </div>
                     </div>
-                `;
-            }
+                </div>
+            `;
+        }
 
-            initializeCarousels() {
-                const carousels = document.querySelectorAll('.carousel');
-                carousels.forEach(carousel => {
-                    new bootstrap.Carousel(carousel, {
-                        interval: false
-                    });
-                });
-            }
-
-            updatePageTitle() {
-                const titleElement = document.getElementById('page-title');
-                const subtitleElement = document.getElementById('page-subtitle');
-
-                if (this.currentCategory === 'homme') {
-                    titleElement.textContent = 'Collection Homme';
-                    subtitleElement.textContent = 'Découvrez notre collection homme';
-                } else if (this.currentCategory === 'femme') {
-                    titleElement.textContent = 'Collection Femme';
-                    subtitleElement.textContent = 'Découvrez notre collection femme';
-                }
-            }
-
-            createNoProductsMessage() {
-                return `
-                    <div class="col-12 text-center py-5">
-                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                        <h4 class="fw-bold mb-3">Aucun produit trouvé</h4>
-                        <p class="text-muted mb-4">
-                            Aucun produit n'est disponible dans cette catégorie.
-                        </p>
-                        <a href="products.html" class="btn btn-primary">Voir tous les produits</a>
+        createImageCarousel(product) {
+            const productImages = product.images || [product.image];
+            const productColors = product.colors || ['Couleur unique'];
+            
+            return `
+                <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-inner">
+                        ${productImages.map((image, index) => `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <img src="${image}" 
+                                     class="product-image d-block w-100" 
+                                     alt="${product.name} - ${productColors[index] || 'Couleur ' + (index + 1)}"
+                                     loading="lazy">
+                            </div>
+                        `).join('')}
                     </div>
-                `;
+                    ${productImages.length > 1 ? `
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Précédent</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Suivant</span>
+                        </button>
+                        <div class="carousel-indicators">
+                            ${productImages.map((_, index) => `
+                                <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
+                                        class="${index === 0 ? 'active' : ''}" aria-label="Slide ${index + 1}"></button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        createSingleImage(product) {
+            const productImages = product.images || [product.image];
+            return `
+                <img src="${productImages[0]}" 
+                     class="product-image" 
+                     alt="${product.name}"
+                     loading="lazy">
+            `;
+        }
+
+        createColorSelector(product) {
+            const productColors = product.colors || ['Couleur unique'];
+            
+            if (productColors.length === 1 && productColors[0] === 'Couleur unique') {
+                return '<div class="mb-3"></div>';
             }
 
-            setupEventListeners() {
-                // Gestion des favoris
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('.favorite-btn')) {
-                        const btn = e.target.closest('.favorite-btn');
-                        const productId = btn.getAttribute('data-product-id');
-                        const icon = btn.querySelector('i');
-                        
-                        icon.classList.toggle('far');
-                        icon.classList.toggle('fas');
-                        icon.classList.toggle('text-danger');
-                        
-                        const productName = btn.closest('.product-card').querySelector('.product-title').textContent;
-                        const action = icon.classList.contains('fas') ? 'ajouté aux' : 'retiré des';
-                        alert(`${productName} ${action} favoris !`);
-                    }
+            return `
+                <div class="color-selector mb-3">
+                    <small class="text-muted d-block mb-2">Couleurs disponibles:</small>
+                    <div class="d-flex gap-2 flex-wrap">
+                        ${productColors.map((color, index) => `
+                            <button type="button" class="btn btn-sm color-option ${index === 0 ? 'active' : ''}" 
+                                    data-product-id="${product.id}" 
+                                    data-color-index="${index}"
+                                    data-color-name="${color}"
+                                    title="${color}">
+                                ${color}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        initializeCarousels() {
+            const carousels = document.querySelectorAll('.carousel');
+            carousels.forEach(carousel => {
+                new bootstrap.Carousel(carousel, {
+                    interval: false
                 });
+            });
+        }
 
-                // Gestion du bouton "Acheter"
-                document.addEventListener('click', (e) => {
-                    const buyButton = e.target.closest('.buy-now-btn');
-                    if (buyButton) {
-                        console.log('Bouton Acheter cliqué');
-                        
-                        const productId = buyButton.getAttribute('data-product-id');
-                        console.log('ID du produit:', productId);
-                        
-                        const product = this.productsManager.products.find(p => p.id === productId);
-                        if (!product) {
-                            console.error('Produit non trouvé:', productId);
-                            console.log('Produits disponibles:', this.productsManager.products.map(p => ({id: p.id, name: p.name})));
-                            return;
-                        }
-                        
-                        console.log('Produit trouvé:', product.name);
-                        
-                        const productCard = buyButton.closest('.product-card');
-                        const activeColorOption = productCard.querySelector('.color-option.active');
-                        let selectedColorIndex = 0;
-                        
-                        if (activeColorOption) {
-                            selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
-                        }
-                        
-                        this.productColorSelections[productId] = selectedColorIndex;
-                        
-                        const hasMultipleColors = product.images && product.images.length > 1;
-                        const images = product.images || [product.image];
-                        const colors = product.colors || ['Couleur unique'];
-                        const hasDiscount = product.discount > 0;
-                        const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
-                        
-                        this.currentProduct = {
-                            id: product.id,
-                            name: product.name,
-                            category: product.category,
-                            price: price,
-                            images: images,
-                            colors: colors
-                        };
-                        
-                        console.log('Ouverture du modal pour:', this.currentProduct.name);
-                        this.openOrderModal();
-                    }
-                });
+        updatePageTitle() {
+            const titleElement = document.getElementById('page-title');
+            const subtitleElement = document.getElementById('page-subtitle');
 
-                // Gestion des sélecteurs de couleur
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('color-option')) {
-                        const option = e.target;
-                        const productId = option.getAttribute('data-product-id');
-                        const colorIndex = parseInt(option.getAttribute('data-color-index'));
-                        
-                        this.productColorSelections[productId] = colorIndex;
-                        
-                        const carousel = document.getElementById(`carousel-${productId}`);
-                        if (carousel) {
-                            const carouselInstance = bootstrap.Carousel.getInstance(carousel);
-                            if (carouselInstance) {
-                                carouselInstance.to(colorIndex);
-                            }
-                        }
-                        
-                        const allOptions = document.querySelectorAll(`.color-option[data-product-id="${productId}"]`);
-                        allOptions.forEach(opt => opt.classList.remove('active'));
-                        option.classList.add('active');
-                    }
-                });
-
-                // Newsletter
-                document.getElementById('newsletter-submit').addEventListener('click', () => {
-                    const email = document.getElementById('newsletter-email').value;
-                    if (this.validateEmail(email)) {
-                        alert('Merci pour votre inscription à la newsletter !');
-                        document.getElementById('newsletter-email').value = '';
-                    } else {
-                        alert('Veuillez entrer une adresse email valide.');
-                    }
-                });
-
-                // Gestion du formulaire de commande
-                document.getElementById('orderForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.sendOrderViaWhatsApp();
-                });
-            }
-
-            openOrderModal() {
-                if (!this.currentProduct) {
-                    console.error('Aucun produit sélectionné');
-                    return;
-                }
-                
-                console.log('Ouverture du modal pour le produit:', this.currentProduct.name);
-                
-                const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
-                const selectedImage = this.currentProduct.images[selectedColorIndex];
-                
-                document.getElementById('orderProductImage').src = selectedImage;
-                document.getElementById('orderProductName').textContent = this.currentProduct.name;
-                document.getElementById('orderProductCategory').textContent = this.currentProduct.category.toUpperCase();
-                document.getElementById('orderProductPrice').textContent = `${this.currentProduct.price} DT`;
-                
-                const colorInfoElement = document.getElementById('selectedColorInfo');
-                if (this.currentProduct.colors && this.currentProduct.colors.length > 0) {
-                    const selectedColor = this.currentProduct.colors[selectedColorIndex];
-                    colorInfoElement.innerHTML = `<span class="badge bg-primary">Couleur: ${selectedColor}</span>`;
-                } else {
-                    colorInfoElement.innerHTML = '';
-                }
-                
-                document.getElementById('orderForm').reset();
-                
-                const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-                orderModal.show();
-            }
-
-            sendOrderViaWhatsApp() {
-                if (!this.currentProduct) {
-                    console.error('Aucun produit pour la commande');
-                    return;
-                }
-                
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const phone = document.getElementById('phone').value;
-                const address = document.getElementById('address').value;
-                const sizeElement = document.querySelector('input[name="size"]:checked');
-                
-                if (!sizeElement) {
-                    alert('Veuillez sélectionner une taille');
-                    return;
-                }
-                
-                const size = sizeElement.value;
-                const notes = document.getElementById('notes').value;
-                
-                const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
-                const selectedColor = this.currentProduct.colors && this.currentProduct.colors.length > 0 
-                    ? this.currentProduct.colors[selectedColorIndex] 
-                    : 'Non spécifiée';
-                
-                const message = `Bonjour Votre_Boutique ! Je souhaite commander le produit suivant :
-                
-Produit: ${this.currentProduct.name}
-Catégorie: ${this.currentProduct.category}
-Prix: ${this.currentProduct.price} DT
-Couleur: ${selectedColor}
-Taille: ${size}
-
-Informations personnelles:
-Nom: ${firstName} ${lastName}
-Téléphone: ${phone}
-Adresse: ${address}
-
-${notes ? `Notes: ${notes}` : ''}
-
-Merci de me contacter pour finaliser ma commande.`;
-
-                const encodedMessage = encodeURIComponent(message);
-                const whatsappNumber = "+21654942408";
-                
-                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-                
-                const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
-                if (orderModal) {
-                    orderModal.hide();
-                }
-                
-                alert('Votre commande a été envoyée via WhatsApp ! Nous vous contacterons bientôt.');
-            }
-
-            validateEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
+            if (this.currentCategory === 'homme') {
+                titleElement.textContent = 'Collection Homme';
+                subtitleElement.textContent = 'Découvrez notre collection homme';
+            } else if (this.currentCategory === 'femme') {
+                titleElement.textContent = 'Collection Femme';
+                subtitleElement.textContent = 'Découvrez notre collection femme';
             }
         }
 
-        // Démarrer l'application
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Démarrage de l application...');
-            new ProductsFilter();
-            
-            // Setup admin auth
-            const adminPassword = "ghassen123*";
-            document.getElementById('adminAuthForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const passwordInput = document.getElementById('adminPassword').value;
-                const errorElement = document.getElementById('authError');
-                
-                if (passwordInput === adminPassword) {
-                    window.location.href = 'admin.html';
-                } else {
-                    errorElement.classList.remove('d-none');
-                    document.getElementById('adminPassword').value = '';
-                    document.getElementById('adminPassword').focus();
+        createNoProductsMessage() {
+            return `
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4 class="fw-bold mb-3">Aucun produit trouvé</h4>
+                    <p class="text-muted mb-4">
+                        Aucun produit n'est disponible dans cette catégorie.
+                    </p>
+                    <a href="products.html" class="btn btn-primary">Voir tous les produits</a>
+                </div>
+            `;
+        }
+
+        setupEventListeners() {
+            // Gestion des favoris
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.favorite-btn')) {
+                    const btn = e.target.closest('.favorite-btn');
+                    const productId = btn.getAttribute('data-product-id');
+                    const icon = btn.querySelector('i');
+                    
+                    icon.classList.toggle('far');
+                    icon.classList.toggle('fas');
+                    icon.classList.toggle('text-danger');
+                    
+                    const productName = btn.closest('.product-card').querySelector('.product-title').textContent;
+                    const action = icon.classList.contains('fas') ? 'ajouté aux' : 'retiré des';
+                    alert(`${productName} ${action} favoris !`);
                 }
             });
-            
-            document.getElementById('adminAuthModal').addEventListener('show.bs.modal', function() {
-                document.getElementById('authError').classList.add('d-none');
-                document.getElementById('adminPassword').value = '';
+
+            // Gestion du bouton "Acheter"
+            document.addEventListener('click', (e) => {
+                const buyButton = e.target.closest('.buy-now-btn');
+                if (buyButton) {
+                    console.log('Bouton Acheter cliqué');
+                    
+                    const productId = buyButton.getAttribute('data-product-id');
+                    console.log('ID du produit:', productId);
+                    
+                    const product = this.productsManager.products.find(p => p.id === productId);
+                    if (!product) {
+                        console.error('Produit non trouvé:', productId);
+                        console.log('Produits disponibles:', this.productsManager.products.map(p => ({id: p.id, name: p.name})));
+                        return;
+                    }
+                    
+                    console.log('Produit trouvé:', product.name);
+                    
+                    const productCard = buyButton.closest('.product-card');
+                    const activeColorOption = productCard.querySelector('.color-option.active');
+                    let selectedColorIndex = 0;
+                    
+                    if (activeColorOption) {
+                        selectedColorIndex = parseInt(activeColorOption.getAttribute('data-color-index'));
+                    }
+                    
+                    this.productColorSelections[productId] = selectedColorIndex;
+                    
+                    const hasMultipleColors = product.images && product.images.length > 1;
+                    const images = product.images || [product.image];
+                    const colors = product.colors || ['Couleur unique'];
+                    const hasDiscount = product.discount > 0;
+                    const price = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(2) : product.price;
+                    
+                    this.currentProduct = {
+                        id: product.id,
+                        name: product.name,
+                        category: product.category,
+                        price: price,
+                        images: images,
+                        colors: colors
+                    };
+                    
+                    console.log('Ouverture du modal pour:', this.currentProduct.name);
+                    this.openOrderModal();
+                }
             });
+
+            // Gestion des sélecteurs de couleur
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('color-option')) {
+                    const option = e.target;
+                    const productId = option.getAttribute('data-product-id');
+                    const colorIndex = parseInt(option.getAttribute('data-color-index'));
+                    
+                    this.productColorSelections[productId] = colorIndex;
+                    
+                    const carousel = document.getElementById(`carousel-${productId}`);
+                    if (carousel) {
+                        const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+                        if (carouselInstance) {
+                            carouselInstance.to(colorIndex);
+                        }
+                    }
+                    
+                    const allOptions = document.querySelectorAll(`.color-option[data-product-id="${productId}"]`);
+                    allOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                }
+            });
+
+            // Newsletter
+            document.getElementById('newsletter-submit').addEventListener('click', () => {
+                const email = document.getElementById('newsletter-email').value;
+                if (this.validateEmail(email)) {
+                    alert('Merci pour votre inscription à la newsletter !');
+                    document.getElementById('newsletter-email').value = '';
+                } else {
+                    alert('Veuillez entrer une adresse email valide.');
+                }
+            });
+
+            // Gestion du formulaire de commande
+            document.getElementById('orderForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.saveOrderToAdmin();
+            });
+        }
+
+        openOrderModal() {
+            if (!this.currentProduct) {
+                console.error('Aucun produit sélectionné');
+                return;
+            }
+            
+            console.log('Ouverture du modal pour le produit:', this.currentProduct.name);
+            
+            const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
+            const selectedImage = this.currentProduct.images[selectedColorIndex];
+            
+            document.getElementById('orderProductImage').src = selectedImage;
+            document.getElementById('orderProductName').textContent = this.currentProduct.name;
+            document.getElementById('orderProductCategory').textContent = this.currentProduct.category.toUpperCase();
+            document.getElementById('orderProductPrice').textContent = `${this.currentProduct.price} DT`;
+            
+            const colorInfoElement = document.getElementById('selectedColorInfo');
+            if (this.currentProduct.colors && this.currentProduct.colors.length > 0) {
+                const selectedColor = this.currentProduct.colors[selectedColorIndex];
+                colorInfoElement.innerHTML = `<span class="badge bg-primary">Couleur: ${selectedColor}</span>`;
+            } else {
+                colorInfoElement.innerHTML = '';
+            }
+            
+            document.getElementById('orderForm').reset();
+            
+            const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+            orderModal.show();
+        }
+
+        // NOUVELLE MÉTHODE : Sauvegarder la commande vers l'admin
+        async saveOrderToAdmin() {
+            if (!this.currentProduct) {
+                console.error('Aucun produit pour la commande');
+                alert('Erreur: Aucun produit sélectionné');
+                return;
+            }
+            
+            // Récupérer les données du formulaire
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const sizeElement = document.querySelector('input[name="size"]:checked');
+            
+            if (!sizeElement) {
+                alert('Veuillez sélectionner une taille');
+                return;
+            }
+            
+            const size = sizeElement.value;
+            const notes = document.getElementById('notes').value;
+            
+            // Récupérer les informations du produit
+            const selectedColorIndex = this.productColorSelections[this.currentProduct.id] || 0;
+            const selectedColor = this.currentProduct.colors && this.currentProduct.colors.length > 0 
+                ? this.currentProduct.colors[selectedColorIndex] 
+                : 'Non spécifiée';
+            
+            const selectedImage = this.currentProduct.images[selectedColorIndex];
+            
+            // Créer l'objet commande
+            const order = {
+                id: this.generateOrderId(),
+                productId: this.currentProduct.id,
+                productName: this.currentProduct.name,
+                productCategory: this.currentProduct.category,
+                productPrice: this.currentProduct.price,
+                productImage: selectedImage,
+                productColor: selectedColor,
+                productSize: size,
+                customer: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    phone: phone,
+                    address: address
+                },
+                notes: notes,
+                status: 'pending', // En attente
+                orderDate: new Date().toISOString(),
+                confirmed: false // Pas encore confirmée
+            };
+            
+            // Afficher un message de chargement
+            const submitBtn = document.getElementById('submitOrderBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Enregistrement...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Sauvegarder la commande dans Firebase
+                const saved = await this.saveOrderToFirebase(order);
+                
+                if (saved) {
+                    // Afficher un message de succès
+                    alert('✅ Commande enregistrée avec succès !\n\nNotre équipe va vous contacter dans les plus brefs délais pour confirmer votre commande.');
+                    
+                    // Fermer le modal
+                    const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+                    if (orderModal) {
+                        orderModal.hide();
+                    }
+                    
+                    // Réinitialiser le formulaire
+                    document.getElementById('orderForm').reset();
+                } else {
+                    alert('❌ Erreur lors de l\'enregistrement de la commande. Veuillez réessayer.');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('❌ Une erreur est survenue. Veuillez réessayer.');
+            } finally {
+                // Restaurer le bouton
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Méthode pour générer un ID de commande unique
+        generateOrderId() {
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 1000);
+            return `CMD-${timestamp}-${random}`;
+        }
+
+        // Sauvegarder la commande dans Firebase
+        async saveOrderToFirebase(order) {
+            try {
+                const db = firebase.firestore();
+                
+                // Ajouter la commande à la collection 'orders'
+                await db.collection('orders').doc(order.id).set({
+                    ...order,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                console.log('Commande sauvegardée avec succès:', order.id);
+                return true;
+            } catch (error) {
+                console.error('Erreur lors de la sauvegarde de la commande:', error);
+                return false;
+            }
+        }
+
+        validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    }
+
+    // Démarrer l'application
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Démarrage de l application...');
+        new ProductsFilter();
+        
+        // Setup admin auth
+        const adminPassword = "ghassen123*";
+        document.getElementById('adminAuthForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const passwordInput = document.getElementById('adminPassword').value;
+            const errorElement = document.getElementById('authError');
+            
+            if (passwordInput === adminPassword) {
+                window.location.href = 'admin.html';
+            } else {
+                errorElement.classList.remove('d-none');
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
         });
-    </script>
+        
+        document.getElementById('adminAuthModal').addEventListener('show.bs.modal', function() {
+            document.getElementById('authError').classList.add('d-none');
+            document.getElementById('adminPassword').value = '';
+        });
+    });
+</script>
 </body>
 </html>
